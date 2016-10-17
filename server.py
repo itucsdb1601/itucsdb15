@@ -9,9 +9,13 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def home_page():
+def layout_page():
     now = datetime.datetime.now()
     return render_template('layout.html', current_time=now.ctime())
+@app.route('/home')
+def home_page():
+    now = datetime.datetime.now()
+    return render_template('home.html', current_time=now.ctime())
 @app.route('/profiles')
 def open_profiles():
     now = datetime.datetime.now()
