@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>UNICORN</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <header>
+         <nav>
+             <li><a href="{{url_for('home_page') }}">Home</a></li>
+             <li><a href="{{url_for('open_profiles') }}">Profiles</a></li>
+         </nav>
+    </header>
+
+
+    <footer>
+      <div id="datetime">{{ current_time }}</div>
+    </footer>
+  </body>
+
+</html>
