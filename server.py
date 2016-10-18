@@ -20,22 +20,6 @@ def home_page():
 def open_profiles():
     now = datetime.datetime.now()
     return render_template('profiles.html', current_time=now.ctime())
-@app.route('/followersfollowing')
-def open_followersFollowing():
-    now = datetime.datetime.now()
-    return render_template('followersfollowing.html', current_time=now.ctime())
-@app.route('/notifications')
-def open_notifications():
-    now = datetime.datetime.now()
-    return render_template('notifications.html', current_time=now.ctime())
-@app.route('/settings')
-def open_settings():
-    now = datetime.datetime.now()
-    return render_template('settings.html', current_time=now.ctime())
-@app.route('/favorites')
-def open_favorites():
-    now = datetime.datetime.now()
-    return render_template('favorites.html', current_time=now.ctime())
 
 
 if __name__ == '__main__':
