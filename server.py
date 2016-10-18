@@ -24,7 +24,7 @@ def open_profiles():
 def open_followersFollowing():
     now = datetime.datetime.now()
     return render_template('followersfollowing.html', current_time=now.ctime())
-@app.route('/notifications)
+@app.route('/notifications')
 def open_notifications():
     now = datetime.datetime.now()
     return render_template('notifications.html', current_time=now.ctime())
