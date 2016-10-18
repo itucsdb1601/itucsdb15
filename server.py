@@ -24,7 +24,7 @@ def open_profiles():
 def open_followersFollowing():
     now = datetime.datetime.now()
     return render_template('followersfollowing.html', current_time=now.ctime())
-@app.route('/followers following')
+@app.route('/notifications)
 def open_notifications():
     now = datetime.datetime.now()
     return render_template('notifications.html', current_time=now.ctime())
@@ -32,6 +32,10 @@ def open_notifications():
 def settings():
     now = datetime.datetime.now()
     return render_template('settings.html', current_time=now.ctime())
+def open_favorites():
+    now = datetime.datetime.now()
+    return render_template('favorites.html', current_time=now.ctime())
+@app.route('/favorites')
 
 if __name__ == '__main__':
     VCAP_APP_PORT = os.getenv('VCAP_APP_PORT')
