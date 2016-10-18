@@ -20,6 +20,10 @@ def home_page():
 def open_profiles():
     now = datetime.datetime.now()
     return render_template('profiles.html', current_time=now.ctime())
+@app.route('/settings')
+def settings():
+    now = datetime.datetime.now()
+    return render_template('settings.html', current_time=now.ctime())
 
 
 if __name__ == '__main__':
