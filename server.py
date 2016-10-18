@@ -17,13 +17,26 @@ def home_page():
     now = datetime.datetime.now()
     return render_template('home.html', current_time=now.ctime())
 @app.route('/profiles')
-def open_profiles():
+def profiles():
     now = datetime.datetime.now()
     return render_template('profiles.html', current_time=now.ctime())
 @app.route('/settings')
 def settings():
     now = datetime.datetime.now()
     return render_template('settings.html', current_time=now.ctime())
+@app.route('/notifications')
+def notifications():
+    now = datetime.datetime.now()
+    return render_template('notifications.html', current_time=now.ctime())
+@app.route('/favorites')
+def favorites():
+    now = datetime.datetime.now()
+    return render_template('favorites.html', current_time=now.ctime())
+@app.route('/followers')
+def followers():
+    now = datetime.datetime.now()
+    return render_template('followers.html', current_time=now.ctime())
+
 
 
 if __name__ == '__main__':
