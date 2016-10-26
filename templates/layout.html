@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>UNICORN</title>
+    <title>UNICORN - {% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
   <body>
     <header>
-         <nav>
-             <li><a href="{{url_for('home_page') }}">Home</a></li>
-             <li><a href="{{url_for('profiles') }}">Profiles</a></li>
-             <li><a href="{{url_for('settings') }}">Settings</a></li>
-             <li><a href="{{url_for('notifications') }}">Notifications</a></li>
-             <li><a href="{{url_for('favorites') }}">Favorites</a></li>
-             <li><a href="{{url_for('followers') }}">Followers/Following</a></li>
-             
-         </nav>
+      <nav>
+        <li><a href="{{ url_for('home_page') }}">Home</a></li>
+        <li><a href="{{ url_for('profiles') }}">Profile</a></li>
+		<li><a href="{{ url_for('settings') }}">Settings</a></li>
+		<li><a href="{{ url_for('notifications') }}">Notifications</a></li>
+		<li><a href="{{ url_for('favorites') }}">Favorites</a></li>
+		<li><a href="{{ url_for('followers') }}">Followers/Following</a></li>
+      </nav>
     </header>
 
+    {% block content %}{% endblock %}
 
     <footer>
-      <div id="datetime">{{ current_time }}</div>
+      &copy; 2016, Kilgore Trout
     </footer>
   </body>
-
 </html>
