@@ -30,7 +30,8 @@ def initialize_database(config):
         connection.commit();
         initialize_tweets(config)
         initialize_followers(config)
-		initialize_favoritestable(config)
+	initialize_favoritestable(config)
+	initialize_universities(config)
         return 'Value is inserted'
 
 def initialize_tweets(config):
@@ -74,5 +75,19 @@ def initialize_favoritestable(config):
         connection.commit();
         return 'Favorite user  is inserted'
 
+def initialize_universities(config):
+    with dbapi2.connection(config) as connection:
+        cursor = connection.cursor()
+    
+        query = """CREATE TABLE IF NOT EXISTS UNIVERSITY_USERS (
+                    uni_id serial primary key,
+                    user_id INTEGER NOT NULL,
+                    uni_name VARCHAR(50) NOT NULL,
+                    )"""
+        cursor.execute(query)
+        query = """INSERT INTO USER_LOGIN (user_id,uni_name) VALUES ('1','Istanbul Technical University')"""
+        cursor.execute(query)
+        connection.commit();
+        return 'niversities table is inserted to store user-university data'
 
 
