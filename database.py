@@ -34,6 +34,19 @@ def initialize_tweets(config):
         cursor.execute(query)
         connection.commit();
         return 'Tweet was inserted'
+
+
+def initialize_followers(config):
+    with dbapi2.connect(config) as connection:
+        cursor = connection.cursor()
+        
+        query = """CREATE TABLE IF NOT EXISTS FOLLOWERS (follower_id serial primary key,user_id INTEGER NOT NULL)"""
+        cursor.execute(query)
+        
+        query = """insert into FOLLOWERS(follower_id) values('3245')"""
+        cursor.execute(query)
+        connection.commit();
+        return 'A new follower is added to the follower list.'
     
 
     
