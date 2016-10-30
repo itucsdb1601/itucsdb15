@@ -6,11 +6,7 @@ import re
 
 from flask import Flask, render_template, redirect
 from flask.helpers import url_for
-
 from datetime import datetime
-
-
-
 
 app = Flask(__name__)
 
@@ -96,7 +92,7 @@ if __name__ == '__main__':
 
     VCAP_APP_PORT = os.getenv('VCAP_APP_PORT')
     if VCAP_APP_PORT is not None:
-        port,debug = init(VCAP_APP_PORT),False
+        port,debug = int(VCAP_APP_PORT),False
     else:
         port,debug = 5000, True
 
