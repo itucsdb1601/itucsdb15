@@ -20,7 +20,16 @@ def initialize_database(config):
             cursor.execute(query)
         except:
             print("Oops!  That user name exists.  Try again...")
+
+        try:
+            query = """insert into USER_LOGIN(user_name,user_password) values('aladagce','123456')"""
+            cursor.execute(query)
+        except:
+            print("Oops!  That user name exists.  Try again...")
+
         connection.commit();
+        initialize_tweets(config)
+        initialize_followers(config)
         return 'Value is inserted'
 
 def initialize_tweets(config):
@@ -30,7 +39,7 @@ def initialize_tweets(config):
         query = """CREATE TABLE IF NOT EXISTS TWEETS (tweet_id serial primary key,user_id INTEGER NOT NULL, user_tweet VARCHAR(200))"""
         cursor.execute(query)
 
-        query = """insert into TWEETS(user_id, user_tweet) values('1','first tweet for user 1 was added')"""
+        query = """insert into TWEETS(user_id, user_tweet) values(1,'first tweet for user 1 was added')"""
         cursor.execute(query)
         connection.commit();
         return 'Tweet was inserted'
@@ -39,17 +48,14 @@ def initialize_tweets(config):
 def initialize_followers(config):
     with dbapi2.connect(config) as connection:
         cursor = connection.cursor()
-        
-        query = """CREATE TABLE IF NOT EXISTS FOLLOWERS (follower_id serial primary key,user_id INTEGER NOT NULL)"""
+
+        query = """CREATE TABLE IF NOT EXISTS FOLLOWERS (following_event_id serial primary key,follower_id INTEGER NOT NULL ,user_id INTEGER NOT NULL)"""
         cursor.execute(query)
-        
-        query = """insert into FOLLOWERS(follower_id) values('3245')"""
+
+        query = """insert into FOLLOWERS(follower_id,user_id) values(2,1)"""
         cursor.execute(query)
         connection.commit();
         return 'A new follower is added to the follower list.'
-    
-
-    
 
 
 

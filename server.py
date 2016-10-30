@@ -4,8 +4,6 @@ import os
 import re
 
 from database import initialize_database
-from database import initialize_tweets
-from database import initialize_followers
 from flask import Flask, render_template, redirect
 from flask.helpers import url_for
 from datetime import datetime
@@ -18,8 +16,6 @@ def home_page():
     now = datetime.now()
     day = now.strftime('%A')
     initialize_database(app.config['dsn'])
-    initialize_tweets(app.config['dsn'])
-    initialize_followers(app.config['dsn'])
     return render_template('home.html', day_name=day)
 
 
