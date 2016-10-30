@@ -23,4 +23,20 @@ def initialize_database(config):
         connection.commit();
         return 'Value is inserted'
 
+def initialize_tweets(config):
+    with dbapi2.connect(config) as connection:
+        cursor = connection.cursor()
+
+        query = """CREATE TABLE IF NOT EXISTS TWEETS (tweet_id serial primary key,user_id INTEGER NOT NULL, user_tweet VARCHAR(200))"""
+        cursor.execute(query)
+
+        query = """insert into TWEETS(user_id, user_tweet) values('1','first tweet for user 1 was added')"""
+        cursor.execute(query)
+        connection.commit();
+        return 'Tweet was inserted'
+    
+
+    
+
+
 
