@@ -1,9 +1,9 @@
 import datetime
 import json
 import os
-import psycopg2 as dbapi2
 import re
 
+from database import initialize_database
 from flask import Flask, render_template, redirect
 from flask.helpers import url_for
 from datetime import datetime
@@ -15,6 +15,7 @@ app = Flask(__name__)
 def home_page():
     now = datetime.now()
     day = now.strftime('%A')
+    initialize_database(app.config['dsn'])
     return render_template('home.html', day_name=day)
 
 
@@ -41,39 +42,6 @@ def followers():
 @app.route('/login')
 def login():
     return render_template('login.html')
-
-@app.route('/initdb')
-def initialize_database():
-    with dbapi2.connect(app.config['dsn']) as connection:
-        cursor = connection.cursor()
-
-        query = """DROP TABLE IF EXISTS COUNTER"""
-        cursor.execute(query)
-
-        query = """CREATE TABLE COUNTER (N INTEGER)"""
-        cursor.execute(query)
-
-        query = """INSERT INTO COUNTER (N) VALUES (0)"""
-        cursor.execute(query)
-        connection.commit();
-        return redirect(url_for('home_page'))
-
-@app.route('/count')
-def counter_page():
-    with dbapi2.connect(app.config['dsn']) as connection:
-        cursor = connection.cursor()
-
-        query = "UPDATE COUNTER SET N = N + 1"
-        cursor.execute(query)
-        connection.commit()
-
-        query = "SELECT N FROM COUNTER"
-        cursor.execute(query)
-        count = cursor.fetchone()[0]
-
-        return "This page is accessed %d times." % count
-
-
 
 
 def get_elephantsql_dsn(vcap_services):
@@ -102,4 +70,5 @@ if __name__ == '__main__':
     else:
         app.config['dsn'] = """user='vagrant' password='vagrant'
                                host='localhost' port=5432 dbname='itucsdb'"""
+
     app.run(host='0.0.0.0', port=port, debug=debug)
