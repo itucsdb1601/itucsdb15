@@ -30,6 +30,7 @@ def initialize_database(config):
         connection.commit();
         initialize_tweets(config)
         initialize_followers(config)
+		initialize_favoritestable(config)
         return 'Value is inserted'
 
 def initialize_tweets(config):
@@ -56,6 +57,22 @@ def initialize_followers(config):
         cursor.execute(query)
         connection.commit();
         return 'A new follower is added to the follower list.'
+		
+		
+		
+def initialize_favoritestable(config):
+    with dbapi2.connect(config) as connection:
+        cursor = connection.cursor()
+
+        query = """CREATE TABLE IF NOT EXISTS FAVORITES (fav_id serial primary key, user_id INTEGER NOT NULL,university_name VARCHAR(100))"""
+        cursor.execute(query)
+        try:
+            query = """insert into FAVORITES(user_id,university_name) values('1','Istanbul Technical University')"""
+            cursor.execute(query)
+        except:
+            print("Oops!  That favorite id already exists.  Try again...")
+        connection.commit();
+        return 'Favorite user  is inserted'
 
 
 
