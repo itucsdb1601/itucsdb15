@@ -58,14 +58,14 @@ def initialize_followers(config):
         cursor.execute(query)
         connection.commit();
         return 'A new follower is added to the follower list.'
-		
-		
-		
+
+
+
 def initialize_favoritestable(config):
     with dbapi2.connect(config) as connection:
         cursor = connection.cursor()
 
-        query = """CREATE TABLE IF NOT EXISTS FAVORITES (fav_id serial primary key, 
+        query = """CREATE TABLE IF NOT EXISTS FAVORITES (fav_id serial primary key,
         user_id INTEGER NOT NULL,
         university_name VARCHAR(100))"""
         cursor.execute(query)
@@ -78,18 +78,16 @@ def initialize_favoritestable(config):
         return 'Favorite user  is inserted'
 
 def initialize_universities(config):
-    with dbapi2.connection(config) as connection:
+    with dbapi2.connect(config) as connection:
         cursor = connection.cursor()
-    
+
         query = """CREATE TABLE IF NOT EXISTS UNIVERSITY_USERS (
                     uni_id serial primary key,
                     user_id INTEGER NOT NULL,
-                    uni_name VARCHAR(50) NOT NULL,
+                    uni_name VARCHAR(50) NOT NULL
                     )"""
         cursor.execute(query)
         query = """INSERT INTO UNIVERSITY_USERS (user_id,uni_name) VALUES ('1','Istanbul Technical University')"""
         cursor.execute(query)
         connection.commit();
         return 'universities table is inserted to store user-university data'
-
-
