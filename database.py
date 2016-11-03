@@ -215,6 +215,39 @@ def users_page_db_update_apply(config,updateuserlogin):
             cursor.execute(query)
             connection.commit()
             return redirect(url_for('profiles'))
+			
+			
+def tweets_db(config):
+    with dbapi2.connect(config) as connection:
+        if request.method == 'GET':
+            cursor = connection.cursor()
+            query="SELECT user_loginname,tweet from tweets"
+            cursor.execute(query)
+            print(cursor)
+            return render_template('tweets.html',thistweet=cursor)
+def tweets_db_delete(config,deleteUserTweet):
+    with dbapi2.connect(config) as connection:
+            cursor = connection.cursor()
+            query="DELETE FROM tweets where user_loginname = %s"
+            cursor.execute(query, (deleteUserTweet,))
+            connection.commit()
+            return redirect(url_for('tweets'))
+def tweets_db_update(config,updateUserTweet):
+     with dbapi2.connect(config) as connection:
+            cursor = connection.cursor()
+            query="""SELECT user_loginname from tweets where user_loginname = '%s'""" % (updateUserTweet)
+            cursor.execute(query)
+            connection.commit()
+            return render_template('tweet_update.html',logins=cursor)  #bunun için bir tweet_update html i gerekecek
+def users_page_db_update_apply(config,updateUserTweet):
+    with dbapi2.connect(config) as connection:
+            cursor = connection.cursor()
+            new_tweet = request.form['tweet_text']
+            print(new_tweet)
+            query="""UPDATE tweets set tweet ='%s' where user_loginname = '%s'""" % (new_ntweet,updateUserTweet)
+            cursor.execute(query)
+            connection.commit()
+            return redirect(url_for('tweets'))
 
 
 

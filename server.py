@@ -79,24 +79,6 @@ def universities_update_apply(updateuni_name):
     return universities_page_db_update_apply(app.config['dsn'],updateuni_name)
 
 
-@app.route('/favorites')
-def favorites():
-    return render_template('favorites.html')
-
-@app.route('/favorites/delete/<deletefavorites>', methods=['GET', 'POST'])
-def favorites_delete(deletefavorites):
-    return favorites_db_delete(app.config['dsn'],deletefavorites)
-
-@app.route('/favorites/update/<updatefavorites>/', methods=['GET', 'POST'])
-def favorites_update(updatefavorites):
-    return favorites_db_update(app.config['dsn'],updatefavorites)
-
-@app.route('/favorites/update/<updatefavorites>/apply', methods=['GET', 'POST'])
-def favorites_update_apply(updatefavorites):
-    return favorites_db_update_apply(app.config['dsn'],updatefavorites)	
-	
-	@app.route('/saveFavoriteUser', methods=['POST'])
-
 def savefavorites():
 
 	saveFavoriteUser(app.config['dsn'])
