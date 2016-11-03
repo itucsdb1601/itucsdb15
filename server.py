@@ -3,7 +3,7 @@ import json
 import os
 import re
 import psycopg2 as dbapi2
-from database import initialize_database, saveuser, users_page_db, users_page_db_delete, users_page_db_update, users_page_db_update_apply
+from database import initialize_database, saveuser, users_page_db, users_page_db_delete, users_page_db_update, users_page_db_update_apply, search, follow, unfollow, update
 from flask import Flask, render_template, redirect, request
 from flask.helpers import url_for
 from datetime import datetime
@@ -18,6 +18,25 @@ def home_page():
     #initialize_database(app.config['dsn'])
     return render_template('home.html', day_name=day)
 
+
+@app.route('/followers/unfollow/<deletefollower>/', methods=['GET','POST'])
+def unfollowM(deletefollower):
+    return unfollow(app.config['dsn'],deletefollower)
+
+
+@app.route('/followers/search/<searchfollower>/', methods=['GET','POST'])
+def searchM(searchfollower):
+    return search(app.config['dsn'], searchfollower)
+
+
+@app.route('/followers/follow/<insertfollower>/', methods=['GET','POST'])
+def followM(insertfollower):
+    return follow(app.config['dsn'],insertfollower)
+
+
+@app.route('/followers/update/<updatefollower>/)', methods=['POST'])
+def updateM(updatefollower):
+    return update(app.config['dsn'],updatefollower)
 
 @app.route('/profiles')
 def profiles():

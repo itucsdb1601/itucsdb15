@@ -39,11 +39,11 @@ def initialize_tweets(config):
 def initialize_followers(config):
     with dbapi2.connect(config) as connection:
         cursor = connection.cursor()
-
-        query = """CREATE TABLE IF NOT EXISTS FOLLOWERS (following_event_id serial primary key,follower_id INTEGER NOT NULL ,user_id INTEGER NOT NULL)"""
+        
+        query = """CREATE TABLE IF NOT EXISTS FOLLOWERS (following_id serial primary key,follower_name VARCHAR(200) ,follower_email VARCHAR(200))"""
         cursor.execute(query)
-
-        query = """insert into FOLLOWERS(follower_id,user_id) values(2,1)"""
+        
+        query = """insert into FOLLOWERS(follower_name,follower_email) values('c','d')"""
         cursor.execute(query)
         connection.commit();
         return 'A new follower is added to the follower list.'
@@ -158,5 +158,88 @@ def universities_page_db_update(config,updateuni_name):
             cursor.execute(query)
             connection.commit()
             return render_template('universities_edit.html',universities=cursor)
+def universities_page_db_update_apply(config,updateuni_name):
+    with dbapi2.connect(config) as connection:
+            cursor = connection.cursor()
+            new_uni = request.form['name']
+            print(new_uni)
+            query="""UPDATE university_users set uni_name ='%s' where uni_name= '%s'""" % (new_name,updateuni_name)
+            cursor.execute(query)
+            connection.commit()
+            return redirect(url_for('universities'))
+
+
+def follow(config,insertfollower):
+    follower_name = None
+    follower_email = None
+    
+    if request.method == 'POST':
+        follower_name= request.form['name_text']
+        print(user_name)
+        follower_email = request.form['email_text']
+        print(user_surname)
+        
+        with dbapi2.connect(config) as connection:
+            cursor = connection.cursor()
+            query = """INSERT INTO FOLLOWERS(follower_name,follower_email) VALUES (%s,%s);"""
+            cursor.execute(query,(follower_name,follower_email))
+            connection.commit();
+            return redirect(url_for('followers'))
+
+
+
+def unfollow(config,deletefollower):
+    follower_name = None
+    follower_email = None
+    
+    if request.method == 'POST':
+        follower_name2= request.form['name_text']
+        print(user_name)
+        follower_email2 = request.form['email_text']
+        print(user_surname)
+        
+        with dbapi2.connect(config) as connection:
+            cursor = connection.cursor()
+            query = """DELETE FROM FOLLOWERS WHERE follower_name = follower_name2 AND follower_email = follower_email2;"""
+            cursor.execute(query,(follower_name,follower_email))
+            connection.commit();
+            return redirect(url_for('followers'))
+
+
+def search(config,searchfollower):
+    follower_name = None
+    follower_email = None
+    
+    if request.method == 'POST':
+        follower_name= request.form['name_text']
+        print(user_name)
+        follower_email = request.form['email_text']
+        print(user_surname)
+        
+        with dbapi2.connect(config) as connection:
+            cursor = connection.cursor()
+            query = """SELECT follower_name,follower_email FROM FOLLOWERS;"""
+            cursor.execute(query,(follower_name,follower_email))
+            connection.commit();
+            return redirect(url_for('followers'))
+
+def update(config,updatefollower):
+    follower_name = None
+    follower_email = None
+    
+    if request.method == 'POST':
+        follower_name2= request.form['name_text']
+        print(user_name)
+        follower_email2 = request.form['email_text']
+        print(user_surname)
+        
+        with dbapi2.connect(config) as connection:
+            cursor = connection.cursor()
+            query = """UPDATE FOLLOWERS SET follower_name='DFDSF',follower_email='DFDF' WHERE follower_name = follower_name2 ,follower_email = follower_email2;"""
+            cursor.execute(query,(follower_name,follower_email))
+            connection.commit();
+            return redirect(url_for('followers'))
+
+
 
 
