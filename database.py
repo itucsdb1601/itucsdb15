@@ -2,32 +2,28 @@ import json
 import os
 import psycopg2 as dbapi2
 import re
-<<<<<<< HEAD
 from flask import Flask, request, render_template, redirect
 from flask.helpers import url_for
-=======
 from flask import Flask, request, render_template
 
 
 app = Flask(__name__)
->>>>>>> 72451323770cee9de3c5a2d8fc3a1441ffa8b894
 
 
 def initialize_database(config):
     with dbapi2.connect(config) as connection:
         cursor = connection.cursor()
-	 query = """CREATE TABLE IF NOT EXISTS USER_LOGIN (user_id serial primary key, user_loginname VARCHAR(60) NOT NULL, user_password VARCHAR(20) NOT NULL , user_name VARCHAR(30) NOT NULL, user_surname VARCHAR(30) NOT NULL , user_email VARCHAR(120) NOT NULL , user_gender VARCHAR(10))"""
-        cursor.execute(query)
-        connection.commit();
+
+
         query = """CREATE TABLE IF NOT EXISTS TWEETS (tweet_id serial primary key, user_logName VARCHAR(60) NOT NULL , tweet_input VARCHAR(200) NOT NULL)"""
         cursor.execute(query)
         connection.commit();
         query = """CREATE TABLE IF NOT EXISTS FAVORITES (favorite_id serial primary key, user_name VARCHAR(20) NOT NULL, user_surname VARCHAR(20) NOT NULL,user_loginname VARCHAR(30) UNIQUE NOT NULL, user_email VARCHAR(30) NOT NULL)"""
         cursor.execute(query)
         connection.commit();
-<<<<<<< HEAD
         query = """CREATE TABLE IF NOT EXISTS USER_LOGIN (user_id serial primary key, user_loginname NOT NULL VARCHAR(60), user_password VARCHAR(20) NOT NULL,user_name VARCHAR(30) NOT NULL, user_surname VARCHAR(30) NOT NULL, user_email UNIQUE NOT NULL VARCHAR(120), user_gender integer"""
         cursor.execute(query)
+        connection.commit();
         try:
             cursor.execute(query)
         except:
@@ -55,22 +51,18 @@ def initialize_tweets(config):
 def initialize_followers(config):
     with dbapi2.connect(config) as connection:
         cursor = connection.cursor()
-        
+
         query = """CREATE TABLE IF NOT EXISTS FOLLOWERS (following_id serial primary key,follower_name VARCHAR(200) ,follower_email VARCHAR(200))"""
         cursor.execute(query)
-        
+
         query = """insert into FOLLOWERS(follower_name,follower_email) values('c','d')"""
-=======
         query = """CREATE TABLE IF NOT EXISTS USER_LOGIN (user_id serial primary key, user_loginname VARCHAR(60) NOT NULL, user_password VARCHAR(20) NOT NULL , user_name VARCHAR(30) NOT NULL, user_surname VARCHAR(30) NOT NULL , user_email VARCHAR(120) NOT NULL , user_gender VARCHAR(10))"""
         cursor.execute(query)
         connection.commit();
         query = """CREATE TABLE IF NOT EXISTS TWEETS (tweet_id serial primary key, user_logName VARCHAR(60) NOT NULL , tweet_input VARCHAR(200) NOT NULL)"""
         cursor.execute(query)
         connection.commit();
-        query = """CREATE TABLE IF NOT EXISTS FAVORITES (favorite_id serial primary key, user_name VARCHAR(20) NOT NULL, user_surname VARCHAR(20) NOT NULL,user_loginname VARCHAR(30) UNIQUE NOT NULL, user_email VARCHAR(30) NOT NULL)"""
->>>>>>> 72451323770cee9de3c5a2d8fc3a1441ffa8b894
-        cursor.execute(query)
-        connection.commit();
+
         return 'Value is inserted'
 
 
@@ -144,7 +136,7 @@ def saveFavoriteUser(config):
 
 
 
-<<<<<<< HEAD
+
         query = """CREATE TABLE IF NOT EXISTS UNIVERSITY_USERS (
                     uni_id serial primary key,
                     user_id INTEGER NOT NULL,
@@ -155,7 +147,7 @@ def saveFavoriteUser(config):
         cursor.execute(query)
         connection.commit();
         return 'universities table is inserted to store user-university data'
-        
+
 
 def saveuser(config):
     user_name = None
@@ -215,8 +207,8 @@ def users_page_db_update_apply(config,updateuserlogin):
             cursor.execute(query)
             connection.commit()
             return redirect(url_for('profiles'))
-			
-			
+
+
 def tweets_db(config):
     with dbapi2.connect(config) as connection:
         if request.method == 'GET':
@@ -258,7 +250,7 @@ def universities_page_db_delete(config,deleteuni_name):
             cursor.execute(query, (deleteuni_name))
             connection.commit()
             return redirect(url_for('universities'))
-        
+
 def universities_page_db_update(config,updateuni_name):
      with dbapi2.connect(config) as connection:
             cursor = connection.cursor()
@@ -280,13 +272,13 @@ def universities_page_db_update_apply(config,updateuni_name):
 def follow(config,insertfollower):
     follower_name = None
     follower_email = None
-    
+
     if request.method == 'POST':
         follower_name= request.form['name_text']
         print(user_name)
         follower_email = request.form['email_text']
         print(user_surname)
-        
+
         with dbapi2.connect(config) as connection:
             cursor = connection.cursor()
             query = """INSERT INTO FOLLOWERS(follower_name,follower_email) VALUES (%s,%s);"""
@@ -299,13 +291,13 @@ def follow(config,insertfollower):
 def unfollow(config,deletefollower):
     follower_name = None
     follower_email = None
-    
+
     if request.method == 'POST':
         follower_name2= request.form['name_text']
         print(user_name)
         follower_email2 = request.form['email_text']
         print(user_surname)
-        
+
         with dbapi2.connect(config) as connection:
             cursor = connection.cursor()
             query = """DELETE FROM FOLLOWERS WHERE follower_name = follower_name2 AND follower_email = follower_email2;"""
@@ -317,20 +309,20 @@ def unfollow(config,deletefollower):
 def search(config,searchfollower):
     follower_name = None
     follower_email = None
-    
+
     if request.method == 'POST':
         follower_name= request.form['name_text']
         print(user_name)
         follower_email = request.form['email_text']
         print(user_surname)
-        
+
         with dbapi2.connect(config) as connection:
             cursor = connection.cursor()
             query = """SELECT follower_name,follower_email FROM FOLLOWERS;"""
             cursor.execute(query,(follower_name,follower_email))
             connection.commit();
             return redirect(url_for('followers'))
-			
+
 def saveFavoriteUser(config):
     user_name = None
     user_surname = None
@@ -355,13 +347,13 @@ def saveFavoriteUser(config):
 def update(config,updatefollower):
     follower_name = None
     follower_email = None
-    
+
     if request.method == 'POST':
         follower_name2= request.form['name_text']
         print(user_name)
         follower_email2 = request.form['email_text']
         print(user_surname)
-        
+
         with dbapi2.connect(config) as connection:
             cursor = connection.cursor()
             query = """UPDATE FOLLOWERS SET follower_name='DFDSF',follower_email='DFDF' WHERE follower_name = follower_name2 ,follower_email = follower_email2;"""
@@ -401,6 +393,3 @@ def favorites_db_update_apply(config,updateuserlogin):
             connection.commit()
             return redirect(url_for('favorites'))
 
-
-=======
->>>>>>> 72451323770cee9de3c5a2d8fc3a1441ffa8b894

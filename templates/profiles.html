@@ -1,4 +1,6 @@
-<<<<<<< HEAD
+{% extends "layout.html" %}
+{% block title %}{% endblock %}
+{% block content %}
 
   <head>
     <meta charset="utf-8">
@@ -50,10 +52,7 @@
 		{% endfor %}
 		</tbody>
 	</table>
-=======
-{% extends "layout.html" %}
-{% block title %}{% endblock %}
-{% block content %}
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,17 +64,8 @@
    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
   </head>
   <body>
-    <div class="container">
-        <h2>Profile</h2>
-      <div class="header clearfix">
-        <nav>
-          <ul class="nav nav-pills pull-right">
-           <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
-          </ul>
-        </nav>
-      </div>
 
->>>>>>> 72451323770cee9de3c5a2d8fc3a1441ffa8b894
+
 
     </div> <!-- /container -->
 
@@ -84,7 +74,6 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   </body>
 </html>
-<<<<<<< HEAD
-=======
+
 {% endblock %}
->>>>>>> 72451323770cee9de3c5a2d8fc3a1441ffa8b894
+
