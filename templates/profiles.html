@@ -31,21 +31,15 @@
         <th>Name</th>
         <th>Surname</th>
         <th>E-mail</th>
-        <th>Gender</th>
       </tr>
     </thead>
 	<tbody>
-		{% for user_loginname, user_name, user_surname, user_email, user_gender in users %}
+		{% for user_loginname, user_name, user_surname, user_email in users %}
 		<tr>
 			<td class="LeaguesTableItem">{{user_loginname}}</td>
 			<td class="LeaguesTableItem">{{user_name}}</td>
 			<td class="LeaguesTableItem">{{user_surname}}</td>
 			<td class="LeaguesTableItem">{{user_email}}</td>
-			{%  if user_gender == 'm'    %}
-			<td class="LeaguesTableItem">Male</td>
-			{%  else  %}
-			<td class="LeaguesTableItem">Female</td>
-			{%  endif  %}
 			<td class="LeaguesTableItem"><a href="{{ url_for('profile_delete', deleteuserlogin=user_loginname) }}">Delete</a>
 			<td class="LeaguesTableItem"><a href="{{ url_for('profile_update', updateuserlogin=user_loginname) }}">Update</a>
 		</tr>

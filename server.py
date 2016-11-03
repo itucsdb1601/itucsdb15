@@ -18,6 +18,9 @@ def home_page():
     day = now.strftime('%A')
     #initialize_database(app.config['dsn'])
     return render_template('home.html', day_name=day)
+@app.route('/initdb')
+def init():
+    return initialize_database(app.config['dsn'])
 
 
 @app.route('/followers/unfollow/<deletefollower>/', methods=['GET','POST'])
