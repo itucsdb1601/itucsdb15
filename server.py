@@ -4,7 +4,7 @@ import os
 import re
 import psycopg2 as dbapi2
 <<<<<<< HEAD
-from database import initialize_database, saveuser, users_page_db, users_page_db_delete, users_page_db_update, users_page_db_update_apply, search, follow, unfollow, update
+from database import initialize_database, saveFavoriteUser, saveuser, users_page_db, users_page_db_delete, users_page_db_update, users_page_db_update_apply, favorites_db, favorites_db_delete, favorites_db_update favorites_db_update_applyusers_page_db_update_apply, search, follow, unfollow, update
 =======
 from database import initialize_database, saveuser, savetweet, saveFavoriteUser
 >>>>>>> 72451323770cee9de3c5a2d8fc3a1441ffa8b894
@@ -82,6 +82,25 @@ def universities_update_apply(updateuni_name):
 @app.route('/favorites')
 def favorites():
     return render_template('favorites.html')
+
+@app.route('/favorites/delete/<deletefavorites>', methods=['GET', 'POST'])
+def favorites_delete(deletefavorites):
+    return favorites_db_delete(app.config['dsn'],deletefavorites)
+
+@app.route('/favorites/update/<updatefavorites>/', methods=['GET', 'POST'])
+def favorites_update(updatefavorites):
+    return favorites_db_update(app.config['dsn'],updatefavorites)
+
+@app.route('/favorites/update/<updatefavorites>/apply', methods=['GET', 'POST'])
+def favorites_update_apply(updatefavorites):
+    return favorites_db_update_apply(app.config['dsn'],updatefavorites)	
+	
+	@app.route('/saveFavoriteUser', methods=['POST'])
+
+def savefavorites():
+
+	saveFavoriteUser(app.config['dsn'])
+	return 'Favorite user information is inserted'
 
 @app.route('/followers')
 def followers():

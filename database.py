@@ -16,7 +16,15 @@ app = Flask(__name__)
 def initialize_database(config):
     with dbapi2.connect(config) as connection:
         cursor = connection.cursor()
-
+	 query = """CREATE TABLE IF NOT EXISTS USER_LOGIN (user_id serial primary key, user_loginname VARCHAR(60) NOT NULL, user_password VARCHAR(20) NOT NULL , user_name VARCHAR(30) NOT NULL, user_surname VARCHAR(30) NOT NULL , user_email VARCHAR(120) NOT NULL , user_gender VARCHAR(10))"""
+        cursor.execute(query)
+        connection.commit();
+        query = """CREATE TABLE IF NOT EXISTS TWEETS (tweet_id serial primary key, user_logName VARCHAR(60) NOT NULL , tweet_input VARCHAR(200) NOT NULL)"""
+        cursor.execute(query)
+        connection.commit();
+        query = """CREATE TABLE IF NOT EXISTS FAVORITES (favorite_id serial primary key, user_name VARCHAR(20) NOT NULL, user_surname VARCHAR(20) NOT NULL,user_loginname VARCHAR(30) UNIQUE NOT NULL, user_email VARCHAR(30) NOT NULL)"""
+        cursor.execute(query)
+        connection.commit();
 <<<<<<< HEAD
         query = """CREATE TABLE IF NOT EXISTS USER_LOGIN (user_id serial primary key, user_loginname NOT NULL VARCHAR(60), user_password VARCHAR(20) NOT NULL,user_name VARCHAR(30) NOT NULL, user_surname VARCHAR(30) NOT NULL, user_email UNIQUE NOT NULL VARCHAR(120), user_gender integer"""
         cursor.execute(query)
@@ -289,6 +297,27 @@ def search(config,searchfollower):
             cursor.execute(query,(follower_name,follower_email))
             connection.commit();
             return redirect(url_for('followers'))
+			
+def saveFavoriteUser(config):
+    user_name = None
+    user_surname = None
+    user_loginname = None
+    user_email = None
+    if request.method == 'POST':
+        user_name= request.form['fname_text']
+        print(user_name)
+        user_surname = request.form['fsurname_text']
+        print(user_surname)
+        user_loginname = request.form['floginname_text']
+        print(user_loginname)
+        user_email = request.form['femail_text']
+        print(user_email)
+        with dbapi2.connect(config) as connection:
+            cursor = connection.cursor()
+            query = """INSERT INTO FAVORITES(user_loginname,user_name,user_surname,user_email) VALUES (%s,%s,%s,%s)"""
+            cursor.execute(query,(user_loginname,user_name,user_surname,user_email))
+            connection.commit();
+            return 'Favorite user information is inserted'
 
 def update(config,updatefollower):
     follower_name = None
@@ -307,7 +336,37 @@ def update(config,updatefollower):
             connection.commit();
             return redirect(url_for('followers'))
 
-
+def favorites_db(config):
+    with dbapi2.connect(config) as connection:
+        if request.method == 'GET':
+            cursor = connection.cursor()
+            query="SELECT user_loginname,user_name,user_surname,user_email from favorites"
+            cursor.execute(query)
+            print(cursor)
+            return render_template('favorites.html',favorites=cursor)
+def favorites_db_delete(config,deleteufavorites):
+    with dbapi2.connect(config) as connection:
+            cursor = connection.cursor()
+            query="DELETE FROM favorites where user_loginname = %s"
+            cursor.execute(query, (deletefavorites,))
+            connection.commit()
+            return redirect(url_for('favorites'))
+def favorites_db_update(config,updateuserlogin):
+     with dbapi2.connect(config) as connection:
+            cursor = connection.cursor()
+            query="""SELECT user_loginname from favorites where user_loginname = '%s'""" % (updatefavorites)
+            cursor.execute(query)
+            connection.commit()
+            return render_template('favorites_edit.html',logins=cursor)
+def favorites_db_update_apply(config,updateuserlogin):
+    with dbapi2.connect(config) as connection:
+            cursor = connection.cursor()
+            new_name = request.form['name']
+            print(new_name)
+            query="""UPDATE favorites set user_loginname ='%s' where user_loginname = '%s'""" % (new_name,updatefavorites)
+            cursor.execute(query)
+            connection.commit()
+            return redirect(url_for('favorites'))
 
 
 =======
