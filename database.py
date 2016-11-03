@@ -80,6 +80,7 @@ def initialize_universities(config):
         cursor.execute(query)
         connection.commit();
         return 'universities table is inserted to store user-university data'
+        
 
 def saveuser(config):
     user_name = None
@@ -139,4 +140,23 @@ def users_page_db_update_apply(config,updateuserlogin):
             cursor.execute(query)
             connection.commit()
             return redirect(url_for('profiles'))
+
+
+
+def universities_page_db_delete(config,deleteuni_name):
+    with dbapi2.connect(config) as connection:
+            cursor = connection.cursor()
+            query="DELETE FROM UNIVERITY_USERS where uni_name = %s"
+            cursor.execute(query, (deleteuni_name))
+            connection.commit()
+            return redirect(url_for('universities'))
+        
+def universities_page_db_update(config,updateuni_name):
+     with dbapi2.connect(config) as connection:
+            cursor = connection.cursor()
+            query="""SELECT uni_name from UNIVERSITIY_USERS where uni_name = '%s'""" % (updateuni_name)
+            cursor.execute(query)
+            connection.commit()
+            return render_template('universities_edit.html',universities=cursor)
+
 

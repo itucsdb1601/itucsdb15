@@ -2,6 +2,7 @@
 {% block title %}{% endblock %}
 {% block content %}
 
+    <h1>Created by Ozan Özcan</h1><hr>
 
 
   <head>
@@ -30,11 +31,47 @@
 
       </div>
 
-<p> eıjgıojegnoejojgoıjrıgjeıjgj </p>
+<!-- update code -->
+<form action="{{ url_for('universities')}}" method = "post">
+    <table id="universitiesTable">
 
+    <tr>
+      <th>UniversityID</th>
+        <th>University</th>
+      </tr>
+
+    {% for user_id, uni_name in university_users %}
+    <tr>
+      <td class="UniversitiesTableItem">{{user_id}}</td>
+      <td class="UnviersitiesTableItem">{{uni_name}}</td>
+      <td class="UniversitiesTableItem"><a href="{{ url_for('universities_page_db_delete', deleteuni_name=uni_name) }}">Delete</a></td>
+      <td class="UniverisitiesTableItem"><a href="{{ url_for('universities_page_db_update', updateuni_name=uni_name) }}">Update</a></td>
+    </tr>
+    {% endfor %}
+
+    <tr>
+      <td class="UniversitiesTableNewItem"> </td>
+      <td class="UniversitiesTableNewItem"><input type="text" name="university" required="required"></td>
+      <td class="UniversitiesTableNewItem"> </td>
+      <td class="UniversitiesTableNewItem"> </td>
+    </tr>
+    <tr>
+      <td colspan="5"><input value="Add New University" name="add" type="submit"></td>
+    </tr>
+    </table>
+  </form>
+
+
+<div class="form-group">
+      <label for="usearch">SEARCH UNIVERSITY NAME:</label>
+      <input type="text" class="form-control" name="uni_name_text" id="uni_name_text">
+      <button type="submit" id="btn_sign" class="btn btn-default">SEARCH</button>
+    </div>
     </div> <!-- /container -->
     </div>
     </div>
+
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

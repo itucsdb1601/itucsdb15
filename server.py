@@ -43,6 +43,19 @@ def tweets():
 def universities():
     return render_template('universities.html')
 
+@app.route('/universities/delete/<deleteuni_name>', methods=['GET', 'POST'])
+def universities_delete(deleteuni_name):
+    return university_users_page_db_delete(app.config['dsn'],deleteuni_name)
+
+@app.route('/universities/update/<updateuni_name>/', methods=['GET','POST'])
+def universities_update(updateuni_name):
+    return university_users_page_db_update(app.config['dsn'],updateuni_name)
+
+@app.route('/universities/update/<updateuserlogin>/apply', methods=['GET','POST'])
+def universities_update_apply(updateuni_name):
+    return universities_page_db_update_apply(app.config['dsn'],updateuni_name)
+
+
 @app.route('/favorites')
 def favorites():
     return render_template('favorites.html')
