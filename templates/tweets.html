@@ -1,39 +1,29 @@
-{% extends "layout.html" %}
-{% block title %}Movie List{% endblock %}
-{% block content %}
-    <h1>Movies</h1>
-{% endblock %}
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<title>Settings</title>
-</head>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Home</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}" />
+   <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
 
-<body style="background-color:pink;">
+  </head>
 
+  <body>
 
-
-<br>
-<div class="row">
-    <div class="span6">
-        <table class="table table-striped">
-            <tr>
-                <td><h6>Privacy Settings</h6></td>
-                <td><a><i class="material-icons">traffic</i>Click to edit privacy settings</a></td>
-            </tr>
-            <tr>
-                <td><h6>Account Settings</h6></td>
-                <td><i class="icon-home"></i>Click to edit account settings</td>
-            </tr>
-            <tr>
-                <td><h6>Notification Settings</h6></td>
-                <td><i class="material-icons">attachment</i></td>
-            </tr>
-            <tr>
-                <td><h6>Contact Help Desk Email:</h6></td>
-                <td><i class="icon-envelope"></i>ozcanoza@itu.edu.tr</td>
-            </tr>
-        </table>
+    <div class="container bg-2 text-center">
+  <h3>Please Enter Information</h3>
+    <form class="col-lg-12" action="{{url_for('savetw')}}" method="POST">
+    <div class="form-group">
+      <label for="usname">Username:</label>
+       <input class="form-control" id="username_text" name="username_text" type="text">
     </div>
+    <div class="form-group">
+      <label for="tweet">Write a new Tweet:</label>
+       <input class="form-control" name="tweet_text" id="tweet_text" type="text">
+    </div>
+   <button type="submit" id="btn_sign" class="btn btn-default">Enter</button>
+  </form>
 </div>
-</body>
+  </body>
+
 </html>

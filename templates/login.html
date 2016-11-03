@@ -26,23 +26,39 @@
   <body>
 <div class="container-fluid bg-1 text-center">
   <h1>Welcome to Unicorn!</h1>
-  <img src="{{ url_for('static', filename='unicorn.png') }}" class="img-circle" alt="unicorn" width="350" height="350">
+  <img src="{{ url_for('static', filename='unicorn.png') }}" class="img-circle" alt="unicorn" width="100" height="100">
 </div>
     <div class="container bg-2 text-center">
   <h3>Please login</h3>
-    <form>
+    <form class="col-lg-12" action="{{url_for('save')}}" method="POST">
     <div class="form-group">
-      <label for="usr">Please enter user name or e-mail: </label>
-      <input type="text" class="form-control" id="ex2">
+      <label for="uname">Name:</label>
+       <input class="form-control" id="name_text" name="name_text" type="text">
+    </div>
+    <div class="form-group">
+      <label for="usurname">Surname:</label>
+       <input class="form-control" name="surname_text" id="surname_text" type="text">
+    </div>
+    <div class="form-group">
+      <label for="uusername">Please enter user name:</label>
+      <input type="text" class="form-control" name="loginname_text"  id="username_text">
     </div>
     <div class="form-group">
       <label for="pwd">Password:</label>
-       <input class="form-control" id="ex2" type="text">
+       <input class="form-control" name="password_text" id="password_text" type="text">
     </div>
-        <div class="checkbox">
-      <label><input type="checkbox"> Remember me</label>
+    <div class="form-group">
+      <label for="uemail">Please enter e-mail:</label>
+      <input type="text" class="form-control" name="email_text" id="email_text">
     </div>
-   <button type="submit" class="btn btn-default">Submit</button> <a href =""/a>
+    <div class="form-group">
+      <label for="ugender">Please choose gender</label>
+      <select class="form-control" name="gender" id="gender">
+          <option>Male</option>
+          <option>Female</option>
+      </select>
+    </div>
+   <button type="submit" id="btn_sign" class="btn btn-default">Sign up</button>
   </form>
 </div>
 

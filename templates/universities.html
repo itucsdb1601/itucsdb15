@@ -1,57 +1,44 @@
 {% extends "layout.html" %}
-{% block title %}Movie List{% endblock %}
+{% block title %}{% endblock %}
 {% block content %}
-    <h1>Movies</h1>
-{% endblock %}
-<h1>Song�l Sara�</h1>
-<h3>Notifications</h3>
 
-<body>
-<body style="background-color:orange;">
-<div class="row">
-    <div class="span6">
-        <table class="table table-striped">
-            <tr>
-                <td><h6>My Notifications</h6></td>
-                <td><a><i class="icon-user"></i></a></td>
-            </tr>
-            <tr>
 
-                <td><h6>    </h6></td>
-                <td><a><i class="icon-user"></i>Likes</a></td>
-            </tr>
-            <tr>
 
-                <td><h6>    </h6></td>
-                <td><a><i class="icon-user"></i>Comments</a></td>
-            </tr>
-            <tr>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}" />
+   <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
 
-                <td><h6>    </h6></td>
-                <td><a><i class="icon-user"></i>Friendship Requests</a></td>
-            </tr>
-            <tr>
+  </head>
 
-                <td><h6>    </h6></td>
-                <td><a><i class="icon-user"></i>Invitations</a></td>
-            </tr>
-            <tr>
-                <td><h6>Following Notifications:</h6></td>
-                <td><a><i class="icon-home"></i></a></td>
-            </tr>
+  <body>
 
-                <tr>
+    <div class="container">
+        <h2>Universities</h2>
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+        <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
+            <li role="presentation"><a href="{{ url_for('login') }}">Switch User</a></li>
+          </ul>
+        </nav>
 
-                <td><h6>    </h6></td>
-                <td><a><i class="icon-home"></i>Likes</a></td>
-            </tr>
-                            <tr>
+      </div>
 
-                <td><h6>    </h6></td>
-                <td><a><i class="icon-home"></i>Comments</a></td>
-            </tr>
-        </table>
+<p> eıjgıojegnoejojgoıjrıgjeıjgj </p>
+
+    </div> <!-- /container -->
     </div>
-</div>
-</body>
+    </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  </body>
 </html>
+{% endblock %}

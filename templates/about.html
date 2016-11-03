@@ -2,9 +2,8 @@
 {% block title %}{% endblock %}
 {% block content %}
 
-<!--
-<!DOCTYPE html>
-<html lang="en">-->
+
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,35 +19,23 @@
   <body>
 
     <div class="container">
+        <h3>Abot Unicorn</h3>
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation"><a href="{{ url_for('about') }}">About</a></li>
-            <li role="presentation"><a href="{{ url_for('login') }}">Sign up</a></li>
+        <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
+            <li role="presentation"><a href="{{ url_for('login') }}">Switch User</a></li>
           </ul>
         </nav>
 
-
       </div>
 
-      <div class="jumbotron">
-        <h1>Hi User! Have a nice day!</h1>
-        <p class="lead">Welcome to unicorn the newest social media application.</p>
+
+
+      <div class="starter-template">
+        <p class="lead">Who we are?</p>
+        <p class="lead">Unicorn is a social media web application where users will share their thoughts and ideas with entries and interact with each other in various ways such as liking or disliking other users' entries, sharing entries in their own profiles or via direct messaging. Users will create their own profile. Profile photo, number of followers, entries and entry features such as popularity will be shown on the profile. Most important aspects of the profile are the entries and their popularity. Tables for user information, entry information and their related, detailed attributes will be stored in the database system.</p>
       </div>
-
-      <div class="row marketing">
-        <div class="col-lg-6">
-        <div class="btn-group btn-group-justified">
-  			 <a href="{{url_for('profiles') }}" class="btn btn-success btn-lg">Profiles</a></li>
-  			 <a href="{{url_for('universities') }}" class="btn btn-info btn-lg">Universities</a>
-  			<a href="{{url_for('tweets') }}" class="btn btn-warning btn-lg">Tweets</a>
-  			<a href="{{url_for('favorites') }}" class="btn btn-danger btn-lg"> Favorites</a>
-  			<a href="{{url_for('followers') }}" class="btn btn-default btn-lg">Followers</a>
-  			</div>
-
-      <footer class="footer">
-        <p>&copy; Company 2016</p>
-      </footer>
 
     </div> <!-- /container -->
     </div>
@@ -58,5 +45,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   </body>
-<!--  --></html>  -->
+</html>
 {% endblock %}
+
