@@ -1,8 +1,3 @@
-{% extends "layout.html" %}
-{% block title %}{% endblock %}
-{% block content %}
-
-
 
   <head>
     <meta charset="utf-8">
@@ -12,33 +7,39 @@
     <meta name="description" content="">
     <meta name="author" content="">
    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}" />
-   <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
-
   </head>
-
   <body>
-
     <div class="container">
-        <h2>Tweets</h2>
+        <h2>Profile</h2>
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-             <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
-            <li role="presentation"><a href="{{ url_for('login') }}">Switch User</a></li>
+           <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
           </ul>
         </nav>
-
       </div>
 
-
+  <form action="apply" method = "post">
+  <table id="userEditTable" class="table" width="500px">
+	 <thead>
+      <tr>
+		<th>Login name</th>
+      </tr>
+    </thead>
+	<tbody>
+    {% for user_loginname in logins %}
+    <td><input type="text" name="name" required="required" value="{{user_loginname[0]}}" style="width:95%"></td>
+    {% endfor %}
+    <tr>
+			<td colspan="3" align="center"><input value="Update Username" name="add" type="submit"></td>
+	</tr>
+	</tbody>
+	</table>
 
     </div> <!-- /container -->
-    </div>
-    </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   </body>
 </html>
-{% endblock %}

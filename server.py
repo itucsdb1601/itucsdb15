@@ -2,9 +2,9 @@ import datetime
 import json
 import os
 import re
-
-from database import initialize_database
-from flask import Flask, render_template, redirect
+import psycopg2 as dbapi2
+from database import initialize_database, saveuser, users_page_db, users_page_db_delete, users_page_db_update, users_page_db_update_apply
+from flask import Flask, render_template, redirect, request
 from flask.helpers import url_for
 from datetime import datetime
 
@@ -15,13 +15,25 @@ app = Flask(__name__)
 def home_page():
     now = datetime.now()
     day = now.strftime('%A')
-    initialize_database(app.config['dsn'])
+    #initialize_database(app.config['dsn'])
     return render_template('home.html', day_name=day)
 
 
 @app.route('/profiles')
 def profiles():
-    return render_template('profiles.html')
+    return users_page_db(app.config['dsn'])
+
+@app.route('/profiles/delete/<deleteuserlogin>', methods=['GET', 'POST'])
+def profile_delete(deleteuserlogin):
+    return users_page_db_delete(app.config['dsn'],deleteuserlogin)
+
+@app.route('/profiles/update/<updateuserlogin>/', methods=['GET', 'POST'])
+def profile_update(updateuserlogin):
+    return users_page_db_update(app.config['dsn'],updateuserlogin)
+
+@app.route('/profiles/update/<updateuserlogin>/apply', methods=['GET', 'POST'])
+def profile_update_apply(updateuserlogin):
+    return users_page_db_update_apply(app.config['dsn'],updateuserlogin)
 
 @app.route('/tweets')
 def tweets():
@@ -43,6 +55,13 @@ def followers():
 def login():
     return render_template('login.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/saveuser', methods=['GET','POST'])
+def save():
+    return saveuser(app.config['dsn'])
 
 def get_elephantsql_dsn(vcap_services):
     """Returns the data source name for ElephantSQL."""

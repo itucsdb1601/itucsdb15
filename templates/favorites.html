@@ -1,34 +1,44 @@
 {% extends "layout.html" %}
-{% block title %}Movie List{% endblock %}
+{% block title %}{% endblock %}
 {% block content %}
-    <h1>Movies</h1>
-{% endblock %}
 
-</head>
-<body style="background-color:purple;">
-<h1>Melis Gulenay</h1>
-<br>
-<div class="row">
-    <div class="span6">
-        <table class="table table-striped">
-            <tr>
-                <td><h6>My Favorites</h6></td>
-                <td><a><i class="icon-user"></i>4</a></td>
-            </tr>
-            <tr>
-                <td><h6>    </h6></td>
-                <td><a><i class="icon-user"></i>Pictures</a></td>
-            </tr>
-            <tr>
-                <td><h6>    </h6></td>
-                <td><a><i class="icon-user"></i>Friends</a></td>
-            </tr>
-            <tr>
-                <td><h6>    </h6></td>
-                <td><a><i class="icon-user"></i>Status</a></td>
-            </tr>
-        </table>
+
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}" />
+   <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
+
+  </head>
+
+  <body>
+
+    <div class="container">
+        <h1>Favorites</h1>
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+             <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
+            <li role="presentation"><a href="{{ url_for('login') }}">Switch User</a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+<p> eıjgıojegnoejojgoıjrıgjeıjgj </p>
+
+    </div> <!-- /container -->
     </div>
-</div>
-</body>
+    </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  </body>
 </html>
+{% endblock %}
