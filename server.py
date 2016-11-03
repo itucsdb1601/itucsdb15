@@ -3,7 +3,11 @@ import json
 import os
 import re
 import psycopg2 as dbapi2
+<<<<<<< HEAD
 from database import initialize_database, saveuser, users_page_db, users_page_db_delete, users_page_db_update, users_page_db_update_apply, search, follow, unfollow, update
+=======
+from database import initialize_database, saveuser, savetweet, saveFavoriteUser
+>>>>>>> 72451323770cee9de3c5a2d8fc3a1441ffa8b894
 from flask import Flask, render_template, redirect, request
 from flask.helpers import url_for
 from datetime import datetime
@@ -91,9 +95,26 @@ def login():
 def about():
     return render_template('about.html')
 
+<<<<<<< HEAD
 @app.route('/saveuser', methods=['GET','POST'])
 def save():
     return saveuser(app.config['dsn'])
+=======
+@app.route('/saveuser', methods=['POST'])
+def save():
+    saveuser(app.config['dsn'])
+    return 'User is inserted'
+
+@app.route('/savetweet', methods=['POST'])
+def savetw():
+	savetweet(app.config['dsn'])
+	return 'Your tweet has been successfully posted'
+
+@app.route('/saveFavoriteUser', methods=['POST'])
+def savefavorites():
+	saveFavoriteUser(app.config['dsn'])
+	return 'Favorite user information is inserted'
+>>>>>>> 72451323770cee9de3c5a2d8fc3a1441ffa8b894
 
 def get_elephantsql_dsn(vcap_services):
     """Returns the data source name for ElephantSQL."""
