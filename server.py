@@ -3,7 +3,7 @@ import json
 import os
 import re
 import psycopg2 as dbapi2
-from database import initialize_database, saveuser, users_page_db, users_page_db_delete, users_page_db_update, users_page_db_update_apply, favorites_db_delete, favorites_db_update, favorites_db_update_apply,users_page_db_update_apply, search, follow, unfollow, update, check, check2,check3, search_following, follow_following, unfollow_following, update_following, search_blocked, follow_blocked, unfollow_blocked, update_blocked
+from database import initialize_database, favorites_db_delete, favorites_db_update, favorites_db_update_apply,users_page_db_update_apply, search, follow, unfollow, update, check, check2,check3, search_following, follow_following, unfollow_following, update_following, search_blocked, follow_blocked, unfollow_blocked, update_blocked
 from database import savetweet, saveFavoriteUser
 from flask import Flask, render_template, redirect, request
 from flask.helpers import url_for
