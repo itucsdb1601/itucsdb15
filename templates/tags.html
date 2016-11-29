@@ -14,35 +14,36 @@
   </head>
   <body>
     <div class="container">
-        <h2>TWEET PANEL</h2>
+        <h2>TAG PANEL</h2>
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
            <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
-           <li role="presentation" class="active"><a href="{{ url_for('tweet_edit') }}">Add a New Tweet</a></li>
-              <li role="presentation" class="active"><a href="{{ url_for('tags') }}">Tags</a></li>
+           <li role="presentation" class="active"><a href="{{ url_for('tags_edit') }}">Add a New Tag</a></li>
 
           </ul>
         </nav>
       </div>
 
-   <form action="{{ url_for('tweets') }}" method = "post">
-  <table id="tweetsTable" class="table">
+   <form action="{{ url_for('tags') }}" method = "post">
+  <table id="tagsTable" class="table">
 	 <thead>
       <tr>
-        <th>User Login Name</th>
+       <th>User Name</th>
         <th>Tweet</th>
-        <th>Tweet Category</th>
+        <th>Tag</th>
+        <th>Tag Category</th>
       </tr>
     </thead>
 	<tbody>
-		{% for user_logName, tweet_input, tweet_category in tweets_list %}
+		{% for user_logname, tweet_input, tag_input, tag_category in tag_list %}
 		<tr>
-			<td class="TweetsTableItem">{{user_logName}}</td>
-			<td class="TweetsTableItem">{{tweet_input}}</td>
-			<td class="TweetsTableItem">{{tweet_category}}</td>
-			<td class="TweetssTableItem"><a href="{{ url_for('tweet_delete', deleteTweet=user_logName) }}">Delete</a>
-			<td class="TweetsTableItem"><a href="{{ url_for('tweet_update', updateTweet=user_logName) }}">Update</a>
+			<td class="TagsTableItem">{{user_logname}}</td>
+			<td class="TagsTableItem">{{tweet_input}}</td>
+			<td class="TagsTableItem">{{tag_input}}</td>
+			<td class="TagsTableItem">{{tag_category}}</td>
+			<td class="TagsTableItem"><a href="{{ url_for('tag_delete', deletetag=user_logname) }}">Delete</a>
+			<td class="TagsTableItem"><a href="{{ url_for('tag_update', updatetag=user_logname) }}">Update</a>
 		</tr>
 		{% endfor %}
 		</tbody>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Tweet Panel</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}" />
+   <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
+
+  </head>
+
+  <body>
+
+    <div class="container bg-2 text-center">
+  <h3> Please Enter Username and Tweet </h3>
+    <form class="col-lg-12" action="{{url_for('savetw')}}" method="POST">
+    <div class="form-group">
+      <label for="name">Username:</label>
+       <input class="form-control" id="username_text" name="username_text" type="text">
+    </div>
+    <div class="form-group">
+      <label for="tweet">Tweet for User:</label>
+       <input class="form-control" name="tweet_text" id="tweet_text" type="text">
+    </div>
+
+        <div class="form-group">
+      <label for="category">Tweet Category:</label>
+       <input class="form-control" name="category_text" id="category_text" type="text">
+    </div>
+
+   <button type="submit" id="btn_sign" class="btn btn-default">Save</button>
+   </form>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+  </body>
+
+</html>

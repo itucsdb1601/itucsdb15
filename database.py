@@ -26,17 +26,6 @@ def initialize_database(config):
         connection.commit();
         return 'tables are created <a href="http://localhost:5000">Home</a>'
 
-def initialize_tweets(config):
-    with dbapi2.connect(config) as connection:
-        cursor = connection.cursor()
-
-        query = """CREATE TABLE IF NOT EXISTS TWEETS (tweet_id serial primary key,user_id INTEGER NOT NULL, user_tweet VARCHAR(200))"""
-        cursor.execute(query)
-
-        query = """insert into TWEETS(user_id, user_tweet) values(1,'first tweet for user 1 was added')"""
-        cursor.execute(query)
-        connection.commit();
-        return 'Tweet was inserted'
 
 
 def initialize_followers(config):
@@ -397,38 +386,6 @@ def saveFavoriteUser(config):
         return 'universities table is inserted to store user-university data'
 
 
-def tweets_db(config):
-    with dbapi2.connect(config) as connection:
-        if request.method == 'GET':
-            cursor = connection.cursor()
-            query="SELECT user_loginname,tweet from tweets"
-            cursor.execute(query)
-            print(cursor)
-            return render_template('tweets.html',thistweet=cursor)
-def tweets_db_delete(config,deleteUserTweet):
-    with dbapi2.connect(config) as connection:
-            cursor = connection.cursor()
-            query="DELETE FROM tweets where user_loginname = %s"
-            cursor.execute(query, (deleteUserTweet,))
-            connection.commit()
-            return redirect(url_for('tweets'))
-def tweets_db_update(config,updateUserTweet):
-     with dbapi2.connect(config) as connection:
-            cursor = connection.cursor()
-            query="""SELECT user_loginname from tweets where user_loginname = '%s'""" % (updateUserTweet)
-            cursor.execute(query)
-            connection.commit()
-            return render_template('tweet_update.html',logins=cursor)  #bunun için bir tweet_update html i gerekecek
-def tweet_page_db_update_apply(config,updateUserTweet):
-    with dbapi2.connect(config) as connection:
-            cursor = connection.cursor()
-            new_tweet = request.form['tweet_text']
-            print(new_tweet)
-            query="""UPDATE tweets set tweet ='%s' where user_loginname = '%s'""" % (new_ntweet,updateUserTweet)
-            cursor.execute(query)
-            connection.commit()
-            return redirect(url_for('tweets'))
-
 
 
 def universities_page_db_delete(config,deleteuni_name):
@@ -456,57 +413,4 @@ def universities_page_db_update_apply(config,updateuni_name):
             connection.commit()
             return redirect(url_for('universities'))
 
-
-def saveFavoriteUser(config):
-    user_name = None
-    user_surname = None
-    user_loginname = None
-    user_email = None
-    if request.method == 'POST':
-        user_name= request.form['fname_text']
-        print(user_name)
-        user_surname = request.form['fsurname_text']
-        print(user_surname)
-        user_loginname = request.form['floginname_text']
-        print(user_loginname)
-        user_email = request.form['femail_text']
-        print(user_email)
-        with dbapi2.connect(config) as connection:
-            cursor = connection.cursor()
-            query = """INSERT INTO FAVORITES(user_loginname,user_name,user_surname,user_email) VALUES (%s,%s,%s,%s)"""
-            cursor.execute(query,(user_loginname,user_name,user_surname,user_email))
-            connection.commit();
-            return 'Favorite user information is inserted'
-
-def favorites_db(config):
-    with dbapi2.connect(config) as connection:
-        if request.method == 'GET':
-            cursor = connection.cursor()
-            query="SELECT user_loginname,user_name,user_surname,user_email from favorites"
-            cursor.execute(query)
-            print(cursor)
-            return render_template('favorites.html',favorites=cursor)
-def favorites_db_delete(config,deleteufavorites):
-    with dbapi2.connect(config) as connection:
-            cursor = connection.cursor()
-            query="DELETE FROM favorites where user_loginname = %s"
-            cursor.execute(query, (deletefavorites,))
-            connection.commit()
-            return redirect(url_for('favorites'))
-def favorites_db_update(config,updateuserlogin):
-     with dbapi2.connect(config) as connection:
-            cursor = connection.cursor()
-            query="""SELECT user_loginname from favorites where user_loginname = '%s'""" % (updatefavorites)
-            cursor.execute(query)
-            connection.commit()
-            return render_template('favorites_edit.html',logins=cursor)
-def favorites_db_update_apply(config,updateuserlogin):
-    with dbapi2.connect(config) as connection:
-            cursor = connection.cursor()
-            new_name = request.form['name']
-            print(new_name)
-            query="""UPDATE favorites set user_loginname ='%s' where user_loginname = '%s'""" % (new_name,updatefavorites)
-            cursor.execute(query)
-            connection.commit()
-            return redirect(url_for('favorites'))
 

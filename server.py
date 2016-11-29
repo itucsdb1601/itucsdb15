@@ -3,14 +3,15 @@ import json
 import os
 import re
 import psycopg2 as dbapi2
-from database import initialize_database, favorites_db_delete, favorites_db_update, favorites_db_update_apply, search, follow, unfollow, update, check, check2,check3, search_following, follow_following, unfollow_following, update_following, search_blocked, follow_blocked, unfollow_blocked, update_blocked
-from database import savetweet, saveFavoriteUser
+from database import initialize_database, search, follow, unfollow, update, check, check2,check3, search_following, follow_following, unfollow_following, update_following, search_blocked, follow_blocked, unfollow_blocked, update_blocked
 from flask import Flask, render_template, redirect, request
 from flask.helpers import url_for
 from datetime import datetime
 from Profile import Profile as profile
 from Hobby import Hobby as hobby
 from Communication import Communication as communication
+from tags import tags as tag
+from tweets import tweets as tweet
 
 app = Flask(__name__)
 
@@ -167,11 +168,6 @@ def hobbies_edit_insert_or_update():
 def hobbies_edit_delete():
         return hobby.users_page_db_hobby_information_delete(app.config['dsn'])
 
-
-@app.route('/tweets')
-def tweets():
-    return render_template('tweets.html')
-
 @app.route('/universities')
 def universities():
     return render_template('universities.html')
@@ -207,15 +203,62 @@ def save():
     profile.saveuser(app.config['dsn'])
     return render_template('login.html')
 
+
+@app.route('/tag_edit')
+def tags_edit():
+    return render_template('tags_edit.html')
+
+@app.route('/tags')
+def tags():
+    return tag.tags_db(app.config['dsn'])
+
+@app.route('/tags/delete/<deletetag>', methods=['GET', 'POST'])
+def tag_delete(deletetag):
+    return tag.tags_db_delete(app.config['dsn'],deletetag)
+
+
+@app.route('/tags/update/<updatetag>/', methods=['GET', 'POST'])
+def tag_update(updatetag):
+    return tag.tags_db_update(app.config['dsn'],updatetag)
+
+@app.route('/tags/update/<updatetag>/apply', methods=['GET', 'POST'])
+def tags_apply(updatetag):
+    return tag.tags_db_update_apply(app.config['dsn'],updatetag)
+
+@app.route('/savettag', methods=['POST'])
+def savetag():
+    tag.savetag(app.config['dsn'])
+    return 'Your tag has been successfully posted'
+
+@app.route('/tweets')
+def tweets():
+    return tweet.tweets_db(app.config['dsn'])
+
+@app.route('/tweets/delete/<deleteTweet>', methods=['GET', 'POST'])
+def tweet_delete(deleteTweet):
+    return tweet.tweets_db_delete(app.config['dsn'],deleteTweet)
+
+@app.route('/tweets/initialize_tweets', methods=['GET', 'POST'])
+def initialize_tweets():
+        return tweet.initialize_tweets(app.config['dsn'])
+
+@app.route('/tweets/update/<updateTweet>/', methods=['GET', 'POST'])
+def tweet_update(updateTweet):
+    return tweet.tweets_db_update(app.config['dsn'],updateTweet)
+
+@app.route('/tweets/update/<updateTweet>/apply', methods=['GET', 'POST'])
+def tweets_apply(updateTweet):
+    return tweet.tweets_db_update_apply(app.config['dsn'],updateTweet)
+
+@app.route('/tweet_edit')
+def tweet_edit():
+    return render_template('tweet_edit.html')
+
 @app.route('/savetweet', methods=['POST'])
 def savetw():
-    savetweet(app.config['dsn'])
+    tweet.savetweet(app.config['dsn'])
     return 'Your tweet has been successfully posted'
 
-@app.route('/saveFavoriteUser', methods=['POST'])
-def savefavorites():
-    saveFavoriteUser(app.config['dsn'])
-    return 'Favorite user information is inserted'
 
 
 def get_elephantsql_dsn(vcap_services):
