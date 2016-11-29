@@ -15,6 +15,10 @@ def initialize_database(config):
         cursor = connection.cursor()
         profile.initialize_profiles(config)
         initialize_followers(config)
+        query = """DROP TABLE IF EXISTS TWEETS"""
+        cursor.execute(query)
+        query = """DROP TABLE IF EXISTS FAVORITES"""
+        cursor.execute(query)
         query = """CREATE TABLE IF NOT EXISTS TWEETS (tweet_id serial primary key, user_logName VARCHAR(60) NOT NULL , tweet_input VARCHAR(200) NOT NULL)"""
         cursor.execute(query)
         query = """CREATE TABLE IF NOT EXISTS FAVORITES (favorite_id serial primary key, user_name VARCHAR(20) NOT NULL, user_surname VARCHAR(20) NOT NULL,user_loginname VARCHAR(30) UNIQUE NOT NULL, user_email VARCHAR(30) NOT NULL)"""
@@ -38,6 +42,8 @@ def initialize_tweets(config):
 def initialize_followers(config):
     with dbapi2.connect(config) as connection:
         cursor = connection.cursor()
+        query = """DROP TABLE IF EXISTS FOLLOWERS"""
+        cursor.execute(query)
         query = """CREATE TABLE IF NOT EXISTS FOLLOWERS (following_id serial primary key,follower_name VARCHAR(200) ,follower_email VARCHAR(200))"""
         cursor.execute(query)
         query = """insert into FOLLOWERS(follower_name,follower_email) values('c','d')"""

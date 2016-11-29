@@ -5,6 +5,7 @@ import re
 from flask import Flask, request, render_template, redirect
 from flask.helpers import url_for
 
+app = Flask(__name__)
 ## CEYDA ALADAÐ - 150130283
 class Hobby:
 
