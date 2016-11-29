@@ -3,7 +3,7 @@ import json
 import os
 import re
 import psycopg2 as dbapi2
-from database import initialize_database, favorites_db_delete, favorites_db_update, favorites_db_update_apply,search, follow, unfollow, update
+from database import initialize_database, saveuser, users_page_db, users_page_db_delete, users_page_db_update, users_page_db_update_apply, favorites_db_delete, favorites_db_update, favorites_db_update_apply,users_page_db_update_apply, search, follow, unfollow, update, check, check2,check3, search_following, follow_following, unfollow_following, update_following, search_blocked, follow_blocked, unfollow_blocked, update_blocked
 from database import savetweet, saveFavoriteUser
 from flask import Flask, render_template, redirect, request
 from flask.helpers import url_for
@@ -27,25 +27,98 @@ def init():
     return initialize_database(app.config['dsn'])
 
 
-@app.route('/followers/unfollow/<deletefollower>/', methods=['GET','POST'])
-def unfollowM(deletefollower):
-    return unfollow(app.config['dsn'],deletefollower)
+@app.route('/followers/search', methods=['POST'])
+def searchM():
+    return search(app.config['dsn'])
 
 
-@app.route('/followers/search/<searchfollower>/', methods=['GET','POST'])
-def searchM(searchfollower):
-    return search(app.config['dsn'], searchfollower)
+@app.route('/followers/follow', methods=['POST'])
+def insertM():
+    follow(app.config['dsn'])
+        return render_template('followers.html')
 
 
-@app.route('/followers/follow/<insertfollower>/', methods=['GET','POST'])
-def followM(insertfollower):
-     follow(app.config['dsn'],insertfollower)
-     return'follower is inserted'
+@app.route('/following/search_following', methods=['POST'])
+def searchM_following():
+    return search_following(app.config['dsn'])
 
-@app.route('/followers/update/<updatefollower>/)', methods=['POST'])
-def updateM(updatefollower):
-    return update(app.config['dsn'],updatefollower)
 
+
+@app.route('/following/follow_following', methods=['POST'])
+def insertM_following():
+    follow_following(app.config['dsn'])
+        return render_template('following.html')
+
+
+@app.route('/blocked/search_blocked', methods=['POST'])
+def searchM_blocked():
+    return search_blocked(app.config['dsn'])
+
+
+
+@app.route('/blocked/follow_blocked', methods=['POST'])
+def insertM_blocked():
+    follow_blocked(app.config['dsn'])
+        return render_template('blocked.html')
+
+@app.route('/followers/check', methods=['POST'])
+def checkM():
+    return check(app.config['dsn'])
+
+@app.route('/following/check2', methods=['POST'])
+def checkM2():
+    return check2(app.config['dsn'])
+
+@app.route('/blocked/check3', methods=['POST'])
+def checkM3():
+    return check3(app.config['dsn'])
+
+@app.route('/followers/unfollow', methods=['POST'])
+def unfollowM():
+    unfollow(app.config['dsn'])
+        return render_template('followers.html')
+
+@app.route('/followers/update', methods=['POST'])
+def updateM():
+    return update(app.config['dsn'])
+
+@app.route('/following/unfollow_following', methods=['POST'])
+def unfollowM_following():
+    unfollow_following(app.config['dsn'])
+        return render_template('following.html')
+
+@app.route('/following/update_following', methods=['POST'])
+def updateM_following():
+    return update_following(app.config['dsn'])
+
+@app.route('/blocked/unfollow_blocked', methods=['POST'])
+def unfollowM_blocked():
+    unfollow_blocked(app.config['dsn'])
+        return render_template('blocked.html')
+
+@app.route('/blocked/update_blocked', methods=['POST'])
+def updateM_blocked():
+    return update_blocked(app.config['dsn'])
+
+@app.route('/followers')
+def followers():
+    return render_template('followers.html')
+
+@app.route('/search_display')
+def search_display():
+    return render_template('search_display.html')
+
+@app.route('/interaction')
+def interaction():
+    return render_template('interaction.html')
+
+@app.route('/blocked')
+def blocked():
+    return render_template('blocked.html')
+
+@app.route('/following')
+def following():
+    return render_template('following.html')
 @app.route('/profiles')
 def profiles():
     return profile.users_page_db(app.config['dsn'])
@@ -119,9 +192,6 @@ def universities_update_apply(updateuni_name):
 def favorites():
     return render_template('favorites.html')
 
-@app.route('/followers')
-def followers():
-    return render_template('followers.html')
 
 @app.route('/login')
 def login():
@@ -129,7 +199,8 @@ def login():
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    return render_template('about.html')
+
 
 @app.route('/saveuser', methods=['POST'])
 def save():

@@ -1,0 +1,138 @@
+{% extends "layout.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+
+
+
+<head>
+    <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+                <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+                <meta name="description" content="">
+                    <meta name="author" content="">
+                        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}" />
+                       <!-- <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" /> -->
+                        </head>
+
+
+<body>
+    <div class="container-fluid bg-1 text-center">
+        <h1>Welcome to Unicorn!</h1>
+        <img src="{{ url_for('static', filename='unicorn.png') }}" class="img-circle" alt="unicorn" width="100" height="100">
+            </div>
+         <form action="{{ url_for('insertM_blocked') }}" method="POST">
+          <div class="container bg-2 text-center">
+            <h3>Follow</h3>
+            <div class="form-group">
+                <label for="pwd">Please enter a name:</label>
+                <input class="form-control" name="follower_name_text" id="follower_name_text" type="name_text">
+                    </div>
+      
+
+         </div>    
+              <button type="follow" id="btn_follow" class="btn btn-default">Follow</button>
+             
+                               </form>
+                               
+                               
+       <form action="{{ url_for('unfollowM_blocked') }}" method="POST">
+          <div class="container bg-2 text-center">
+            <h3>Unfollow</h3>
+            <div class="form-group">
+                <label for="pwd">Please enter a name:</label>
+                <input class="form-control" name="follower_name_text" id="follower_name_text" type="name_text">
+                    </div>
+      
+
+                   </div>   
+                 <button type="unfollow" id="btn_unfollow" class="btn btn-default">Unfollow</button>
+        
+                       </form>
+           
+         <form action="{{ url_for('searchM_blocked') }}" method="POST">
+          <div class="container bg-2 text-center">
+            <h3>Search</h3>
+            <div class="form-group">
+                <label for="pwd">Please enter a name:</label>
+                <input class="form-control" name="follower_name_text" id="follower_name_text" type="name_text">
+                    </div>
+           
+
+                   </div>   
+                 <button type="search" id="btn_unfollow" class="btn btn-default">Search</button>
+        
+                       </form>
+                       
+                           
+         <form action="{{ url_for('updateM_blocked') }}" method="POST">
+          <div class="container bg-2 text-center">
+            <h3>Update</h3>
+            <div class="form-group">
+                <label for="pwd">Please enter a name that you want to update:</label>
+                <input class="form-control" name="follower_name_text" id="follower_name_text" type="name_text">
+                 
+                    </div>
+            <div class="form-group">
+       			<label for="pwd">Please enter a new name :</label>
+                <input class="form-control" name="follower_name_text_new" id="follower_name_text_new" type="name_text">
+           
+                    </div>
+
+<div class="form-group">
+    <label for="ublock">Please choose block type</label>
+    <select class="form-control" name="block_type" id="block_type">
+        <option>inappropriate content</option>
+        <option>fake profile</option>
+        <option>distracting message content</option>
+        <option>violent profile</option>
+
+    </select>
+</div>
+
+                   </div>
+                 <button type="update" id="btn_unfollow" class="btn btn-default">Update</button>
+                       </form>
+           
+   
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}" />
+   <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
+
+  </head>
+
+  <body>
+
+    <div class="container">
+        <h2>BLOCKED</h2>
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" ><a href="{{ url_for('home_page') }}">Home</a></li>
+            <li role="presentation"><a href="{{ url_for('login') }}">Switch User</a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+
+
+    </div> <!-- /container -->
+    </div>
+    </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  </body>
+
+</html>
+{% endblock %}

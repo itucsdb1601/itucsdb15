@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+
+
+
+<head>
+    <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+                <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+                <meta name="description" content="">
+                    <meta name="author" content="">
+                        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}" />
+                        <!-- <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" /> -->
+                        </head>
+
+
+<body>
+    <div class="container-fluid bg-1 text-center">
+        <h1>Welcome to Unicorn!</h1>
+        <img src="{{ url_for('static', filename='unicorn.png') }}" class="img-circle" alt="unicorn" width="100" height="100">
+            </div>
+                   <form action="{{ url_for('checkM') }}" method="POST">                      
+            
+        <div class="container bg-2 text-center">
+            <h3>Information</h3>
+            <div class="form-group">
+                <label for="pwd">Please enter an user name:</label>
+               
+                  				  <input class="form-control" name="user_name_text" id="user_name_text" type="text"> 
+                  				  
+
+                    </div>
+                                     <button type="follower" id="btn_unfollow" class="btn btn-default">Add to Followers List</button>
+
+      
+        </div>
+            </form>
+        
+ 
+                    <form action="{{ url_for('checkM2') }}" method="POST">                      
+            
+        <div class="container bg-2 text-center">
+            <h3>Information</h3>
+            <div class="form-group">
+                <label for="pwd">Please enter an user name:</label>
+               
+                  				  <input class="form-control" name="user_name_text2" id="user_name_text2" type="text"> 
+                  				  
+
+                    </div>
+                                         <button type="following" id="btn_unfollow" class="btn btn-default">Add to Followings List</button>
+
+      
+        </div>
+                                                           </form>
+                                                           
+                                                           
+     <form action="{{ url_for('checkM3') }}" method="POST">                      
+            
+        <div class="container bg-2 text-center">
+            <h3>Information</h3>
+            <div class="form-group">
+                <label for="pwd">Please enter an user name:</label>
+               
+                  				  <input class="form-control" name="user_name_text3" id="user_name_text3" type="text"> 
+                  				  
+
+                    </div>
+ 					<button type="blocked" id="btn_unfollow" class="btn btn-default">Add to Blocked List</button>
+      
+        </div>
+     </form>
+                                                           
+    
+    <head>
+        <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+                    <meta name="description" content="">
+                        <meta name="author" content="">
+                            <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}" />
+                            <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
+                            
+                            </head>
+    
+    <body>
+        
+        <div class="container">
+            <h2>Followers</h2>
+            <div class="header clearfix">
+                <nav>
+                    <ul class="nav nav-pills pull-right">
+                        <li role="presentation" ><a href="{{ url_for('home_page') }}">Home</a></li>
+                        <li role="presentation"><a href="{{ url_for('login') }}">Switch User</a></li>
+                    </ul>
+                </nav>
+                
+            </div>
+            
+            
+            
+        </div> <!-- /container -->
+        </div>
+        </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    </body>
+    
+    </html>
+    {% endblock %}
