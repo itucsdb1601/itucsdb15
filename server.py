@@ -3,7 +3,7 @@ import json
 import os
 import re
 import psycopg2 as dbapi2
-from database import initialize_database, favorites_db_delete, favorites_db_update, favorites_db_update_apply,users_page_db_update_apply, search, follow, unfollow, update, check, check2,check3, search_following, follow_following, unfollow_following, update_following, search_blocked, follow_blocked, unfollow_blocked, update_blocked
+from database import initialize_database, favorites_db_delete, favorites_db_update, favorites_db_update_apply, search, follow, unfollow, update, check, check2,check3, search_following, follow_following, unfollow_following, update_following, search_blocked, follow_blocked, unfollow_blocked, update_blocked
 from database import savetweet, saveFavoriteUser
 from flask import Flask, render_template, redirect, request
 from flask.helpers import url_for
@@ -35,7 +35,7 @@ def searchM():
 @app.route('/followers/follow', methods=['POST'])
 def insertM():
     follow(app.config['dsn'])
-        return render_template('followers.html')
+    return render_template('followers.html')
 
 
 @app.route('/following/search_following', methods=['POST'])
@@ -47,7 +47,7 @@ def searchM_following():
 @app.route('/following/follow_following', methods=['POST'])
 def insertM_following():
     follow_following(app.config['dsn'])
-        return render_template('following.html')
+    return render_template('following.html')
 
 
 @app.route('/blocked/search_blocked', methods=['POST'])
@@ -59,7 +59,7 @@ def searchM_blocked():
 @app.route('/blocked/follow_blocked', methods=['POST'])
 def insertM_blocked():
     follow_blocked(app.config['dsn'])
-        return render_template('blocked.html')
+    return render_template('blocked.html')
 
 @app.route('/followers/check', methods=['POST'])
 def checkM():
@@ -76,7 +76,7 @@ def checkM3():
 @app.route('/followers/unfollow', methods=['POST'])
 def unfollowM():
     unfollow(app.config['dsn'])
-        return render_template('followers.html')
+    return render_template('followers.html')
 
 @app.route('/followers/update', methods=['POST'])
 def updateM():
@@ -85,7 +85,7 @@ def updateM():
 @app.route('/following/unfollow_following', methods=['POST'])
 def unfollowM_following():
     unfollow_following(app.config['dsn'])
-        return render_template('following.html')
+    return render_template('following.html')
 
 @app.route('/following/update_following', methods=['POST'])
 def updateM_following():
@@ -94,7 +94,7 @@ def updateM_following():
 @app.route('/blocked/unfollow_blocked', methods=['POST'])
 def unfollowM_blocked():
     unfollow_blocked(app.config['dsn'])
-        return render_template('blocked.html')
+    return render_template('blocked.html')
 
 @app.route('/blocked/update_blocked', methods=['POST'])
 def updateM_blocked():
@@ -209,13 +209,13 @@ def save():
 
 @app.route('/savetweet', methods=['POST'])
 def savetw():
-	savetweet(app.config['dsn'])
-	return 'Your tweet has been successfully posted'
+    savetweet(app.config['dsn'])
+    return 'Your tweet has been successfully posted'
 
 @app.route('/saveFavoriteUser', methods=['POST'])
 def savefavorites():
-	saveFavoriteUser(app.config['dsn'])
-	return 'Favorite user information is inserted'
+    saveFavoriteUser(app.config['dsn'])
+    return 'Favorite user information is inserted'
 
 
 def get_elephantsql_dsn(vcap_services):
