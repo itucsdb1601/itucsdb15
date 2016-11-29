@@ -17,8 +17,6 @@ def initialize_database(config):
         cursor = connection.cursor()
         profile.initialize_profiles(config)
         initialize_followers(config)
-		tweet.initialize_tweets(config)
-		favorite.initialize_favorites(config)
         connection.commit();
         return 'tables are created <a href="http://localhost:5000">Home</a>'
 
