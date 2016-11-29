@@ -6,6 +6,8 @@ from flask import Flask, request, render_template, redirect
 from flask.helpers import url_for
 from flask import Flask, request, render_template
 from Profile import Profile as profile
+from tweets import tweets as tweet
+from favorites import favorites as favorite
 
 app = Flask(__name__)
 
@@ -15,14 +17,8 @@ def initialize_database(config):
         cursor = connection.cursor()
         profile.initialize_profiles(config)
         initialize_followers(config)
-        query = """DROP TABLE IF EXISTS TWEETS"""
-        cursor.execute(query)
-        query = """DROP TABLE IF EXISTS FAVORITES"""
-        cursor.execute(query)
-        query = """CREATE TABLE IF NOT EXISTS TWEETS (tweet_id serial primary key, user_logName VARCHAR(60) NOT NULL , tweet_input VARCHAR(200) NOT NULL)"""
-        cursor.execute(query)
-        query = """CREATE TABLE IF NOT EXISTS FAVORITES (favorite_id serial primary key, user_name VARCHAR(20) NOT NULL, user_surname VARCHAR(20) NOT NULL,user_loginname VARCHAR(30) UNIQUE NOT NULL, user_email VARCHAR(30) NOT NULL)"""
-        cursor.execute(query)
+		tweet.initialize_tweets(config)
+		favorite.initialize_favorites(config)
         connection.commit();
         return 'tables are created <a href="http://localhost:5000">Home</a>'
 
