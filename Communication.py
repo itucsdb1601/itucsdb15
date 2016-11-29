@@ -42,7 +42,7 @@ class Communication:
                 cursor = connection.cursor()
                 query="DELETE FROM user_communication where user_loginname = %s"
                 cursor.execute(query, (username,))
-                connection.commit()
+                connection.commit();
                 if cursor.rowcount == 0:
                     return "There is no personal info for this user <a href='http://localhost:5000/profiles'>Profiles</a>"
                 else:
@@ -59,6 +59,7 @@ class Communication:
                 query = "SELECT country_code,country_name from COUNTRY"
                 cursor.execute(query)
                 country_list = cursor.fetchall()
+                connection.commit();
                 return render_template('communication_edit.html', countries = country_list, communications=comm_list)
 
 

@@ -19,6 +19,7 @@ class Hobby:
                 query = "SELECT b.user_loginname,a.hobby_name, a.hobby_type from HOBBIES a, USER_HOBBIES b where a.hobby_name = b.user_hobby"
                 cursor.execute(query)
                 user_hobby_list = cursor.fetchall()
+                connection.commit();
                 return render_template('hobbies_edit.html',hobbies = hobby_list, user_hobbies = user_hobby_list)
 
     #Update user's hobby information if exists
@@ -51,7 +52,7 @@ class Hobby:
                 cursor = connection.cursor()
                 query="DELETE FROM user_hobbies where user_loginname = %s AND user_hobby=%s"
                 cursor.execute(query, (username,hobby_name))
-                connection.commit()
+                connection.commit();
                 if cursor.rowcount == 0:
                     return "There is no user and hobby with that user hobby pair <a href='http://localhost:5000/profiles'>Profiles</a>"
                 else:
