@@ -3,11 +3,14 @@ import json
 import os
 import re
 import psycopg2 as dbapi2
-from database import initialize_database, saveuser, users_page_db, users_page_db_delete, users_page_db_update, users_page_db_update_apply, favorites_db_delete, favorites_db_update, favorites_db_update_apply,users_page_db_update_apply, search, follow, unfollow, update
-from database import initialize_database, saveuser, savetweet, saveFavoriteUser
+from database import initialize_database, favorites_db_delete, favorites_db_update, favorites_db_update_apply,search, follow, unfollow, update
+from database import savetweet, saveFavoriteUser
 from flask import Flask, render_template, redirect, request
 from flask.helpers import url_for
 from datetime import datetime
+from Profile import Profile as profile
+from Hobby import Hobby as hobby
+from Communication import Communication as communication
 
 app = Flask(__name__)
 
@@ -35,8 +38,8 @@ def searchM(searchfollower):
 
 @app.route('/followers/follow/<insertfollower>/', methods=['GET','POST'])
 def followM(insertfollower):
-    return follow(app.config['dsn'],insertfollower)
-
+     follow(app.config['dsn'],insertfollower)
+     return'follower is inserted'
 
 @app.route('/followers/update/<updatefollower>/)', methods=['POST'])
 def updateM(updatefollower):
@@ -44,19 +47,52 @@ def updateM(updatefollower):
 
 @app.route('/profiles')
 def profiles():
-    return users_page_db(app.config['dsn'])
+    return profile.users_page_db(app.config['dsn'])
 
 @app.route('/profiles/delete/<deleteuserlogin>', methods=['GET', 'POST'])
 def profile_delete(deleteuserlogin):
-    return users_page_db_delete(app.config['dsn'],deleteuserlogin)
+    return profile.users_page_db_delete(app.config['dsn'],deleteuserlogin)
 
 @app.route('/profiles/update/<updateuserlogin>/', methods=['GET', 'POST'])
 def profile_update(updateuserlogin):
-    return users_page_db_update(app.config['dsn'],updateuserlogin)
+    return profile.users_page_db_update(app.config['dsn'],updateuserlogin)
 
 @app.route('/profiles/update/<updateuserlogin>/apply', methods=['GET', 'POST'])
 def profile_update_apply(updateuserlogin):
-    return users_page_db_update_apply(app.config['dsn'],updateuserlogin)
+    return profile.users_page_db_update_apply(app.config['dsn'],updateuserlogin)
+
+@app.route('/profiles/update_communication/', methods=['GET', 'POST'])
+def communication_edit():
+    return communication.users_page_db_communication_information_select(app.config['dsn'])
+
+@app.route('/profiles/update_communication/select',methods=['GET'])
+def communication_edit_select():
+    return communication.users_page_db_communication_information_select(app.config['dsn'])
+
+@app.route('/profiles/update_communication/delete', methods=['GET','POST'])
+def communication_edit_delete():
+    return communication.users_page_db_communication_information_delete(app.config['dsn'])
+
+@app.route('/profiles/update_communication/apply', methods=['GET','POST'])
+def communication_edit_insert_or_update():
+    return communication.users_page_db_communication_information_apply(app.config['dsn'])
+
+@app.route('/profiles/update_hobbies/', methods=['GET', 'POST'])
+def hobbies_edit():
+        return hobby.users_page_db_hobby_information_select(app.config['dsn'])
+
+@app.route('/profiles/update_hobbies/select',methods=['GET'])
+def hobbies_edit_select():
+        return hobby.users_page_db_hobby_information_select(app.config['dsn'])
+
+@app.route('/profiles/update_hobbies/apply', methods=['GET', 'POST'])
+def hobbies_edit_insert_or_update():
+        return hobby.users_page_db_hobby_information_apply(app.config['dsn'])
+
+@app.route('/profiles/update_hobbies/delete', methods=['GET', 'POST'])
+def hobbies_edit_delete():
+        return hobby.users_page_db_hobby_information_delete(app.config['dsn'])
+
 
 @app.route('/tweets')
 def tweets():
@@ -96,15 +132,13 @@ def about():
 
 @app.route('/saveuser', methods=['POST'])
 def save():
-    saveuser(app.config['dsn'])
-    return 'User is inserted'
+    profile.saveuser(app.config['dsn'])
+    return render_template('login.html')
 
 @app.route('/savetweet', methods=['POST'])
 def savetw():
 	savetweet(app.config['dsn'])
 	return 'Your tweet has been successfully posted'
-
-
 
 @app.route('/saveFavoriteUser', methods=['POST'])
 def savefavorites():

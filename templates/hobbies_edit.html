@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+  <h3>CEYDA ALADAĞ - 150130283</h3>
+    <meta charset="utf-8" />
+    <title>Home</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}" />
+   <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='datepicker.css') }}" />
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <footer>
+      <div id="datetime">{{ current_time }}</div>
+    </footer>
+     <style>
+  .bg-1 {
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+  }
+  .bg-2 {
+      background-color: #474e5d; /* Dark Blue */
+      color: #ffffff;
+  }
+
+  </style>
+  </head>
+
+  <body>
+  <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+           <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
+          </ul>
+        </nav>
+      </div>
+<div class="container-fluid bg-1 text-center">
+  <h1>Unicorn!</h1>
+  <img src="{{ url_for('static', filename='unicorn.png') }}" class="img-circle" alt="unicorn" width="100" height="100">
+</div>
+
+
+<h2>HOBBY LIST</h2>
+
+<form action="select" method = "get">
+  <table id="usersTable" class="table">
+	 <thead>
+      <tr>
+        <th>Username</th>
+        <th>Hobby</th>
+        <th>Hobby Type</th>
+      </tr>
+    </thead>
+	<tbody>
+		{% for user_loginname, hobby_name, hobby_type in user_hobbies %}
+		<tr>
+			<td class="UsersTableItem">{{user_loginname}}</td>
+			<td class="UsersTableItem">{{hobby_name}}</td>
+			<td class="UsersTableItem">{{hobby_type}}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+	</table>
+	<tr>
+	<td colspan="3" align="center"><input value="Show hobbies" name="sel_hobbies" type="submit"></td>
+	</tr>
+</form>
+
+
+<h2>DELETE HOBBBY OF USER</h2>
+<form class="form-vertical" action="delete" method="post">
+  <div class="form-group">
+  <label for="user_name_del">Enter user name you want to delete personal info :</label>
+        <input type="text" class="form-control" id="user_name_del" name="user_name_del" placeholder="Enter user name">
+	</div>
+	<div class="form-group">
+	  <label for="hobby_name_del">Choose hobby that you want to delete for user :</label>
+  		<select class="form-control" id="hobby_sel" name="hobby_sel"  >
+ 		{% for hobby_name,hobby_type in hobbies %}
+  		<option value="{{hobby_name}}">{{hobby_name}}</option>
+  		{% endfor %}
+  </select>	</div>
+	<tr>
+		 <td colspan="3" align="center"><input value="Delete Hobby" name="del_hobby" type="submit"></td>
+	</tr>
+</form>
+
+
+<h2>INSERT OR UPDATE HOBBY</h2>
+<form class="form-vertical" action="apply" method = "post">
+
+  <div class="form-group">
+  <label for="uhometown">Enter user name you want to update hobby</label>
+        <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Enter user name">
+	</div>
+  <div class="form-group">
+  <label for="ucountry">Hobby:</label>
+  <select class="form-control" id="hobby" name="hobby"  >
+ {% for hobby_name,hobby_type in hobbies %}
+  <option value="{{hobby_name}}">{{hobby_name}}</option>
+  {% endfor %}
+  </select>
+	</div>
+	<tr colspan="3">
+		 <td colspan="3" align="center"><input value="Insert or Update Hobby" name="del_personal" type="submit"></td>
+	</tr>
+</form>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script type="text/javascript"
+        src="https://raw.githubusercontent.com/jquery/jquery-ui/master/ui/i18n/datepicker-tr.js">
+</script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src ="{{ url_for('static', filename='custom.js') }}" ></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+{% endblock %}

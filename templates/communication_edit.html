@@ -1,0 +1,141 @@
+{% extends "layout.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+  <h3>CEYDA ALADAĞ - 150130283</h3>
+    <meta charset="utf-8" />
+    <title>Home</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}" />
+   <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='datepicker.css') }}" />
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <footer>
+      <div id="datetime">{{ current_time }}</div>
+    </footer>
+     <style>
+  .bg-1 {
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+  }
+  .bg-2 {
+      background-color: #474e5d; /* Dark Blue */
+      color: #ffffff;
+  }
+
+  </style>
+  </head>
+
+  <body>
+  <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+           <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
+          </ul>
+        </nav>
+      </div>
+<div class="container-fluid bg-1 text-center">
+  <h1>Unicorn!</h1>
+  <img src="{{ url_for('static', filename='unicorn.png') }}" class="img-circle" alt="unicorn" width="100" height="100">
+</div>
+
+
+<h2>PERSONAL INFO LIST</h2>
+
+<form action="select" method = "get">
+  <table id="usersTable" class="table">
+	 <thead>
+      <tr>
+        <th>User Login</th>
+        <th>Nationality</th>
+        <th>Country Code</th>
+        <th>Living City</th>
+		<th>Phone number</th>
+		<th>Birthday</th>
+      </tr>
+    </thead>
+	<tbody>
+		{% for user_loginname, nationality, country_code, user_living_city, user_telephonenumber,user_birthday in communications %}
+		<tr>
+			<td class="UsersTableItem">{{user_loginname}}</td>
+			<td class="UsersTableItem">{{nationality}}</td>
+			<td class="UsersTableItem">{{country_code}}</td>
+			<td class="UsersTableItem">{{user_living_city}}</td>
+			<td class="UsersTableItem">{{user_telephonenumber}}</td>
+			<td class="UsersTableItem">{{user_birthday}}</td>
+		</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	<tr>
+			<td colspan="3" align="center"><input value="Show personal info" name="sel_personal" type="submit"></td>
+	</tr>
+</form>
+
+
+<h2>DELETE PERSONAL INFO</h2>
+<form class="form-vertical" action="delete" method="post">
+  <div class="form-group">
+  <label for="uhometown">Enter user name you want to delete personal info :</label>
+        <input type="text" class="form-control" id="user_name_del" name="user_name_del" placeholder="Enter user name">
+	</div>
+	 <tr>
+			<td colspan="3" align="center"><input value="Delete Personal Info" name="del_personal" type="submit"></td>
+	</tr>
+</form>
+
+
+<h2>INSERT OR UPDATE PERSONAL INFO</h2>
+<form class="form-vertical" action="apply" method = "post">
+
+  <div class="form-group">
+  <label for="uhometown">Enter user name you want to update personal info :</label>
+        <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Enter user name">
+</div>
+  <div class="form-group">
+  <label for="uhometown">Nationality:</label>
+  <select class="form-control" id="nationality" name="nationality"> <option value="afghan">Afghan</option> <option value="albanian">Albanian</option> <option value="algerian">Algerian</option> <option value="american">American</option> <option value="andorran">Andorran</option> <option value="angolan">Angolan</option> <option value="antiguans">Antiguans</option> <option value="argentinean">Argentinean</option> <option value="armenian">Armenian</option> <option value="australian">Australian</option> <option value="austrian">Austrian</option> <option value="azerbaijani">Azerbaijani</option> <option value="bahamian">Bahamian</option> <option value="bahraini">Bahraini</option> <option value="bangladeshi">Bangladeshi</option> <option value="barbadian">Barbadian</option> <option value="barbudans">Barbudans</option> <option value="batswana">Batswana</option> <option value="belarusian">Belarusian</option> <option value="belgian">Belgian</option> <option value="belizean">Belizean</option> <option value="beninese">Beninese</option> <option value="bhutanese">Bhutanese</option> <option value="bolivian">Bolivian</option> <option value="bosnian">Bosnian</option> <option value="brazilian">Brazilian</option> <option value="british">British</option> <option value="bruneian">Bruneian</option> <option value="bulgarian">Bulgarian</option> <option value="burkinabe">Burkinabe</option> <option value="burmese">Burmese</option> <option value="burundian">Burundian</option> <option value="cambodian">Cambodian</option> <option value="cameroonian">Cameroonian</option> <option value="canadian">Canadian</option> <option value="cape verdean">Cape Verdean</option> <option value="central african">Central African</option> <option value="chadian">Chadian</option> <option value="chilean">Chilean</option> <option value="chinese">Chinese</option> <option value="colombian">Colombian</option> <option value="comoran">Comoran</option> <option value="congolese">Congolese</option> <option value="costa rican">Costa Rican</option> <option value="croatian">Croatian</option> <option value="cuban">Cuban</option> <option value="cypriot">Cypriot</option> <option value="czech">Czech</option> <option value="danish">Danish</option> <option value="djibouti">Djibouti</option> <option value="dominican">Dominican</option> <option value="dutch">Dutch</option> <option value="east timorese">East Timorese</option> <option value="ecuadorean">Ecuadorean</option> <option value="egyptian">Egyptian</option> <option value="emirian">Emirian</option> <option value="equatorial guinean">Equatorial Guinean</option> <option value="eritrean">Eritrean</option> <option value="estonian">Estonian</option> <option value="ethiopian">Ethiopian</option> <option value="fijian">Fijian</option> <option value="filipino">Filipino</option> <option value="finnish">Finnish</option> <option value="french">French</option> <option value="gabonese">Gabonese</option> <option value="gambian">Gambian</option> <option value="georgian">Georgian</option> <option value="german">German</option> <option value="ghanaian">Ghanaian</option> <option value="greek">Greek</option> <option value="grenadian">Grenadian</option> <option value="guatemalan">Guatemalan</option> <option value="guinea-bissauan">Guinea-Bissauan</option> <option value="guinean">Guinean</option> <option value="guyanese">Guyanese</option> <option value="haitian">Haitian</option> <option value="herzegovinian">Herzegovinian</option> <option value="honduran">Honduran</option> <option value="hungarian">Hungarian</option> <option value="icelander">Icelander</option> <option value="indian">Indian</option> <option value="indonesian">Indonesian</option> <option value="iranian">Iranian</option> <option value="iraqi">Iraqi</option> <option value="irish">Irish</option> <option value="israeli">Israeli</option> <option value="italian">Italian</option> <option value="ivorian">Ivorian</option> <option value="jamaican">Jamaican</option> <option value="japanese">Japanese</option> <option value="jordanian">Jordanian</option> <option value="kazakhstani">Kazakhstani</option> <option value="kenyan">Kenyan</option> <option value="kittian and nevisian">Kittian and Nevisian</option> <option value="kuwaiti">Kuwaiti</option> <option value="kyrgyz">Kyrgyz</option> <option value="laotian">Laotian</option> <option value="latvian">Latvian</option> <option value="lebanese">Lebanese</option> <option value="liberian">Liberian</option> <option value="libyan">Libyan</option> <option value="liechtensteiner">Liechtensteiner</option> <option value="lithuanian">Lithuanian</option> <option value="luxembourger">Luxembourger</option> <option value="macedonian">Macedonian</option> <option value="malagasy">Malagasy</option> <option value="malawian">Malawian</option> <option value="malaysian">Malaysian</option> <option value="maldivan">Maldivan</option> <option value="malian">Malian</option> <option value="maltese">Maltese</option> <option value="marshallese">Marshallese</option> <option value="mauritanian">Mauritanian</option> <option value="mauritian">Mauritian</option> <option value="mexican">Mexican</option> <option value="micronesian">Micronesian</option> <option value="moldovan">Moldovan</option> <option value="monacan">Monacan</option> <option value="mongolian">Mongolian</option> <option value="moroccan">Moroccan</option> <option value="mosotho">Mosotho</option> <option value="motswana">Motswana</option> <option value="mozambican">Mozambican</option> <option value="namibian">Namibian</option> <option value="nauruan">Nauruan</option> <option value="nepalese">Nepalese</option> <option value="new zealander">New Zealander</option> <option value="ni-vanuatu">Ni-Vanuatu</option> <option value="nicaraguan">Nicaraguan</option> <option value="nigerien">Nigerien</option> <option value="north korean">North Korean</option> <option value="northern irish">Northern Irish</option> <option value="norwegian">Norwegian</option> <option value="omani">Omani</option> <option value="pakistani">Pakistani</option> <option value="palauan">Palauan</option> <option value="panamanian">Panamanian</option> <option value="papua new guinean">Papua New Guinean</option> <option value="paraguayan">Paraguayan</option> <option value="peruvian">Peruvian</option> <option value="polish">Polish</option> <option value="portuguese">Portuguese</option> <option value="qatari">Qatari</option> <option value="romanian">Romanian</option> <option value="russian">Russian</option> <option value="rwandan">Rwandan</option> <option value="saint lucian">Saint Lucian</option> <option value="salvadoran">Salvadoran</option> <option value="samoan">Samoan</option> <option value="san marinese">San Marinese</option> <option value="sao tomean">Sao Tomean</option> <option value="saudi">Saudi</option> <option value="scottish">Scottish</option> <option value="senegalese">Senegalese</option> <option value="serbian">Serbian</option> <option value="seychellois">Seychellois</option> <option value="sierra leonean">Sierra Leonean</option> <option value="singaporean">Singaporean</option> <option value="slovakian">Slovakian</option> <option value="slovenian">Slovenian</option> <option value="solomon islander">Solomon Islander</option> <option value="somali">Somali</option> <option value="south african">South African</option> <option value="south korean">South Korean</option> <option value="spanish">Spanish</option> <option value="sri lankan">Sri Lankan</option> <option value="sudanese">Sudanese</option> <option value="surinamer">Surinamer</option> <option value="swazi">Swazi</option> <option value="swedish">Swedish</option> <option value="swiss">Swiss</option> <option value="syrian">Syrian</option> <option value="taiwanese">Taiwanese</option> <option value="tajik">Tajik</option> <option value="tanzanian">Tanzanian</option> <option value="thai">Thai</option> <option value="togolese">Togolese</option> <option value="tongan">Tongan</option> <option value="trinidadian or tobagonian">Trinidadian or Tobagonian</option> <option value="tunisian">Tunisian</option> <option value="turkish">Turkish</option> <option value="tuvaluan">Tuvaluan</option> <option value="ugandan">Ugandan</option> <option value="ukrainian">Ukrainian</option> <option value="uruguayan">Uruguayan</option> <option value="uzbekistani">Uzbekistani</option> <option value="venezuelan">Venezuelan</option> <option value="vietnamese">Vietnamese</option> <option value="welsh">Welsh</option> <option value="yemenite">Yemenite</option> <option value="zambian">Zambian</option> <option value="zimbabwean">Zimbabwean</option> </select>
+</div>
+  <div class="form-group">
+  <label for="ucountry">Country:</label>
+  <select class="form-control" id="country" name="country"  >
+ {% for country_name,country_code in countries %}
+  <option value="{{country_name}}">{{country_code}}</option>
+  {% endfor %}
+  </select>
+</div>
+   <div class="form-group">
+    <label  for="ulivingcity">Living City:</label>
+    <div>
+      <input type="text" class="form-control" id="livingcity_text" name="livingcity_text" placeholder="Enter living city">
+    </div>
+  </div>
+   <div class="form-group">
+    <label class="control-label col-sm-2" for="utelephonenumber">Telephone Number:</label>
+    <div>
+      <input type="text" class="form-control" id="telephonenumber_text" name="telephonenumber_text" placeholder="Enter phone number">
+    </div>
+  </div>
+    <div class="form-group">
+     <label class="control-label col-sm-2" for="birthdate">Date of Birth</label>
+                <input type="text" id="datepicker" name="datepicker">
+     </div>
+    <tr>
+			<td colspan="3" align="center"><input value="Insert or Update Personal Info" name="personal" type="submit"></td>
+	</tr>
+</form>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script type="text/javascript"
+        src="https://raw.githubusercontent.com/jquery/jquery-ui/master/ui/i18n/datepicker-tr.js">
+</script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script src ="{{ url_for('static', filename='custom.js') }}" ></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+{% endblock %}
