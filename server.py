@@ -12,6 +12,8 @@ from Hobby import Hobby as hobby
 from Communication import Communication as communication
 from tags import tags as tag
 from tweets import tweets as tweet
+from favorites import favorites as favorite
+from favoritestweet import favoritestweet as favtweet
 
 app = Flask(__name__)
 
@@ -184,9 +186,7 @@ def universities_update(updateuni_name):
 def universities_update_apply(updateuni_name):
     return universities_page_db_update_apply(app.config['dsn'],updateuni_name)
 
-@app.route('/favorites')
-def favorites():
-    return render_template('favorites.html')
+
 
 
 @app.route('/login')
@@ -259,7 +259,59 @@ def savetw():
     tweet.savetweet(app.config['dsn'])
     return 'Your tweet has been successfully posted'
 
+@app.route('/favorites')
+def favorites():
+    return favorite.favorites_db(app.config['dsn'])
 
+@app.route('/saveFavoriteUser', methods=['POST'])
+def savefavorites():
+	favorite.saveFavoriteUser(app.config['dsn'])
+	return 'Favorite user information is inserted'
+
+@app.route('/favorites/delete/<deletefavorites>', methods=['GET', 'POST'])
+def favorites_delete(deletefavorites):
+    return favorite.favorites_db_delete(app.config['dsn'],deletefavorites)
+
+@app.route('/favorites/initialize_favorites', methods=['GET', 'POST'])
+def initialize_favorites():
+        return favorite.initialize_favorites(app.config['dsn'])
+
+@app.route('/favorites/update/<updatefavorites>/', methods=['GET', 'POST'])
+def favorites_update(updatefavorites):
+    return favorite.favorites_db_update(app.config['dsn'],updatefavorites)
+
+@app.route('/favorites/update/<updatefavorites>/apply', methods=['GET', 'POST'])
+def favorites_apply(updatefavorites):
+    return favorite.favorites_db_update_apply(app.config['dsn'],updatefavorites)
+
+@app.route('/favorites_edit')
+def favorites_edit():
+    return render_template('favorites_edit.html')
+
+@app.route('/favorites_tweet')
+def favorites_tweet():
+    return favtweet.favoritestweet_db(app.config['dsn'])
+
+@app.route('/saveFavoriteTweet', methods=['POST'])
+def savefavoritestweet():
+    favtweet.saveFavoriteTweet(app.config['dsn'])
+    return 'Favorite tweet information is inserted'
+
+@app.route('/favorites_tweet/delete/<deletefavoritestweet>', methods=['GET', 'POST'])
+def favorites_tweet_delete(deletefavoritestweet):
+    return favtweet.favoritestweet_db_delete(app.config['dsn'],deletefavoritestweet)
+
+@app.route('/favorites_tweet/update/<updatefavoritestweet>/', methods=['GET', 'POST'])
+def favorites_tweet_update(updatefavoritestweet):
+    return favtweet.favoritestweet_db_update(app.config['dsn'],updatefavoritestweet)
+
+@app.route('/favorites_tweet/update/<updatefavoritestweet>/apply', methods=['GET', 'POST'])
+def favoritestweet_apply(updatefavoritestweet):
+    return favtweet.favoritestweet_db_update_apply(app.config['dsn'],updatefavoritestweet)
+
+@app.route('/favorites_tweet_edit')
+def favorites_tweet_edit():
+    return render_template('favorites_tweet_edit.html')
 
 def get_elephantsql_dsn(vcap_services):
     """Returns the data source name for ElephantSQL."""

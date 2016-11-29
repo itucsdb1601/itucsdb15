@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Favorites</title>
+    <title>Favorite Tweets</title>
    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}" />
    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
 
@@ -12,22 +12,18 @@
 
     <div class="container bg-2 text-center">
   <h3>Please Enter Information</h3>
-    <form class="col-lg-12" action="{{url_for('savefavorites')}}" method="POST">
+    <form class="col-lg-12" action="{{url_for('savefavoritestweet')}}" method="POST">
     <div class="form-group">
-      <label for="name">Name:</label>
+      <label for="name">User name:</label>
        <input class="form-control" id="fname_text" name="fname_text" type="text">
     </div>
     <div class="form-group">
-      <label for="surname">Surname:</label>
-       <input class="form-control" name="fsurname_text" id="fsurname_text" type="text">
+      <label for="surname">Tweet</label>
+       <input class="form-control" name="ftweet_text" id="ftweet_text" type="text">
     </div>
     <div class="form-group">
-      <label for="username">Please enter user name:</label>
-      <input type="text" class="form-control" name="floginname_text"  id="floginname_text">
-    </div>
-    <div class="form-group">
-      <label for="email">Please enter e-mail:</label>
-      <input type="text" class="form-control" name="femail_text" id="femail_text">
+      <label for="email">Tweet Category</label>
+      <input type="text" class="form-control" name="fcategory_text" id="fcategory_text">
     </div>
    <button type="submit" id="btn_sign" class="btn btn-default">Enter</button>
   </form>

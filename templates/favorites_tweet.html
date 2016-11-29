@@ -19,32 +19,28 @@
         <nav>
           <ul class="nav nav-pills pull-right">
            <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
-           <li role="presentation" class="active"><a href="{{ url_for('favorites_edit') }}">New User Favorite</a></li>
-           <li role="presentation" class="active"><a href="{{ url_for('favorites_tweet') }}">Favorite Tweets</a></li>
-           
+           <li role="presentation" class="active"><a href="{{ url_for('favorites_tweet_edit') }}">New User Favorite Tweet</a></li>
           </ul>
         </nav>
       </div>
 
-   <form action="{{ url_for('favorites') }}" method = "post">
-  <table id="favoritesTable" class="table">
+   <form action="{{ url_for('favorites_tweet') }}" method = "post">
+  <table id="favoritesTweetTable" class="table">
 	 <thead>
       <tr>
         <th>User Login</th>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>E-mail</th>
+        <th>Tweet</th>
+        <th>Category</th>
       </tr>
     </thead>
 	<tbody>
-		{% for user_loginname, user_name, user_surname, user_email in favorites_list %}
+		{% for user_loginname, tweet_input,tweet_category in favoritestweet_list %}
 		<tr>
-			<td class="FavoritesTableItem">{{user_loginname}}</td>
-			<td class="FavoritesTableItem">{{user_name}}</td>
-			<td class="FavoritesTableItem">{{user_surname}}</td>
-			<td class="FavoritesTableItem">{{user_email}}</td>
-			<td class="FavoritesTableItem"><a href="{{ url_for('favorites_delete', deletefavorites=user_loginname) }}">Delete</a>
-			<td class="FavoritesTableItem"><a href="{{ url_for('favorites_update', updatefavorites=user_loginname) }}">Update</a>
+			<td class="FavoritesTweetTableItem">{{user_loginname}}</td>
+			<td class="FavoritesTweetTableItem">{{tweet_input}}</td>
+			<td class="FavoritesTweetTableItem">{{tweet_category}}</td>
+			<td class="FavoritesTweetTableItem"><a href="{{ url_for('favorites_tweet_delete', deletefavoritestweet=user_loginname) }}">Delete</a>
+			<td class="FavoritesTweetTableItem"><a href="{{ url_for('favorites_tweet_update', updatefavoritestweet=user_loginname) }}">Update</a>
 		</tr>
 		{% endfor %}
 		</tbody>

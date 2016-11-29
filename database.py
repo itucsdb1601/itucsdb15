@@ -333,57 +333,11 @@ def update_blocked(config):
             cursor.execute(query,(blocked_name_new,blocked_name,blocked_type))
             connection.commit();
             return redirect(url_for('blocked'))
-def savetweet(config):
-    new_tweet = None
-    user_login = None
-    if request.method == 'POST':
-        new_tweet = request.form['tweet_text']
-        print(new_tweet)
-        user_login = request.form['username_text']
-        print(user_login)
-        with dbapi2.connect(config) as connection:
-            cursor = connection.cursor()
-            query = """INSERT INTO TWEETS (user_logName, tweet_input) VALUES (%s, %s)"""
-            cursor.execute(query, (user_login, new_tweet))
-            connection.commit();
-            return 'Your tweet has been successfully posted'
-
-
-def saveFavoriteUser(config):
-    user_name = None
-    user_surname = None
-    user_loginname = None
-    user_email = None
-    if request.method == 'POST':
-        user_name= request.form['fname_text']
-        print(user_name)
-        user_surname = request.form['fsurname_text']
-        print(user_surname)
-        user_loginname = request.form['floginname_text']
-        print(user_loginname)
-        user_email = request.form['femail_text']
-        print(user_email)
-        with dbapi2.connect(config) as connection:
-            cursor = connection.cursor()
-            query = """INSERT INTO FAVORITES(user_loginname,user_name,user_surname,user_email) VALUES (%s,%s,%s,%s);"""
-            cursor.execute(query,(user_loginname,user_name,user_surname,user_email))
-            connection.commit();
-            return 'Favorite user information is inserted'
 
 
 
 
 
-        query = """CREATE TABLE IF NOT EXISTS UNIVERSITY_USERS (
-                    uni_id serial primary key,
-                    user_id INTEGER NOT NULL,
-                    uni_name VARCHAR(50) NOT NULL
-                    )"""
-        cursor.execute(query)
-        query = """INSERT INTO UNIVERSITY_USERS (user_id,uni_name) VALUES ('1','Istanbul Technical University')"""
-        cursor.execute(query)
-        connection.commit();
-        return 'universities table is inserted to store user-university data'
 
 
 
