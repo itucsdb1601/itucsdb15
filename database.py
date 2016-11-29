@@ -13,7 +13,7 @@ app = Flask(__name__)
 def initialize_database(config):
     with dbapi2.connect(config) as connection:
         cursor = connection.cursor()
-        profile.initialize_profiles()
+        profile.initialize_profiles(config)
         query = """CREATE TABLE IF NOT EXISTS TWEETS (tweet_id serial primary key, user_logName VARCHAR(60) NOT NULL , tweet_input VARCHAR(200) NOT NULL)"""
         cursor.execute(query)
         connection.commit();
