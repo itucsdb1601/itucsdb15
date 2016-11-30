@@ -14,6 +14,7 @@ from tags import tags as tag
 from tweets import tweets as tweet
 from favorites import favorites as favorite
 from favoritestweet import favoritestweet as favtweet
+from university import university as university
 
 app = Flask(__name__)
 
@@ -170,23 +171,6 @@ def hobbies_edit_insert_or_update():
 def hobbies_edit_delete():
         return hobby.users_page_db_hobby_information_delete(app.config['dsn'])
 
-@app.route('/universities')
-def universities():
-    return render_template('universities.html')
-
-@app.route('/universities/delete/<deleteuni_name>', methods=['GET', 'POST'])
-def universities_delete(deleteuni_name):
-    return university_users_page_db_delete(app.config['dsn'],deleteuni_name)
-
-@app.route('/universities/update/<updateuni_name>/', methods=['GET','POST'])
-def universities_update(updateuni_name):
-    return university_users_page_db_update(app.config['dsn'],updateuni_name)
-
-@app.route('/universities/update/<updateuserlogin>/apply', methods=['GET','POST'])
-def universities_update_apply(updateuni_name):
-    return universities_page_db_update_apply(app.config['dsn'],updateuni_name)
-
-
 
 
 @app.route('/login')
@@ -229,6 +213,23 @@ def tags_apply(updatetag):
 def savetag():
     tag.savetag(app.config['dsn'])
     return 'Your tag has been successfully posted'
+    
+@app.route('/universities')
+def universities():
+    return university.universities_page(app.config['dsn'])
+
+@app.route('/universities/delete/<deleteuniversities>', methods=['GET', 'POST'])
+def universities_delete(deleteuniversities):
+    return university.universities_page_delete(app.config['dsn'])
+
+@app.route('/universities/update/<updateuniversities>', methods=['GET', 'POST'])
+def universities_update(updateuniversities):
+    return university.universities_page_update(app.config['dsn'], updateuniversities)
+
+@app.route('/universities/update/<updateuniversities>/apply', methods=['GET', 'POST'])
+def universities_update_apply(updateuniversities):
+    return university.universities_page_update_apply(app.config['dsn'], updateuniversities)
+
 
 @app.route('/tweets')
 def tweets():

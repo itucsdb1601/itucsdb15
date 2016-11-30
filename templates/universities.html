@@ -25,8 +25,9 @@
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-        <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
-            <li role="presentation"><a href="{{ url_for('login') }}">Switch User</a></li>
+          <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
+          <li role="presentation"><a href="{{ url_for('login') }}">Switch User</a></li>
+          <li role="presentation" class="active"><a href="{{ url_for('universities_edit') }}">Edit University Info</a></li>
           </ul>
         </nav>
 
@@ -35,42 +36,27 @@
 
 <!-- update code -->
 <form action="{{ url_for('universities')}}" method = "post">
-    <table id="universitiesTable">
-
+    <table id="universitiesTable" class="table">
+    <thead>
     <tr>
-      <th>UniversityID</th>
-        <th>University</th>
+      <th>University ID</th>
+      <th>University Name</th>
+      <th>University Type</th>
+      <th>Founding Date</th>
       </tr>
-
-    {% for user_id, uni_name in university_users %}
+    </thead>
+    <tbody>
+    {% for uni_id, uni_name, unicity_id, unitype_id, startdate in unis %}
     <tr>
       <td class="UniversitiesTableItem">{{user_id}}</td>
+      <td class="UniversitiesTableItem">{{unicity_id}}</td>
       <td class="UnviersitiesTableItem">{{uni_name}}</td>
-      <td class="UniversitiesTableItem"><a href="{{ url_for('universities_page_db_delete', deleteuni_name=uni_name) }}">Delete</a></td>
-      <td class="UniverisitiesTableItem"><a href="{{ url_for('universities_page_db_update', updateuni_name=uni_name) }}">Update</a></td>
+      <td class="UnviersitiesTableItem">{{unitype_id}}</td>
+      <td class="UnviersitiesTableItem">{{startdate}}</td>
     </tr>
     {% endfor %}
-
-    <tr>
-      <td class="UniversitiesTableNewItem"> </td>
-      <td class="UniversitiesTableNewItem"><input type="text" name="university" required="required"></td>
-      <td class="UniversitiesTableNewItem"> </td>
-      <td class="UniversitiesTableNewItem"> </td>
-    </tr>
-    <tr>
-      <td colspan="5"><input value="Add New University" name="add" type="submit"></td>
-    </tr>
+    </tbody>
     </table>
-  </form>
-
-
-<div class="form-group">
-      <label for="usearch">SEARCH UNIVERSITY NAME:</label>
-      <input type="text" class="form-control" name="uni_name_text" id="uni_name_text">
-      <button type="submit" id="btn_sign" class="btn btn-default">SEARCH</button>
-    </div>
-
-
 
 
     </div> <!-- /container -->

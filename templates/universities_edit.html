@@ -10,7 +10,7 @@
   </head>
   <body>
     <div class="container">
-        <h2>Profile</h2>
+        <h2>Universities</h2>
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
@@ -21,15 +21,15 @@
 
 
   <form action="apply" method = "post">
-  <table id="userEditTable" class="table" width="500px">
+  <table id="universityEditTable" class="table" width="500px">
    <thead>
       <tr>
-    <th>University name</th>
+    <th>University Name</th>
       </tr>
     </thead>
   <tbody>
-    {% for uni_name in university_users %}
-    <td><input type="text" name="name" required="required" value="{{user_loginname[0]}}" style="width:95%"></td>
+    {% for uni_name in unis %}
+    <td><input type="text" name="name" required="required" value="{{uni_name[0]}}" style="width:95%"></td>
     {% endfor %}
     <tr>
       <td colspan="3" align="center"><input value="Update University Name" name="add" type="submit"></td>

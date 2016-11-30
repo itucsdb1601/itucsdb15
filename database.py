@@ -8,6 +8,7 @@ from flask import Flask, request, render_template
 from Profile import Profile as profile
 from tweets import tweets as tweet
 from favorites import favorites as favorite
+from university import university as university
 
 app = Flask(__name__)
 
@@ -17,6 +18,8 @@ def initialize_database(config):
         cursor = connection.cursor()
         profile.initialize_profiles(config)
         initialize_followers(config)
+        university.initialize_universities(config)
+
         connection.commit();
         return 'tables are created <a href="http://localhost:5000">Home</a>'
 
@@ -327,38 +330,3 @@ def update_blocked(config):
             cursor.execute(query,(blocked_name_new,blocked_name,blocked_type))
             connection.commit();
             return redirect(url_for('blocked'))
-
-
-
-
-
-
-
-
-
-def universities_page_db_delete(config,deleteuni_name):
-    with dbapi2.connect(config) as connection:
-            cursor = connection.cursor()
-            query="DELETE FROM UNIVERITY_USERS where uni_name = %s"
-            cursor.execute(query, (deleteuni_name))
-            connection.commit()
-            return redirect(url_for('universities'))
-
-def universities_page_db_update(config,updateuni_name):
-     with dbapi2.connect(config) as connection:
-            cursor = connection.cursor()
-            query="""SELECT uni_name from UNIVERSITIY_USERS where uni_name = '%s'""" % (updateuni_name)
-            cursor.execute(query)
-            connection.commit()
-            return render_template('universities_edit.html',universities=cursor)
-def universities_page_db_update_apply(config,updateuni_name):
-    with dbapi2.connect(config) as connection:
-            cursor = connection.cursor()
-            new_uni = request.form['name']
-            print(new_uni)
-            query="""UPDATE university_users set uni_name ='%s' where uni_name= '%s'""" % (new_name,updateuni_name)
-            cursor.execute(query)
-            connection.commit()
-            return redirect(url_for('universities'))
-
-
