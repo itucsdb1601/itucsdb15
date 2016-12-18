@@ -243,7 +243,7 @@ def adduniversity():
 def universities_edit():
     return render_template('universities_edit.html')
 
-@app.route('/universities/academics')
+@app.route('/academics')
 def academics():
     return academics.academics_page(app.config['dsn'])
 
@@ -259,11 +259,11 @@ def academics_update(updateacademicinfo):
 def academics_update_apply(updateacademicinfo):
     return academics.academics_page_update_apply(app.config['dsn'], updateacademicinfo)
 
-@app.route('/academics/addacademics')
+@app.route('/addacademics')
 def addacademics():
     return render_template('academics_add.html')
 
-@app.route('/academics/academics_edit')
+@app.route('/academics_edit')
 def academics_edit():
     return render_template('academics_edit.html')
 
@@ -283,11 +283,11 @@ def unisports_update(updateuniteam):
 def unisports_update_apply(updateuniteam):
     return unisports.unisports_page_update_apply(app.config['dsn'], updateuniteam)
 
-@app.route('/unisports/addunisports')
+@app.route('/addunisports')
 def addunisports():
     return render_template('unisports_add.html')
 
-@app.route('/unisports/unisports_edit')
+@app.route('/unisports_edit')
 def unisports_edit():
     return render_template('unsports_edit.html')
 
