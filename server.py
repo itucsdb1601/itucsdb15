@@ -247,47 +247,47 @@ def universities_edit():
 def academics():
     return academics.academics_page(app.config['dsn'])
 
-@app.route('/universities/academics/delete/<deleteacademicinfo>', methods=['GET', 'POST'])
+@app.route('/academics/delete/<deleteacademicinfo>', methods=['GET', 'POST'])
 def academics_delete(deleteacademicinfo):
     return academics.academics_page_delete(app.config['dsn'], deleteacademicinfo)
 
-@app.route('/universities/academics/update/<updateacademicinfo>', methods=['GET', 'POST'])
+@app.route('/academics/update/<updateacademicinfo>', methods=['GET', 'POST'])
 def academics_update(updateacademicinfo):
     return academics.academics_page_update(app.config['dsn'], updateacademicinfo)
 
-@app.route('/universities/academics/update/<updateacademicinfo>/apply', methods=['GET', 'POST'])
+@app.route('/academics/update/<updateacademicinfo>/apply', methods=['GET', 'POST'])
 def academics_update_apply(updateacademicinfo):
     return academics.academics_page_update_apply(app.config['dsn'], updateacademicinfo)
 
-@app.route('/universities/academics/addacademics')
+@app.route('/academics/addacademics')
 def addacademics():
     return render_template('academics_add.html')
 
-@app.route('/universities/academics/academics_edit')
+@app.route('/academics/academics_edit')
 def academics_edit():
     return render_template('academics_edit.html')
 
-@app.route('/universities/unisports')
+@app.route('/unisports')
 def unisports():
     return unisports.unisports_page(app.config['dsn'])
 
-@app.route('/universities/unisports/delete/<deleteuniteam>'), methods=['GET', 'POST'])
+@app.route('/unisports/delete/<deleteuniteam>'), methods=['GET', 'POST'])
 def unisports_delete(deleteuniteam):
     return unisports.unisports_page_delete(app.config['dsn'], deleteuniteam)
 
-@app.route('/universities/unisports/update/<updateuniteam>', methods=['GET', 'POST'])
+@app.route('/unisports/update/<updateuniteam>', methods=['GET', 'POST'])
 def unisports_update(updateuniteam):
     return unisports.unisports_page_update(app.config['dsn'], updateuniteam)
 
-@app.route('/universities/unisports/update/<updateuniteam>/apply', methods=['GET', 'POST'])
+@app.route('/unisports/update/<updateuniteam>/apply', methods=['GET', 'POST'])
 def unisports_update_apply(updateuniteam):
     return unisports.unisports_page_update_apply(app.config['dsn'], updateuniteam)
 
-@app.route('/universities/unisports/addunisports')
+@app.route('/unisports/addunisports')
 def addunisports():
     return render_template('unisports_add.html')
 
-@app.route('/universities/unisports/unisports_edit')
+@app.route('/unisports/unisports_edit')
 def unisports_edit():
     return render_template('unsports_edit.html')
 
