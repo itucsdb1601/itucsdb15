@@ -16,6 +16,8 @@ from tweets import tweets as tweet
 from favorites import favorites as favorite
 from favoritestweet import favoritestweet as favtweet
 from university import university as university
+from unisports import unisports as unisports
+from academics import academics as academics
 
 app = Flask(__name__)
 
@@ -233,6 +235,61 @@ def universities_update(updateuniversities):
 def universities_update_apply(updateuniversities):
     return university.universities_page_update_apply(app.config['dsn'], updateuniversities)
 
+@app.route('/adduniversity')
+def adduniversity():
+    return render_template('universities_add.html')
+
+@app.route('/universities_edit')
+def universities_edit():
+    return render_template('universities_edit.html')
+
+@app.route('/universities/academics')
+def academics():
+    return academics.academics_page(app.config['dsn'])
+
+@app.route('/universities/academics/delete/<deleteacademicinfo>', methods=['GET', 'POST'])
+def academics_delete(deleteacademicinfo):
+    return academics.academics_page_delete(app.config['dsn'], deleteacademicinfo)
+
+@app.route('/universities/academics/update/<updateacademicinfo>', methods=['GET', 'POST'])
+def academics_update(updateacademicinfo):
+    return academics.academics_page_update(app.config['dsn'], updateacademicinfo)
+
+@app.route('/universities/academics/update/<updateacademicinfo>/apply', methods=['GET', 'POST'])
+def academics_update_apply(updateacademicinfo):
+    return academics.academics_page_update_apply(app.config['dsn'], updateacademicinfo)
+
+@app.route('/universities/academics/addacademics')
+def addacademics():
+    return render_template('academics_add.html')
+
+@app.route('/universities/academics/academics_edit')
+def academics_edit():
+    return render_template('academics_edit.html')
+
+@app.route('/universities/unisports')
+def unisports():
+    return unisports.unisports_page(app.config['dsn'])
+
+@app.route('/universities/unisports/delete/<deleteuniteam>'), methods=['GET', 'POST'])
+def unisports_delete(deleteuniteam):
+    return unisports.unisports_page_delete(app.config['dsn'], deleteuniteam)
+
+@app.route('/universities/unisports/update/<updateuniteam>', methods=['GET', 'POST'])
+def unisports_update(updateuniteam):
+    return unisports.unisports_page_update(app.config['dsn'], updateuniteam)
+
+@app.route('/universities/unisports/update/<updateuniteam>/apply', methods=['GET', 'POST'])
+def unisports_update_apply(updateuniteam):
+    return unisports.unisports_page_update_apply(app.config['dsn'], updateuniteam)
+
+@app.route('/universities/unisports/addunisports')
+def addunisports():
+    return render_template('unisports_add.html')
+
+@app.route('/universities/unisports/unisports_edit')
+def unisports_edit():
+    return render_template('unsports_edit.html')
 
 @app.route('/tweets')
 def tweets():

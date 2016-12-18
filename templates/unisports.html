@@ -21,15 +21,14 @@
   <body>
 
     <div class="container">
-        <h2>Universities</h2>
+        <h2>University Sports Database</h2>
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
           <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
+          <li role="presentation" class="active"><a href="{{ url_for('universities') }}">University Main Page</a></li>
           <li role="presentation"><a href="{{ url_for('login') }}">Switch User</a></li>
-          <li role="presentation" class="active"><a href="{{ url_for('universities_edit') }}">Edit University Info</a></li>
-          <li role="presentation" class="active"><a href="{{ url_for('academics') }}">Academic Info</a></li>
-          <li role="presentation" class="active"><a href="{{ url_for('unisports') }}">University Sports Info</a></li>
+          <li role="presentation" class="active"><a href="{{ url_for('unisports_edit') }}">Edit University Sports Information</a></li>
           </ul>
         </nav>
 
@@ -37,21 +36,21 @@
 
 
 <!-- update code -->
-<form action="{{ url_for('universities')}}" method = "post">
-    <table id="universitiesTable" class="table">
+<form action="{{ url_for('unisports')}}" method = "post">
+    <table id="unisportsTable" class="table">
     <thead>
     <tr>
       <th>University Name</th>
-      <th>Founding Date</th>
+      <th>Team Name</th>
       </tr>
     </thead>
     <tbody>
-    {% for uni_name , startdate in unis %}
+    {% for uni_name , team_name in unispo %}
     <tr>
-      <td class="UniversitiesTableItem">{{uni_name}}</td>
-      <td class="UniversitiesTableItem">{{startdate}}</td>
-      <td class="UniversitiesTableItem"><a href="{{ url_for('universities_delete', deleteuniversities=uni_name)}}">Delete</a>
-	  <td class="UniversitiesTableItem"><a href="{{ url_for('universities_edit', updateuniversities=uni_name)}}">Update</a>
+      <td class="UnisportsTableItem">{{uni_name}}</td>
+      <td class="UnisportsTableItem">{{team_name}}</td>
+      <td class="UnisportsTableItem"><a href="{{ url_for('unisports_delete', deleteuniteam=uni_name)}}">Delete</a>
+	  <td class="UnisportsTableItem"><a href="{{ url_for('unisports_edit', updateuniteam=uni_name)}}">Update</a>
     </tr>
     {% endfor %}
     </tbody>

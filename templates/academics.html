@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+
+    <h1>Created by Ozan Özcan</h1><hr>
+
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}" />
+   <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
+
+  </head>
+
+  <body>
+
+    <div class="container">
+        <h2>University Academic Information</h2>
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+          <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
+          <li role="presentation" class="active"><a href="{{ url_for('universities') }}">University Main Page</a></li>
+          <li role="presentation"><a href="{{ url_for('login') }}">Switch User</a></li>
+          <li role="presentation" class="active"><a href="{{ url_for('academics_edit') }}">Edit Academic Info</a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+
+<!-- update code -->
+<form action="{{ url_for('academics')}}" method = "post">
+    <table id="academicsTable" class="table">
+    <thead>
+    <tr>
+      <th>University Name</th>
+      <th>Unicorn Level</th>
+      <th>Scholarship Opportunities</th>
+      <th>Main Research Area</th>
+      <th>Research Budget</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for uni_name , level, scholarship, mainresearch, researchbudget in aca %}
+    <tr>
+      <td class="AcademicsTableItem">{{uni_name}}</td>
+      <td class="AcademicsTableItem">{{level}}</td>
+      <td class="AcademicsTableItem">{{scholarship}}</td>
+      <td class="AcademicsTableItem">{{mainresearch}}</td>
+      <td class="AcademicsTableItem">{{researchbudget}}</td>
+      <td class="AcademicsTableItem"><a href="{{ url_for('academics_delete', deleteacademicinfo=uni_name)}}">Delete</a>
+	  <td class="UniversitiesTableItem"><a href="{{ url_for('academics_edit', updateacademicinfo=uni_name)}}">Update</a>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+
+    </div> <!-- /container -->
+    </div>
+    </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  </body>
+</html>
+{% endblock %}
