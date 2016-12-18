@@ -24,9 +24,9 @@
             </div>
     <form action="{{ url_for('insertM') }}" method="POST">
         <div class="container bg-2 text-center">
-            <h3>Follow</h3>
+            <h3>Add</h3>
             <div class="form-group">
-                <label for="pwd">Please enter a name:</label>
+                <label for="pwd">Please enter an username:</label>
                 <input class="form-control" name="follower_name_text" id="follower_name_text" type="name_text">
                     </div>
             
@@ -39,9 +39,9 @@
     
     <form action="{{ url_for('unfollowM') }}" method="POST">
         <div class="container bg-2 text-center">
-            <h3>Unfollow</h3>
+            <h3>Remove</h3>
             <div class="form-group">
-                <label for="pwd">Please enter a name:</label>
+                <label for="pwd">Please enter an username:</label>
                 <input class="form-control" name="follower_name_text" id="follower_name_text" type="name_text">
                     </div>
            
@@ -55,8 +55,8 @@
         <div class="container bg-2 text-center">
             <h3>Search</h3>
             <div class="form-group">
-                <label for="pwd">Please enter a name:</label>
-                <input class="form-control" name="follower_name_text" id="follower_name_text" type="name_text">
+                <label for="pwd">Please enter an username:</label>
+                <input class="form-control" name="follower_name_text" id="follower_name_text" type="name_text" >
                     </div>
            
         </div>
@@ -69,16 +69,40 @@
         <div class="container bg-2 text-center">
             <h3>Update</h3>
             <div class="form-group">
-                <label for="pwd">Please enter a name that you want to update:</label>
+                <label for="pwd">Please enter an username that you want to update:</label>
                 <input class="form-control" name="follower_name_text" id="follower_name_text" type="name_text">
-                   
-                        
+             
                         </div>
-            <div class="form-group">
-                <label for="pwd">Please enter a new name :</label>
-                <input class="form-control" name="follower_name_text_new" id="follower_name_text_new" type="name_text">
-                   
-                        </div>
+
+         <div class="form-group">
+   	 <label for="ublock">Please choose a song to add to the playlist</label>
+   	 <select class="form-control" name="song_name" id="block_type">
+   	    <option>Murat Boz - Direniyorsun</option>
+        <option>Cem Belevi - Alisamıyorum</option>
+        <option>Emir - Bir Agla</option>
+        <option>Aydın Kurtoglu - Yak</option>
+        <option>Mustafa Ceceli - Hüsran</option>
+        <option>Aleyna Tilki - Cevapsız Cinlama</option>
+        <option>Drake - Feel No Ways</option>
+        <option>G-Eazy - Drifting</option>
+        <option>Wiz Khalifa - Material</option>
+        <option>Tyga - Diced Pineapples</option>
+        <option>Usher - Lemme See</option>
+        <option>The Weeknd - House of Balloons</option>
+        <option>Snoop Dogg - Kush</option>
+    </select>
+</div>
+
+         <div class="form-group">
+   	 <label for="ublock">Please select a social media to connect your account</label>
+   	 <select class="form-control" name="social_media_name" id="block_type2">
+   	    <option>Instagram</option>
+        <option>Facebook</option>
+        <option>Pinterest</option>
+        <option>Tinder</option>
+        <option>Spotify</option>
+    </select>
+</div>
             
         </div>
         <button type="update" id="btn_unfollow" class="btn btn-default">Update</button>

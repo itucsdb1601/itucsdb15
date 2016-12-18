@@ -26,7 +26,7 @@
           <div class="container bg-2 text-center">
             <h3>Follow</h3>
             <div class="form-group">
-                <label for="pwd">Please enter a name:</label>
+                <label for="pwd">Please enter an username:</label>
                 <input class="form-control" name="follower_name_text" id="follower_name_text" type="name_text">
                     </div>
           
@@ -40,7 +40,7 @@
           <div class="container bg-2 text-center">
             <h3>Unfollow</h3>
             <div class="form-group">
-                <label for="pwd">Please enter a name:</label>
+                <label for="pwd">Please enter an username:</label>
                 <input class="form-control" name="follower_name_text" id="follower_name_text" type="name_text">
                     </div>
            
@@ -54,7 +54,7 @@
           <div class="container bg-2 text-center">
             <h3>Search</h3>
             <div class="form-group">
-                <label for="pwd">Please enter a name:</label>
+                <label for="pwd">Please enter an username:</label>
                 <input class="form-control" name="follower_name_text" id="follower_name_text" type="name_text">
                     </div>
           
@@ -64,21 +64,46 @@
         
                        </form>
                        
+                       
+                        
+         <form action="{{ url_for('find_following') }}" method="POST">
+          <div class="container bg-2 text-center">
+            <h3>Find</h3>
+            <div class="form-group">
+                <label for="pwd">Find people around you!</label>
+                <input class="form-control" name="find_text" id="find_text" type="name_text">
+                    </div>
+          
+
+                   </div>   
+                 <button type="find" id="btn_find" class="btn btn-default">Find</button>
+        
+                       </form>
                            
          <form action="{{ url_for('updateM_following') }}" method="POST">
           <div class="container bg-2 text-center">
             <h3>Update</h3>
             <div class="form-group">
-                <label for="pwd">Please enter a name that you want to update:</label>
+            
+              <label for="pwd">Please enter an username:</label>
                 <input class="form-control" name="follower_name_text" id="follower_name_text" type="name_text">
-                 
+                
+                  <label for="pwd">Please enter your location:</label>
+                <input class="form-control" name="location_text" id="location_text" type="name_text">
+                
+                
+   	 <label for="ublock">Please choose an event to add to your coming events list</label>
+   	 <select class="form-control" name="event_name" id="event_type">
+   	    <option>Kalben</option>
+        <option>Mabel Matiz</option>
+        <option>Athena</option>
+        <option>Cem Adrian</option>
+        <option>Yasar</option>
+
+    </select>                 
                
                     </div>
-            <div class="form-group">
-       			<label for="pwd">Please enter a new name :</label>
-                <input class="form-control" name="follower_name_text_new" id="follower_name_text_new" type="name_text">
-               
-                    </div>
+           
 
                    </div>   
                  <button type="update" id="btn_unfollow" class="btn btn-default">Update</button>

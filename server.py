@@ -3,12 +3,13 @@ import json
 import os
 import re
 import psycopg2 as dbapi2
-from database import initialize_database, search, follow, unfollow, update, check, check2,check3, search_following, follow_following, unfollow_following, update_following, search_blocked, follow_blocked, unfollow_blocked, update_blocked
+from database import initialize_database
 from flask import Flask, render_template, redirect, request
 from flask.helpers import url_for
 from datetime import datetime
 from Profile import Profile as profile
 from Hobby import Hobby as hobby
+from Interaction_c import Interaction_c
 from Communication import Communication as communication
 from tags import tags as tag
 from tweets import tweets as tweet
@@ -33,76 +34,73 @@ def init():
 
 @app.route('/followers/search', methods=['POST'])
 def searchM():
-    return search(app.config['dsn'])
+    return Interaction_c.search(app.config['dsn'])
 
 
 @app.route('/followers/follow', methods=['POST'])
 def insertM():
-    follow(app.config['dsn'])
+    Interaction_c.follow(app.config['dsn'])
     return render_template('followers.html')
 
 
 @app.route('/following/search_following', methods=['POST'])
 def searchM_following():
-    return search_following(app.config['dsn'])
+    return Interaction_c.search_following(app.config['dsn'])
 
 
 
 @app.route('/following/follow_following', methods=['POST'])
 def insertM_following():
-    follow_following(app.config['dsn'])
+    Interaction_c.follow_following(app.config['dsn'])
     return render_template('following.html')
-
 
 @app.route('/blocked/search_blocked', methods=['POST'])
 def searchM_blocked():
-    return search_blocked(app.config['dsn'])
-
-
+    return Interaction_c.search_blocked(app.config['dsn'])
 
 @app.route('/blocked/follow_blocked', methods=['POST'])
 def insertM_blocked():
-    follow_blocked(app.config['dsn'])
+    Interaction_c.follow_blocked(app.config['dsn'])
     return render_template('blocked.html')
-
-@app.route('/followers/check', methods=['POST'])
-def checkM():
-    return check(app.config['dsn'])
 
 @app.route('/following/check2', methods=['POST'])
 def checkM2():
-    return check2(app.config['dsn'])
+    return Interaction_c.check2(app.config['dsn'])
 
 @app.route('/blocked/check3', methods=['POST'])
 def checkM3():
-    return check3(app.config['dsn'])
+    return Interaction_c.check3(app.config['dsn'])
+
+@app.route('/following/find', methods=['POST'])
+def find_following():
+    return Interaction_c.find(app.config['dsn'])
 
 @app.route('/followers/unfollow', methods=['POST'])
 def unfollowM():
-    unfollow(app.config['dsn'])
+    Interaction_c.unfollow(app.config['dsn'])
     return render_template('followers.html')
 
 @app.route('/followers/update', methods=['POST'])
 def updateM():
-    return update(app.config['dsn'])
+    return Interaction_c.update(app.config['dsn'])
 
 @app.route('/following/unfollow_following', methods=['POST'])
 def unfollowM_following():
-    unfollow_following(app.config['dsn'])
+    Interaction_c.unfollow_following(app.config['dsn'])
     return render_template('following.html')
 
 @app.route('/following/update_following', methods=['POST'])
 def updateM_following():
-    return update_following(app.config['dsn'])
+    return Interaction_c.update_following(app.config['dsn'])
 
 @app.route('/blocked/unfollow_blocked', methods=['POST'])
 def unfollowM_blocked():
-    unfollow_blocked(app.config['dsn'])
+    Interaction_c.unfollow_blocked(app.config['dsn'])
     return render_template('blocked.html')
 
 @app.route('/blocked/update_blocked', methods=['POST'])
 def updateM_blocked():
-    return update_blocked(app.config['dsn'])
+    return Interaction_c.update_blocked(app.config['dsn'])
 
 @app.route('/followers')
 def followers():
@@ -123,6 +121,11 @@ def blocked():
 @app.route('/following')
 def following():
     return render_template('following.html')
+
+@app.route('/followers/check', methods=['POST'])
+def checkM():
+    return Interaction_c.check(app.config['dsn'])
+
 @app.route('/profiles')
 def profiles():
     return profile.users_page_db(app.config['dsn'])
