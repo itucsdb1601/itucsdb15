@@ -16,8 +16,7 @@ from tweets import tweets as tweet
 from favorites import favorites as favorite
 from favoritestweet import favoritestweet as favtweet
 from university import university as university
-from unisports import unisports as unisports
-from academics import academics as academics
+
 
 app = Flask(__name__)
 
