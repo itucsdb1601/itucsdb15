@@ -243,54 +243,6 @@ def adduniversity():
 def universities_edit():
     return render_template('universities_edit.html')
 
-@app.route('/academics')
-def academics():
-    return academics.academics_page(app.config['dsn'])
-
-@app.route('/academics/delete/<deleteacademicinfo>', methods=['GET', 'POST'])
-def academics_delete(deleteacademicinfo):
-    return academics.academics_page_delete(app.config['dsn'], deleteacademicinfo)
-
-@app.route('/academics/update/<updateacademicinfo>', methods=['GET', 'POST'])
-def academics_update(updateacademicinfo):
-    return academics.academics_page_update(app.config['dsn'], updateacademicinfo)
-
-@app.route('/academics/update/<updateacademicinfo>/apply', methods=['GET', 'POST'])
-def academics_update_apply(updateacademicinfo):
-    return academics.academics_page_update_apply(app.config['dsn'], updateacademicinfo)
-
-@app.route('/addacademics')
-def addacademics():
-    return render_template('academics_add.html')
-
-@app.route('/academics_edit')
-def academics_edit():
-    return render_template('academics_edit.html')
-
-@app.route('/unisports')
-def unisports():
-    return unisports.unisports_page(app.config['dsn'])
-
-@app.route('/unisports/delete/<deleteuniteam>'), methods=['GET', 'POST'])
-def unisports_delete(deleteuniteam):
-    return unisports.unisports_page_delete(app.config['dsn'], deleteuniteam)
-
-@app.route('/unisports/update/<updateuniteam>', methods=['GET', 'POST'])
-def unisports_update(updateuniteam):
-    return unisports.unisports_page_update(app.config['dsn'], updateuniteam)
-
-@app.route('/unisports/update/<updateuniteam>/apply', methods=['GET', 'POST'])
-def unisports_update_apply(updateuniteam):
-    return unisports.unisports_page_update_apply(app.config['dsn'], updateuniteam)
-
-@app.route('/addunisports')
-def addunisports():
-    return render_template('unisports_add.html')
-
-@app.route('/unisports_edit')
-def unisports_edit():
-    return render_template('unsports_edit.html')
-
 @app.route('/tweets')
 def tweets():
     return tweet.tweets_db(app.config['dsn'])
