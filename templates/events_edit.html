@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Add Event</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}" />
+   <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
+
+  </head>
+
+  <body>
+
+    <div class="container bg-2 text-center">
+  <h3> Please Enter Event Information</h3>
+    <form class="col-lg-12" action="{{url_for('saveevent')}}" method="POST">
+
+	<div class="form-group">
+      <label for="name">Event Name:</label>
+      <input class="form-control" name="eventname_text" id="eventname_text" type="text">
+    </div>
+
+    <div class="form-group">
+      <label for="location">Event Location:</label>
+       <input class="form-control" id="eventloc_text" name="eventloc_text" type="text">
+    </div>
+
+
+    <div class="form-group">
+      <label for="date">Event Date:</label>
+      <input class="form-control" name="eventdate_text" id="eventdate_text" type="text">
+    </div>
+
+	<div class="form-group">
+      <label for="category">Event Category:</label>
+      <input class="form-control" name="eventcat_text" id="eventcat_text" type="text">
+    </div>
+
+   <button type="submit" id="btn_sign" class="btn btn-default">Save</button>
+   </form>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+  </body>
+
+</html>

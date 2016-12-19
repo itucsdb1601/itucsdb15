@@ -9,63 +9,113 @@ app = Flask(__name__)
 
 class favorites:
 
-
     def initialize_favorites(config):
         with dbapi2.connect(config) as connection:
             cursor = connection.cursor()
-            query = """DROP TABLE IF EXISTS FAVORITES CASCADE;"""
+            query = """DROP TABLE IF EXISTS FAVORITESUSERS CASCADE;"""
             cursor.execute(query)
-            query = """CREATE TABLE IF NOT EXISTS FAVORITES (favorite_id serial primary key, user_name VARCHAR(20) NOT NULL, user_surname VARCHAR(20) NOT NULL,user_loginname VARCHAR(30) UNIQUE NOT NULL, user_email VARCHAR(30) NOT NULL)"""
+            query = """CREATE TABLE IF NOT EXISTS FAVORITEUSERS(
+            favorite_id serial,
+            user_logname1 VARCHAR(60) not null,
+            user_logname2 VARCHAR(60) not null,
+            date date DEFAULT current_date,
+            relation VARCHAR(100) not null,
+            primary key(favorite_id, user_logname1),
+            foreign key(user_logname1) references user_login(user_loginname) on delete cascade on update cascade,
+            foreign key(user_logname2) references user_login(user_loginname) on delete cascade on update cascade
+            )
+            """
             cursor.execute(query)
-            query = """INSERT INTO FAVORITES (user_loginname, user_name, user_surname, user_email) VALUES ('melis', 'songul', 'sarac' , 'skdj')"""
+            query = """DROP TABLE IF EXISTS FAVORITESTWEETS CASCADE;"""
+            cursor.execute(query)
+            query = """CREATE TABLE IF NOT EXISTS FAVORITETWEETS(
+            favoritetweet_id serial unique,
+            tweet_id integer not null,
+            user_logname VARCHAR(200) not null,
+            pop_keyword VARCHAR(100) not null,
+            primary key(favoritetweet_id, user_logname),
+            foreign key(user_logname) references user_login(user_loginname) on delete cascade on update cascade,
+            foreign key(tweet_id) references TWEETS(tweet_id) on delete cascade on update cascade
+            )
+            """
             cursor.execute(query)
 
-            query = """DROP TABLE IF EXISTS FAVORITESTWEET CASCADE;"""
+            query = """DROP TABLE IF EXISTS FAVORITESTAGS CASCADE;"""
             cursor.execute(query)
-            query = """CREATE TABLE IF NOT EXISTS FAVORITESTWEET (
-            favoritetweet_id serial,
-            user_loginname VARCHAR(20) NOT NULL UNIQUE,
-            tweet_input VARCHAR(200) NOT NULL,
-            tweet_category VARCHAR(100),
-            PRIMARY KEY(favoritetweet_id),
-            FOREIGN KEY(user_loginname) REFERENCES FAVORITES(user_loginname))"""
+
+            query = """CREATE TABLE IF NOT EXISTS FAVORITETAGS (
+            favoritetag_id serial unique,
+            tag_id integer not null,
+            user_logname VARCHAR(60) not null,
+            pop_tag VARCHAR(100) not null,
+            date date DEFAULT current_date,
+            primary key(favoritetag_id, tag_id),
+            foreign key(tag_id) references tags(tag_id) on delete cascade on update cascade
+            )
+            """
             cursor.execute(query)
-            query = """INSERT INTO FAVORITESTWEET (user_loginname, tweet_input, tweet_category) VALUES ('melis', 'have a nice day', 'daily')"""
+
+
+            query = """DROP TABLE IF EXISTS FAVORITESEVENTS CASCADE;"""
+            cursor.execute(query)
+
+
+            query = """CREATE TABLE IF NOT EXISTS FAVORITEEVENTS (
+            favoriteevent_id serial unique not null,
+            event_name VARCHAR(200) not null,
+            user_logname VARCHAR(60) not null,
+            join_status VARCHAR(150) not null,
+            primary key(favoriteevent_id),
+            foreign key(event_name) references events(event_name) on delete cascade on update cascade)
+            """
+            cursor.execute(query)
+
+
+            query = """DROP TABLE IF EXISTS FAVORITESUNIS CASCADE;"""
+            cursor.execute(query)
+
+            query = """CREATE TABLE IF NOT EXISTS FAVORITEUNIS (
+            uni_name VARCHAR(80)  NOT NULL,
+            favoriteuni_id serial unique,
+            fav_department VARCHAR(100) not null,
+            user_logname VARCHAR(60) not null,
+            primary key(favoriteuni_id),
+            foreign key(user_logname) references user_login(user_loginname) on delete cascade on update cascade,
+            foreign key(uni_name) references UNIVERSITYLIST(uni_name) on delete cascade on update cascade)
+            """
             cursor.execute(query)
 
             connection.commit();
-            return 'Tables are Inserted'
+            return 'Tables are inserted <a href="http://localhost:5000">Home</a>'
+
 
 
     def saveFavoriteUser(config):
-        user_name = None
-        user_surname = None
-        user_loginname = None
-        user_email = None
+        user_logname1 = None
+        user_logname2 = None
+        relation = None
         if request.method == 'POST':
-            user_name= request.form['fname_text']
-            print(user_name)
-            user_surname = request.form['fsurname_text']
-            print(user_surname)
-            user_loginname = request.form['floginname_text']
-            print(user_loginname)
-            user_email = request.form['femail_text']
-            print(user_email)
+            user_logname1= request.form['fname_text']
+            print(user_logname1)
+            user_logname2 = request.form['fsurname_text']
+            print(user_logname2)
+            relation = request.form['floginname_text']
+            print(relation)
             with dbapi2.connect(config) as connection:
                 cursor = connection.cursor()
-                query = """INSERT INTO FAVORITES(user_loginname,user_name,user_surname,user_email) VALUES (%s,%s,%s,%s);"""
-                cursor.execute(query,(user_loginname,user_name,user_surname,user_email))
-                connection.commit();
-                return render_template('favorites_edit.html')
-
-
-
+                try:
+                    query = """INSERT INTO FAVORITEUSERS(user_logname1,user_logname2,relation) VALUES (%s,%s,%s);"""
+                    cursor.execute(query,(user_logname1,user_logname2,relation))
+                    connection.commit();
+                    return 'Favorite user information is inserted <a href="http://localhost:5000">Home</a>'
+                except:
+                    return  'The users do not exist in User_Login Table or values cannot be NULL! <a href="http://localhost:5000">Home</a> '
 
     def favorites_db(config):
         with dbapi2.connect(config) as connection:
             if request.method == 'GET':
                 cursor = connection.cursor()
-                query="SELECT user_loginname,user_name,user_surname,user_email from favorites"
+                query="SELECT user_logname1,user_logname2,date, relation from favoriteusers"
                 cursor.execute(query)
                 print(cursor)
                 return render_template('favorites.html', favorites_list=cursor)
@@ -73,7 +123,7 @@ class favorites:
     def favorites_db_delete(config,deletefavorites):
         with dbapi2.connect(config) as connection:
             cursor = connection.cursor()
-            query="DELETE FROM favorites where user_loginname = %s"
+            query="DELETE FROM favoriteusers where user_logname1 = %s"
             cursor.execute(query, (deletefavorites,))
             connection.commit()
             return redirect(url_for('favorites'))
@@ -81,7 +131,7 @@ class favorites:
     def favorites_db_update(config,updatefavorites):
         with dbapi2.connect(config) as connection:
             cursor = connection.cursor()
-            query="""SELECT user_loginname from favorites where user_loginname = '%s'""" % (updatefavorites)
+            query="""SELECT relation from favoriteusers where user_logname1 = '%s'""" % (updatefavorites)
             cursor.execute(query)
             connection.commit()
             return render_template('favorites_update.html',favorites_updates=cursor)
@@ -89,12 +139,16 @@ class favorites:
     def favorites_db_update_apply(config,updatefavorites):
         with dbapi2.connect(config) as connection:
             cursor = connection.cursor()
-            new_name = request.form['favorites']
-            print(new_name)
-            query="""UPDATE favorites set user_loginname ='%s' where user_loginname = '%s'""" % (new_name,updatefavorites)
-            cursor.execute(query)
-            connection.commit()
-            return redirect(url_for('favorites'))
+            try:
+                new_name = request.form['favorites']
+                print(new_name)
+                query="""UPDATE favoriteusers set relation ='%s' where user_logname1 = '%s'""" % (new_name,updatefavorites)
+                cursor.execute(query)
+                connection.commit()
+                return redirect(url_for('favorites'))
+            except:
+                return 'Value cannot be NULL! <a href="http://localhost:5000">Home</a>'
+
 
 
 

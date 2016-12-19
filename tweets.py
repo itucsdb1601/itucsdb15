@@ -15,29 +15,86 @@ class tweets:
             cursor = connection.cursor()
             query = """DROP TABLE IF EXISTS TWEETS CASCADE;"""
             cursor.execute(query)
+            query = """CREATE TABLE IF NOT EXISTS TWEETS (
+            tweet_id serial unique,
+            user_logname VARCHAR(60) not null,
+            tweet_input VARCHAR(200) not null,
+            date date default current_date,
+            tweet_category VARCHAR(100) not null,
+            primary key(tweet_id, user_logname),
+            foreign key(user_logname) references user_login(user_loginname) on delete cascade on update cascade
+            )
+            """
+            cursor.execute(query)
+
             query = """DROP TABLE IF EXISTS TAGS CASCADE;"""
             cursor.execute(query)
-            query = """CREATE TABLE IF NOT EXISTS TWEETS
-             (tweet_id SERIAL,
-             user_logName VARCHAR(60) UNIQUE NOT NULL ,
-             tweet_input VARCHAR(200) UNIQUE NOT NULL,
-             tweet_category VARCHAR(100) NOT NULL,
-             PRIMARY KEY(tweet_id , user_logName)) """
+
+            query = """CREATE TABLE IF NOT EXISTS TAGS (
+            tag_id serial unique,
+            tweet_id integer not null,
+            tag_input VARCHAR(200) not null,
+            tag_category VARCHAR(100) not null,
+            date date default current_date ,
+            primary key(tag_id, tweet_id),
+            foreign key(tweet_id) references TWEETS(tweet_id) on delete cascade on update cascade
+            )
+            """
+
             cursor.execute(query)
-            query = """INSERT INTO TWEETS (user_logName, tweet_input, tweet_category) VALUES ('songul', 'first tweet! #first', 'daily')"""
+
+            query = """DROP TABLE IF EXISTS COMMENTS CASCADE;"""
             cursor.execute(query)
-            query = """CREATE TABLE IF NOT EXISTS TAGS
-             (user_logname VARCHAR(20) UNIQUE PRIMARY KEY,
-             tweet_input VARCHAR(200) NOT NULL,
-             tag_id serial,
-             tag_input VARCHAR(50) NOT NULL,
-             tag_category VARCHAR(100) NOT NULL,
-             FOREIGN KEY(user_logname) REFERENCES TWEETS(user_logName))"""
+
+
+            query = """CREATE TABLE IF NOT EXISTS COMMENTS (
+            tweet_id integer not null,
+            comment_id serial unique not null,
+            comment VARCHAR(200) not null,
+            user_logname VARCHAR(60) not null,
+            date date default current_date,
+            primary key(comment_id),
+            foreign key(user_logname) references user_login(user_loginname) on delete cascade on update cascade,
+            foreign key(tweet_id) references TWEETS(tweet_id) on delete cascade on update cascade)
+            """
+
             cursor.execute(query)
-            query = """INSERT INTO TAGS (user_logname, tweet_input, tag_input, tag_category) VALUES ('songul','first tweet! #first' , 'first' , 'daily')"""
+
+            query = """DROP TABLE IF EXISTS DIRECTMESSAGES CASCADE;"""
             cursor.execute(query)
+
+            query = """CREATE TABLE IF NOT EXISTS DIRECTMESSAGES(
+            dm_id serial unique,
+            user_logname1 VARCHAR(60) not null,
+            user_logname2 VARCHAR(60) not null,
+            message VARCHAR(200) not null,
+            subject VARCHAR(100) not null,
+            date date default current_date,
+            primary key(dm_id),
+            foreign key(user_logname1) references user_login(user_loginname) on delete cascade on update cascade,
+            foreign key(user_logname2) references user_login(user_loginname) on delete cascade on update cascade
+            )
+            """
+
+            cursor.execute(query)
+
+            query = """DROP TABLE IF EXISTS ACTIVITIES CASCADE;"""
+            cursor.execute(query)
+
+
+            query = """CREATE TABLE IF NOT EXISTS ACTIVITIES(
+            event_id serial unique not null,
+            event_name VARCHAR(200) unique not null,
+            event_location VARCHAR(200) not null,
+            event_date VARCHAR(200) not null,
+            event_category VARCHAR(200) not null,
+            primary key(event_id, event_name))
+            """
+
+            cursor.execute(query)
+
             connection.commit();
-            return 'Tables inserted'
+            return 'Tables inserted <a href="http://localhost:5000">Home</a>'
 
 
     def savetweet(config):
@@ -53,17 +110,19 @@ class tweets:
             print(new_category)
             with dbapi2.connect(config) as connection:
                 cursor = connection.cursor()
-                query = """INSERT INTO TWEETS (user_logName, tweet_input, tweet_category) VALUES (%s, %s, %s)"""
-                cursor.execute(query, (user_login, new_tweet, new_category))
-                connection.commit();
-                return redirect(url_for('tweet_edit'))
-
+                try:
+                    query = """INSERT INTO TWEETS (user_logName, tweet_input, tweet_category) VALUES (%s, %s, %s)"""
+                    cursor.execute(query, (user_login, new_tweet, new_category))
+                    connection.commit();
+                    return 'Your tweet has been successfully posted<a href="http://localhost:5000">Home</a>'
+                except:
+                    return 'Your tweet cannot be posted due to foreign key constraints! <a href="http://localhost:5000">Home</a>'
 
     def tweets_db(config):
         with dbapi2.connect(config) as connection:
             if request.method == 'GET':
                 cursor = connection.cursor()
-                query = "SELECT user_logName,tweet_input,tweet_category from tweets"
+                query = "SELECT user_logname,tweet_id,tweet_input,tweet_category, date from tweets"
                 cursor.execute(query)
                 connection.commit();
                 return render_template('tweets.html', tweets_list=cursor)
@@ -72,7 +131,7 @@ class tweets:
     def tweets_db_delete(config, deleteTweet):
         with dbapi2.connect(config) as connection:
             cursor = connection.cursor()
-            query = "DELETE FROM tweets where user_logName = %s"
+            query = "DELETE FROM tweets where user_logname = %s"
             cursor.execute(query, (deleteTweet,))
             connection.commit();
             return redirect(url_for('tweets'))
@@ -80,7 +139,7 @@ class tweets:
     def tweets_db_update(config, updateTweet):
         with dbapi2.connect(config) as connection:
             cursor = connection.cursor()
-            query = """SELECT tweet_input from tweets where user_logName = '%s'""" % (updateTweet)
+            query = """SELECT tweet_input from tweets where user_logname = '%s'""" % (updateTweet)
             cursor.execute(query)
             connection.commit();
             return render_template('tweet_update.html', tweet_updates=cursor)
@@ -89,11 +148,15 @@ class tweets:
     def tweets_db_update_apply(config, updateTweet):
         with dbapi2.connect(config) as connection:
             cursor = connection.cursor()
-            new_tweet = request.form['tweet']
-            query = """UPDATE tweets set tweet_input ='%s' where user_logName = '%s'""" % (new_tweet, updateTweet)
-            cursor.execute(query)
-            connection.commit();
-            return redirect(url_for('tweets'))
+            try:
+                new_tweet = request.form['tweet']
+                query = """UPDATE tweets set tweet_input ='%s' where user_logName = '%s'""" % (new_tweet, updateTweet)
+                cursor.execute(query)
+                connection.commit();
+                return redirect(url_for('tweets'))
+            except:
+                return 'Value cannot be NULL! <a href="http://localhost:5000">Home</a>'
+
 
 
 

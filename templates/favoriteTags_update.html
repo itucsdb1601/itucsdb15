@@ -1,6 +1,6 @@
 
   <head>
-  <h1>MELİS GULENAY - 150120304</h1>
+ 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +11,7 @@
   </head>
   <body>
     <div class="container">
-        <h2>Update Favorite</h2>
+        <h2>Update Popularity of Chosen Tag</h2>
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
@@ -21,18 +21,18 @@
       </div>
 
   <form action="apply" method = "post">
-  <table id="favoritesTweetEditTable" class="table" width="500px">
+  <table id="favoritesEditTable" class="table" width="500px">
 	 <thead>
       <tr>
-		<th>User Favorite</th>
+		<th>Popularity</th>
       </tr>
     </thead>
 	<tbody>
-    {% for tweet_category in favoritestweet_updates %}
-    <td><input type="text" name="favoritestweet" required="required" value="{{tweet_category[0]}}" style="width:95%"></td>
+    {% for pop_tag in favoriteTag_updates %}
+    <td><input type="text" name="favorites" required="required" value="{{pop_tag[0]}}" style="width:95%"></td>
     {% endfor %}
     <tr>
-			<td colspan="3" align="center"><input value="Update Favorite Category" name="add" type="submit"></td>
+			<td colspan="3" align="center"><input value="Update popularity" name="add" type="submit"></td>
 	</tr>
 	</tbody>
 	</table>

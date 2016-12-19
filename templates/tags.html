@@ -3,7 +3,6 @@
 {% block content %}
 
   <head>
-  <h3>SONGUL SARAC - 150120303</h3>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,15 +32,17 @@
         <th>Tweet</th>
         <th>Tag</th>
         <th>Tag Category</th>
+        <th>Date</th>
       </tr>
     </thead>
 	<tbody>
-		{% for user_logname, tweet_input, tag_input, tag_category in tag_list %}
+		{% for user_logname, tweet_input, tag_input, tag_category, date in tag_list %}
 		<tr>
 			<td class="TagsTableItem">{{user_logname}}</td>
 			<td class="TagsTableItem">{{tweet_input}}</td>
 			<td class="TagsTableItem">{{tag_input}}</td>
 			<td class="TagsTableItem">{{tag_category}}</td>
+			<td class="TagsTableItem">{{date}}</td>
 			<td class="TagsTableItem"><a href="{{ url_for('tag_delete', deletetag=user_logname) }}">Delete</a>
 			<td class="TagsTableItem"><a href="{{ url_for('tag_update', updatetag=user_logname) }}">Update</a>
 		</tr>

@@ -1,6 +1,6 @@
 
   <head>
-  <h1>MELİS GULENAY - 150120304</h1>
+  <h1>SONGUL SARAC - 150120303</h1>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,8 +11,7 @@
   </head>
   <body>
     <div class="container">
-        <h2>Update Favorite</h2>
-      <div class="header clearfix">
+        <h2>UPDATE COMMENTeader clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
            <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
@@ -21,18 +20,18 @@
       </div>
 
   <form action="apply" method = "post">
-  <table id="favoritesEditTable" class="table" width="500px">
+  <table id="commentEditTable" class="table" width="500px">
 	 <thead>
       <tr>
-		<th>User Favorite</th>
+		<th>User Comment</th>
       </tr>
     </thead>
 	<tbody>
-    {% for relation in favorites_updates %}
-    <td><input type="text" name="favorites" required="required" value="{{relation[0]}}" style="width:95%"></td>
+    {% for comment in comment_updates %}
+    <td><input type="text" name="comment_txt" required="required" value="{{comment[0]}}" style="width:95%"></td>
     {% endfor %}
     <tr>
-			<td colspan="3" align="center"><input value="Update Favorite Name" name="add" type="submit"></td>
+			<td colspan="3" align="center"><input value="Update Comment" name="add" type="submit"></td>
 	</tr>
 	</tbody>
 	</table>

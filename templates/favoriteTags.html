@@ -3,6 +3,7 @@
 {% block content %}
 
   <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,39 +14,35 @@
   </head>
   <body>
     <div class="container">
-        <h2>TWEET PANEL</h2>
+        <h2>Favorite Tags</h2>
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
            <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
-           <li role="presentation" class="active"><a href="{{ url_for('tweet_edit') }}">Add a New Tweet</a></li>
-              <li role="presentation" class="active"><a href="{{ url_for('activities_panel') }}">Activity Panel</a></li>
+	       <li role="presentation" class="active"><a href="{{ url_for('favoritesPanel') }}">Favorites Panel</a></li>
+           <li role="presentation" class="active"><a href="{{ url_for('favoriteTags_edit') }}">New Favorite Tag</a></li>
 
           </ul>
         </nav>
       </div>
 
-   <form action="{{ url_for('tweets') }}" method = "post">
-  <table id="tweetsTable" class="table">
+   <form action="{{ url_for('favoriteTags') }}" method = "post">
+  <table id="favoriteTagsTable" class="table">
 	 <thead>
       <tr>
-        <th>User Login Name</th>
-        <th>Tweet No</th>
-        <th>Tweet</th>
-        <th>Tweet Category</th>
-        <th>Date </th>
+		<th>Username</th>
+        <th>Tag id</th>
+        <th>Popularity of tag</th>
       </tr>
     </thead>
 	<tbody>
-		{% for user_logName, tweet_id, tweet_input, tweet_category, date in tweets_list %}
+		{% for user_loginname, tag_id, pop_tag in favoriteTag_list %}
 		<tr>
-			<td class="TweetsTableItem">{{user_logName}}</td>
-			<td class="TweetsTableItem">{{tweet_id}}</td>
-			<td class="TweetsTableItem">{{tweet_input}}</td>
-			<td class="TweetsTableItem">{{tweet_category}}</td>
-			<td class="TweetsTableItem">{{date}}</td>
-			<td class="TweetssTableItem"><a href="{{ url_for('tweet_delete', deleteTweet=user_logName) }}">Delete</a>
-			<td class="TweetsTableItem"><a href="{{ url_for('tweet_update', updateTweet=user_logName) }}">Update</a>
+			<td class="FavoritesTableItem">{{user_loginname}}</td>
+			<td class="FavoritesTableItem">{{tag_id}}</td>
+			<td class="FavoritesTableItem">{{pop_tag}}</td>
+			<td class="FavoritesTableItem"><a href="{{ url_for('favoriteTag_delete', deletefavoriteTag=user_loginame) }}">Delete</a>
+			<td class="FavoritesTableItem"><a href="{{ url_for('favoriteTag_update', updatefavoriteTag=pop_tag) }}">Update</a>
 		</tr>
 		{% endfor %}
 		</tbody>

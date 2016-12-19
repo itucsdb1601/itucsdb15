@@ -3,6 +3,7 @@
 {% block content %}
 
   <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,42 +11,55 @@
     <meta name="description" content="">
     <meta name="author" content="">
    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}" />
+   <style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
   </head>
   <body>
     <div class="container">
-        <h2>TWEET PANEL</h2>
+        <h2>Favorite Universities</h2>
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
            <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
-           <li role="presentation" class="active"><a href="{{ url_for('tweet_edit') }}">Add a New Tweet</a></li>
-              <li role="presentation" class="active"><a href="{{ url_for('activities_panel') }}">Activity Panel</a></li>
+	       <li role="presentation" class="active"><a href="{{ url_for('favoritesPanel') }}">Favorites Panel</a></li>
+           <li role="presentation" class="active"><a href="{{ url_for('favoriteUnis_edit') }}">New Favorite University</a></li>
 
           </ul>
         </nav>
       </div>
 
-   <form action="{{ url_for('tweets') }}" method = "post">
-  <table id="tweetsTable" class="table">
+   <form action="{{ url_for('favoriteUnis') }}" method = "post">
+  <table>
 	 <thead>
       <tr>
-        <th>User Login Name</th>
-        <th>Tweet No</th>
-        <th>Tweet</th>
-        <th>Tweet Category</th>
-        <th>Date </th>
+		<th>Username</th>
+        <th>University Name</th>
+        <th>Favorite Department</th>
       </tr>
     </thead>
 	<tbody>
-		{% for user_logName, tweet_id, tweet_input, tweet_category, date in tweets_list %}
+		{% for user_logname, uni_name, fav_department in favoriteUni_list %}
 		<tr>
-			<td class="TweetsTableItem">{{user_logName}}</td>
-			<td class="TweetsTableItem">{{tweet_id}}</td>
-			<td class="TweetsTableItem">{{tweet_input}}</td>
-			<td class="TweetsTableItem">{{tweet_category}}</td>
-			<td class="TweetsTableItem">{{date}}</td>
-			<td class="TweetssTableItem"><a href="{{ url_for('tweet_delete', deleteTweet=user_logName) }}">Delete</a>
-			<td class="TweetsTableItem"><a href="{{ url_for('tweet_update', updateTweet=user_logName) }}">Update</a>
+			<td class="FavoritesTableItem">{{user_logname}}</td>
+			<td class="FavoritesTableItem">{{uni_name}}</td>
+			<td class="FavoritesTableItem">{{fav_department}}</td>
+			<td class="FavoritesTableItem"><a href="{{ url_for('favoriteUni_delete', deletefavoriteUni=user_logname) }}">Delete</a>
+			<td class="FavoritesTableItem"><a href="{{ url_for('favoriteUni_update', updatefavoriteUni=user_logname) }}">Update</a>
 		</tr>
 		{% endfor %}
 		</tbody>

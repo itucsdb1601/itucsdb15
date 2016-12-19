@@ -3,7 +3,7 @@
 {% block content %}
 
   <head>
-  <h3>MELİS GÜLENAY - 150120304</h3>
+  <h3>Comments</h3>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,33 +14,37 @@
   </head>
   <body>
     <div class="container">
-        <h2>Profile</h2>
+        <h2>COMMENT PANEL</h2>
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
            <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
-           <li role="presentation" class="active"><a href="{{ url_for('favorites_tweet_edit') }}">New User Favorite Tweet</a></li>
+		   <li role="presentation" class="active"><a href="{{ url_for('activities_panel') }}">Activities Panel</a></li>
+           <li role="presentation" class="active"><a href="{{ url_for('comments_edit') }}">Add a New Comment</a></li>
+
           </ul>
         </nav>
       </div>
 
-   <form action="{{ url_for('favorites_tweet') }}" method = "post">
-  <table id="favoritesTweetTable" class="table">
+   <form action="{{ url_for('comments')}}" method = "post">
+  <table id="CommentsTable" class="table">
 	 <thead>
       <tr>
-        <th>User Login</th>
+        <th>User Login Name</th>
         <th>Tweet</th>
-        <th>Category</th>
+        <th>Comment</th>
+		<th>Date</th>
       </tr>
     </thead>
 	<tbody>
-		{% for user_loginname, tweet_input,tweet_category in favoritestweet_list %}
+		{% for user_logname, tweet_input, comment, date in comments_list %}
 		<tr>
-			<td class="FavoritesTweetTableItem">{{user_loginname}}</td>
-			<td class="FavoritesTweetTableItem">{{tweet_input}}</td>
-			<td class="FavoritesTweetTableItem">{{tweet_category}}</td>
-			<td class="FavoritesTweetTableItem"><a href="{{ url_for('favorites_tweet_delete', deletefavoritestweet=user_loginname) }}">Delete</a>
-			<td class="FavoritesTweetTableItem"><a href="{{ url_for('favorites_tweet_update', updatefavoritestweet=user_loginname) }}">Update</a>
+			<td class="CommentsTableItem">{{user_logname}}</td>
+			<td class="CommentsTableItem">{{tweet_input}}</td>
+			<td class="CommentsTableItem">{{comment}}</td>
+			<td class="CommentsTableItem">{{date}}</td>
+			<td class="CommentsTableItem"><a href="{{ url_for('comments_delete', deletecomment=user_logname) }}">Delete</a>
+			<td class="CommentsTableItem"><a href="{{ url_for('comments_update', updatecomment=user_logname) }}">Update</a>
 		</tr>
 		{% endfor %}
 		</tbody>

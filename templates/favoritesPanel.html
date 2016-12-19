@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="{{ url_for('static', filename='jumbotron.css') }}"/ >
+    <link rel="icon" href="../../favicon.ico">
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}" />
+ <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
+    <title>Favorites Panel</title>
+
+    <!-- Bootstrap core CSS -->
+
+     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}"/ >
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+     <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}"/ >
+    <!-- Custom styles for this template -->
+
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+ <div class="container">
+
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+        <a class="navbar-brand" href="#">Unicorn</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Favorites Admin Panel</h1>
+      </div>
+    </div> <!-- /container -->
+
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+
+          <img src="static/fav_user.png" class="img-rounded" alt="Cinque Terre" width="100" height="100">
+          <p><a class="btn btn-default" href="{{ url_for('favorites') }}" role="button">Favorite Users &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+
+          <img src="static/fav_uni.png" class="img-rounded" alt="Cinque Terre" width="100" height="100">
+          <p><a class="btn btn-default" href="{{ url_for('favoriteUnis') }}" role="button">Favorite Universities &raquo;</a></p>
+        </div>
+		  <div class="col-md-4">
+
+          <img src="static/fav_event.png" class="img-rounded" alt="Cinque Terre" width="100" height="100">
+          <p><a class="btn btn-default" href="{{ url_for('favoriteEvents') }}" role="button">Favorite Events &raquo;</a></p>
+        </div>
+		  <div class="col-md-4">
+
+         <img src="static/fav_tag.png" class="img-rounded" alt="Cinque Terre" width="100" height="100">
+         <p><a class="btn btn-default" href="{{ url_for('favoriteTags') }}" role="button">Favorite Tags &raquo;</a></p>
+        </div>
+
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; 2016 Company, Inc.</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
+{% endblock %}

@@ -2,30 +2,30 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Favorite Tweets</title>
+    <title>Favorite Events</title>
    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}" />
    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
 
   </head>
 
   <body>
-
+	<h2>Add new favorite event</h2>
     <div class="container bg-2 text-center">
   <h3>Please Enter Information</h3>
-    <form class="col-lg-12" action="{{url_for('savefavoritestweet')}}" method="POST">
+    <form class="col-lg-12" action="{{url_for('savefavoriteEvents')}}" method="POST">
     <div class="form-group">
-      <label for="name">User name:</label>
-       <input class="form-control" id="fname_text" name="fname_text" type="text">
+      <label for="name">User Name:</label>
+       <input class="form-control" id="floginname_text" name="floginname_text" type="text">
     </div>
     <div class="form-group">
-      <label for="surname">Tweet</label>
-       <input class="form-control" name="ftweet_text" id="ftweet_text" type="text">
+      <label for="surname">Event Name:</label>
+       <input class="form-control" name="event_name_text" id="event_name_text" type="text">
     </div>
     <div class="form-group">
-      <label for="email">Tweet Category</label>
-      <input type="text" class="form-control" name="fcategory_text" id="fcategory_text">
+      <label for="username">Joining Status</label>
+      <input type="text" class="form-control" name="status_text"  id="status_text">
     </div>
-   <button type="submit" id="btn_sign" class="btn btn-default">Enter</button>
+   <button type="submit" id="btn_sign" class="btn btn-default">Save</button>
   </form>
 
 

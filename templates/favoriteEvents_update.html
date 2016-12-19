@@ -1,6 +1,6 @@
 
   <head>
-  <h1>MELİS GULENAY - 150120304</h1>
+ 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +11,7 @@
   </head>
   <body>
     <div class="container">
-        <h2>Update Favorite</h2>
+        <h2>Update Join Status</h2>
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
@@ -24,15 +24,15 @@
   <table id="favoritesEditTable" class="table" width="500px">
 	 <thead>
       <tr>
-		<th>User Favorite</th>
+		<th>Join Status</th>
       </tr>
     </thead>
 	<tbody>
-    {% for relation in favorites_updates %}
-    <td><input type="text" name="favorites" required="required" value="{{relation[0]}}" style="width:95%"></td>
+    {% for join_status in favoriteEvents_updates %}
+    <td><input type="text" name="favorites" required="required" value="{{join_status[0]}}" style="width:95%"></td>
     {% endfor %}
     <tr>
-			<td colspan="3" align="center"><input value="Update Favorite Name" name="add" type="submit"></td>
+			<td colspan="3" align="center"><input value="Update Favorite Department" name="add" type="submit"></td>
 	</tr>
 	</tbody>
 	</table>

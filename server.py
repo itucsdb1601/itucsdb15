@@ -14,8 +14,13 @@ from Communication import Communication as communication
 from tags import tags as tag
 from tweets import tweets as tweet
 from favorites import favorites as favorite
-from favoritestweet import favoritestweet as favtweet
 from university import university as university
+from directmessages import directmessages as directmessage
+from comments import comments as comment
+from events import activities as event
+from favoriteevents import favoriteevents as favoriteevent
+from favoriteTags import favoriteTags as favoritetag
+from favoriteUni import favoriteUnis as favoriteuni
 
 
 app = Flask(__name__)
@@ -215,9 +220,86 @@ def tags_apply(updatetag):
 
 @app.route('/savettag', methods=['POST'])
 def savetag():
-    tag.savetag(app.config['dsn'])
-    return 'Your tag has been successfully posted'
-    
+    return tag.savetag(app.config['dsn'])
+
+
+@app.route('/directmessages_edit')
+def directmessages_edit():
+    return render_template('directmessages_edit.html')
+
+@app.route('/directmessages')
+def directmessages():
+    return directmessage.directmessages_db(app.config['dsn'])
+
+@app.route('/directmessages/delete/<deletedm>', methods=['GET', 'POST'])
+def directmessages_delete(deletedm):
+    return directmessage.directmessages_db_delete(app.config['dsn'],deletedm)
+
+
+@app.route('/directmessages/update/<updatedm>/', methods=['GET', 'POST'])
+def directmessages_update(updatedm):
+    return directmessage.directmessages_db_update(app.config['dsn'],updatedm)
+
+@app.route('/directmessages/update/<updatedm>/apply', methods=['GET', 'POST'])
+def directmessage_apply(updatedm):
+    return directmessage.directmessages_db_update_apply(app.config['dsn'],updatedm)
+
+@app.route('/savedirectmessage', methods=['POST'])
+def savedirectmessage():
+    return directmessage.savedirectmessage(app.config['dsn'])
+
+
+@app.route('/comments_edit')
+def comments_edit():
+    return render_template('comments_edit.html')
+
+@app.route('/comments')
+def comments():
+    return comment.comments_db(app.config['dsn'])
+
+@app.route('/comments/delete/<deletecomment>', methods=['GET', 'POST'])
+def comments_delete(deletecomment):
+    return comment.comments_db_delete(app.config['dsn'],deletecomment)
+
+
+@app.route('/comments/update/<updatecomment>/', methods=['GET', 'POST'])
+def comments_update(updatecomment):
+    return comment.comments_db_update(app.config['dsn'],updatecomment)
+
+@app.route('/comments/update/<updatecomment>/apply', methods=['GET', 'POST'])
+def comments_apply(updatecomment):
+    return comment.comments_db_update_apply(app.config['dsn'],updatecomment)
+
+@app.route('/savecomment', methods=['POST'])
+def savecomment():
+    return comment.savecomment(app.config['dsn'])
+
+
+@app.route('/events_edit')
+def events_edit():
+    return render_template('events_edit.html')
+
+@app.route('/events')
+def events():
+    return event.events_db(app.config['dsn'])
+
+@app.route('/events/delete/<deleteevent>', methods=['GET', 'POST'])
+def events_delete(deleteevent):
+    return event.events_db_delete(app.config['dsn'],deleteevent)
+
+
+@app.route('/events/update/<updateevent>/', methods=['GET', 'POST'])
+def events_update(updateevent):
+    return event.events_db_update(app.config['dsn'],updateevent)
+
+@app.route('/events/update/<updateevent>/apply', methods=['GET', 'POST'])
+def events_apply(updateevent):
+    return event.events_db_update_apply(app.config['dsn'],updateevent)
+
+@app.route('/saveevent', methods=['POST'])
+def saveevent():
+    return event.saveevent(app.config['dsn'])
+
 @app.route('/universities')
 def universities():
     return university.universities_page(app.config['dsn'])
@@ -268,25 +350,35 @@ def tweet_edit():
 
 @app.route('/savetweet', methods=['POST'])
 def savetw():
-    tweet.savetweet(app.config['dsn'])
-    return 'Your tweet has been successfully posted'
+    return tweet.savetweet(app.config['dsn'])
 
-@app.route('/favorites')
-def favorites():
-    return favorite.favorites_db(app.config['dsn'])
 
-@app.route('/saveFavoriteUser', methods=['POST'])
-def savefavorites():
-	favorite.saveFavoriteUser(app.config['dsn'])
-	return 'Favorite user information is inserted'
+@app.route('/activities_panel')
+def activities_panel():
+    return render_template('activities_panel.html')
 
-@app.route('/favorites/delete/<deletefavorites>', methods=['GET', 'POST'])
-def favorites_delete(deletefavorites):
-    return favorite.favorites_db_delete(app.config['dsn'],deletefavorites)
+
+@app.route('/favoritesPanel')
+def favoritesPanel():
+    return render_template('favoritesPanel.html')
 
 @app.route('/favorites/initialize_favorites', methods=['GET', 'POST'])
 def initialize_favorites():
         return favorite.initialize_favorites(app.config['dsn'])
+
+@app.route('/favoritesPanel/favorites')
+def favorites():
+    return favorite.favorites_db(app.config['dsn'])
+
+
+@app.route('/saveFavoriteUser', methods=['POST'])
+def savefavorites():
+    return favorite.saveFavoriteUser(app.config['dsn'])
+
+
+@app.route('/favorites/delete/<deletefavorites>', methods=['GET', 'POST'])
+def favorites_delete(deletefavorites):
+    return favorite.favorites_db_delete(app.config['dsn'],deletefavorites)
 
 @app.route('/favorites/update/<updatefavorites>/', methods=['GET', 'POST'])
 def favorites_update(updatefavorites):
@@ -300,30 +392,86 @@ def favorites_apply(updatefavorites):
 def favorites_edit():
     return render_template('favorites_edit.html')
 
-@app.route('/favorites_tweet')
-def favorites_tweet():
-    return favtweet.favoritestweet_db(app.config['dsn'])
 
-@app.route('/saveFavoriteTweet', methods=['POST'])
-def savefavoritestweet():
-    favtweet.saveFavoriteTweet(app.config['dsn'])
-    return 'Favorite tweet information is inserted'
+@app.route('/favoritesPanel/favoriteUnis')
+def favoriteUnis():
+    return favoriteuni.favoriteUnis_db(app.config['dsn'])
 
-@app.route('/favorites_tweet/delete/<deletefavoritestweet>', methods=['GET', 'POST'])
-def favorites_tweet_delete(deletefavoritestweet):
-    return favtweet.favoritestweet_db_delete(app.config['dsn'],deletefavoritestweet)
+@app.route('/savefavoriteUnis', methods=['POST'])
+def savefavoriteUni():
+    return favoriteuni.savefavoriteUni(app.config['dsn'])
 
-@app.route('/favorites_tweet/update/<updatefavoritestweet>/', methods=['GET', 'POST'])
-def favorites_tweet_update(updatefavoritestweet):
-    return favtweet.favoritestweet_db_update(app.config['dsn'],updatefavoritestweet)
 
-@app.route('/favorites_tweet/update/<updatefavoritestweet>/apply', methods=['GET', 'POST'])
-def favoritestweet_apply(updatefavoritestweet):
-    return favtweet.favoritestweet_db_update_apply(app.config['dsn'],updatefavoritestweet)
+@app.route('/favoriteUnis/delete/<deletefavoriteUni>', methods=['GET', 'POST'])
+def favoriteUni_delete(deletefavoriteUni):
+    return favoriteuni.favoriteUnis_db_delete(app.config['dsn'],deletefavoriteUni)
+
+@app.route('/favoriteUnis/update/<updatefavoriteUni>/', methods=['GET', 'POST'])
+def favoriteUni_update(updatefavoriteUni):
+    return favoriteuni.favoriteUnis_db_update(app.config['dsn'],updatefavoriteUni)
+
+@app.route('/favoriteUnis/update/<updatefavoriteUni>/apply', methods=['GET', 'POST'])
+def favoriteUnis_apply(updatefavoriteUni):
+    return favoriteuni.favoriteUnis_db_update_apply(app.config['dsn'],updatefavoriteUni)
+
+@app.route('/favoriteUnis_edit')
+def favoriteUnis_edit():
+    return render_template('favoriteUnis_edit.html')
 
 @app.route('/favorites_tweet_edit')
 def favorites_tweet_edit():
     return render_template('favorites_tweet_edit.html')
+
+@app.route('/favoritesPanel/favoriteTags')
+def favoriteTags():
+    return favoritetag.favoriteTags_db(app.config['dsn'])
+
+@app.route('/savefavoriteTags', methods=['POST'])
+def savefavoriteTags():
+    return favoritetag.savefavoriteTags(app.config['dsn'])
+
+
+@app.route('/favoriteTags/delete/<deletefavoriteTag>', methods=['GET', 'POST'])
+def favoriteTag_delete(deletefavoriteTag):
+    return favoritetag.favoriteTags_db_delete(app.config['dsn'],deletefavoriteTag)
+
+@app.route('/favoriteTags/update/<updatefavoriteTag>/', methods=['GET', 'POST'])
+def favoriteTag_update(updatefavoriteTag):
+    return favoritetag.favoriteTags_db_update(app.config['dsn'],updatefavoriteTag)
+
+@app.route('/favoriteTags/update/<updatefavoriteTag>/apply', methods=['GET', 'POST'])
+def favoriteTag_apply(updatefavoriteTag):
+    return favoritetag.favoriteTags_db_update_apply(app.config['dsn'],updatefavoriteTag)
+@app.route('/favoriteTags_edit')
+def favoriteTags_edit():
+    return render_template('favoriteTags_edit.html')
+
+
+@app.route('/favoritesPanel/favoriteEvents')
+def favoriteEvents():
+    return favoriteevent.favoriteevents_db(app.config['dsn'])
+
+@app.route('/savefavoriteEvents', methods=['POST'])
+def savefavoriteEvents():
+    return favoriteevent.savefavoriteEvents(app.config['dsn'])
+
+
+@app.route('/favoriteEvents/delete/<deletefavoriteEvent>', methods=['GET', 'POST'])
+def favoriteEvent_delete(deletefavoriteEvent):
+    return favoriteevent.favoriteevents_db_delete(app.config['dsn'],deletefavoriteEvent)
+
+@app.route('/favoriteEvents/update/<updatefavoriteEvent>/', methods=['GET', 'POST'])
+def favoriteEvent_update(updatefavoriteEvent):
+    return favoriteevent.favoriteevents_db_update(app.config['dsn'],updatefavoriteEvent)
+
+@app.route('/favoriteEvents/update/<updatefavoriteEvent>/apply', methods=['GET', 'POST'])
+def favoriteEvent_apply(updatefavoriteEvent):
+    return favoriteevent.favoriteevents_db_update_apply(app.config['dsn'],updatefavoriteEvent)
+
+@app.route('/favoriteEvents_edit')
+def favoriteEvents_edit():
+    return render_template('favoriteEvents_edit.html')
+
 
 def get_elephantsql_dsn(vcap_services):
     """Returns the data source name for ElephantSQL."""

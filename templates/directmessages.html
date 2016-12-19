@@ -3,6 +3,7 @@
 {% block content %}
 
   <head>
+  <h3>Direct Messages</h3>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,39 +14,39 @@
   </head>
   <body>
     <div class="container">
-        <h2>TWEET PANEL</h2>
+        <h2>DM PANEL</h2>
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
            <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
-           <li role="presentation" class="active"><a href="{{ url_for('tweet_edit') }}">Add a New Tweet</a></li>
-              <li role="presentation" class="active"><a href="{{ url_for('activities_panel') }}">Activity Panel</a></li>
+		   <li role="presentation" class="active"><a href="{{ url_for('activities_panel') }}">Activities Panel</a></li>
+           <li role="presentation" class="active"><a href="{{ url_for('directmessages_edit') }}">Send a Direct Message</a></li>
 
           </ul>
         </nav>
       </div>
 
-   <form action="{{ url_for('tweets') }}" method = "post">
-  <table id="tweetsTable" class="table">
+   <form action="{{ url_for('directmessages')}}" method = "post">
+  <table id="DMTable" class="table">
 	 <thead>
       <tr>
-        <th>User Login Name</th>
-        <th>Tweet No</th>
-        <th>Tweet</th>
-        <th>Tweet Category</th>
-        <th>Date </th>
+        <th>User Login Name for Sender</th>
+        <th>User Login Name for Receiver</th>
+        <th>Message</th>
+        <th>Subject</th>
+		<th>Date</th>
       </tr>
     </thead>
 	<tbody>
-		{% for user_logName, tweet_id, tweet_input, tweet_category, date in tweets_list %}
+		{% for user_logname1, user_logname2, message,subject, date in directmessages_list %}
 		<tr>
-			<td class="TweetsTableItem">{{user_logName}}</td>
-			<td class="TweetsTableItem">{{tweet_id}}</td>
-			<td class="TweetsTableItem">{{tweet_input}}</td>
-			<td class="TweetsTableItem">{{tweet_category}}</td>
-			<td class="TweetsTableItem">{{date}}</td>
-			<td class="TweetssTableItem"><a href="{{ url_for('tweet_delete', deleteTweet=user_logName) }}">Delete</a>
-			<td class="TweetsTableItem"><a href="{{ url_for('tweet_update', updateTweet=user_logName) }}">Update</a>
+			<td class="DMTableItem">{{user_logname1}}</td>
+			<td class="DMTableItem">{{user_logname2}}</td>
+			<td class="DMTableItem">{{message}}</td>
+			<td class="DMTableItem">{{subject}}</td>
+			<td class="DMTableItem">{{date}}</td>
+			<td class="DMTableItem"><a href="{{ url_for('directmessages_delete', deletedm=user_logname1) }}">Delete</a>
+			<td class="DMTableItem"><a href="{{ url_for('directmessages_update', updatedm=user_logname1) }}">Update</a>
 		</tr>
 		{% endfor %}
 		</tbody>
