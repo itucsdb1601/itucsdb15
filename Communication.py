@@ -32,7 +32,7 @@ class Communication:
                     cursor.execute(query)
                     connection.commit();
                 except Exception as e:
-                    return "There is no user with that name <a href='http://localhost:5000/profiles'>Profiles</a>"
+                    return "There is no user with that name <a href='http://itucsdb1601.mybluemix.net/profiles'>Profiles</a>"
                 else:
                     return redirect(url_for('communication_edit'))
 
@@ -45,7 +45,7 @@ class Communication:
                 cursor.execute(query, (username,))
                 connection.commit();
                 if cursor.rowcount == 0:
-                    return "There is no personal info for this user <a href='http://localhost:5000/profiles'>Profiles</a>"
+                    return "There is no personal info for this user <a href='http://itucsdb1601.mybluemix.net/profiles'>Profiles</a>"
                 else:
                     return redirect(url_for('communication_edit'))
 

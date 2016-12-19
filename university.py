@@ -29,7 +29,7 @@ class university:
 			cursor.execute(query)
 			query = """INSERT INTO UNIVERSITYTYPE (unitype) VALUES ('Public Technical University'), ('Public University'), ('Sports and Arts University'), ('Private University'), ('Foreign University');"""
 			cursor.execute(query)
-			query = """CREATE TABLE IF NOT EXISTS UNICITY (city_id INTEGER primary key REFERENCES UNIVERSITYLIST(unicity_id), city_name VARCHAR(80) NOT NULL);"""
+			query = """CREATE TABLE IF NOT EXISTS UNICITY (city_id INTEGER REFERENCES UNIVERSITYLIST(unicity_id), city_name VARCHAR(80) NOT NULL);"""
 			cursor.execute(query)
 			query = """INSERT INTO UNICITY VALUES (34,'Istanbul'), (35,'Izmir'), (999,'Foreign'), (33, 'Mersin'),(6,'Ankara'), (1,'Adana'), (7,'Antalya');"""
 			cursor.execute(query)

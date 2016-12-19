@@ -66,7 +66,7 @@ class favorites:
             user_logname VARCHAR(60) not null,
             join_status VARCHAR(150) not null,
             primary key(favoriteevent_id),
-            foreign key(event_name) references events(event_name) on delete cascade on update cascade)
+            foreign key(event_name) references activities(event_name) on delete cascade on update cascade)
             """
             cursor.execute(query)
 

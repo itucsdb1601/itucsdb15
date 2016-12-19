@@ -37,6 +37,10 @@ def home_page():
 def init():
     return initialize_database(app.config['dsn'])
 
+@app.route('/inituniversities')
+def init_university():
+    return university.initialize_universities(app.config['dsn'])
+
 
 @app.route('/followers/search', methods=['POST'])
 def searchM():

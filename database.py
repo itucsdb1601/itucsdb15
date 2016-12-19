@@ -20,9 +20,6 @@ def initialize_database(config):
         cursor = connection.cursor()
         profile.initialize_profiles(config)
         Interaction_c.initialize_interaction(config)
-        university.initialize_universities(config)
-        
-
         connection.commit();
-        return 'tables are created <a href="http://localhost:5000">Home</a>'
+        return 'tables are created <a href="http://itucsdb1601.mybluemix.net">Home</a>'
 

@@ -41,7 +41,7 @@ class Hobby:
                     cursor.execute(query)
                     connection.commit();
                 except Exception as e:
-                    return "There is no user with that name <a href='http://localhost:5000/profiles'>Profiles</a>"
+                    return "There is no user with that name <a href='http://itucsdb1601.mybluemix.net/profiles'>Profiles</a>"
                 else:
                     return redirect(url_for('hobbies_edit'))
 
@@ -55,7 +55,7 @@ class Hobby:
                 cursor.execute(query, (username,hobby_name))
                 connection.commit();
                 if cursor.rowcount == 0:
-                    return "There is no user and hobby with that user hobby pair <a href='http://localhost:5000/profiles'>Profiles</a>"
+                    return "There is no user and hobby with that user hobby pair <a href='http://itucsdb1601.mybluemix.net/profiles'>Profiles</a>"
                 else:
                     return redirect(url_for('hobbies_edit'))
 
