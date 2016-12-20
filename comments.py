@@ -10,12 +10,12 @@ app = Flask(__name__)
 class comments:
 
     def savecomment(config):
-        tweet_id = None
+        tweet_input = None
         user_logname = None
         comment = None
         if request.method == 'POST':
-            tweet_id = request.form['tweetid_text']
-            print(tweet_id)
+            tweet_input = request.form['tweetinput_text']
+            print(tweet_input)
             user_logname = request.form['userlogname_text']
             print(user_logname)
             comment = request.form['comment_text']
@@ -23,8 +23,8 @@ class comments:
             with dbapi2.connect(config) as connection:
                 cursor = connection.cursor()
                 try:
-                    query = """INSERT INTO comments (tweet_id, comment, user_logname) VALUES (%d, %s, %s)"""
-                    cursor.execute(query, (tweet_id, user_logname, comment))
+                    query = """INSERT INTO comments (tweet_input, comment, user_logname) VALUES (%s, %s, %s)"""
+                    cursor.execute(query, (tweet_input, comment , user_logname))
                     connection.commit();
                     return 'Your comment has been successfully posted <a href="http://localhost:5000">Home</a>'
                 except:
@@ -35,7 +35,7 @@ class comments:
         with dbapi2.connect(config) as connection:
             if request.method == 'GET':
                 cursor = connection.cursor()
-                query = "SELECT DISTINCT comments.user_logname, tweet_input, comment  from COMMENTS, TWEETS where comments.tweet_id=tweets.tweet_id"
+                query = "SELECT DISTINCT user_logname, tweet_input, comment  from COMMENTS"
                 cursor.execute(query)
                 connection.commit();
                 return render_template('comments.html', comments_list=cursor)

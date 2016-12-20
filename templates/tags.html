@@ -43,8 +43,8 @@
 			<td class="TagsTableItem">{{tag_input}}</td>
 			<td class="TagsTableItem">{{tag_category}}</td>
 			<td class="TagsTableItem">{{date}}</td>
-			<td class="TagsTableItem"><a href="{{ url_for('tag_delete', deletetag=user_logname) }}">Delete</a>
-			<td class="TagsTableItem"><a href="{{ url_for('tag_update', updatetag=user_logname) }}">Update</a>
+			<td class="TagsTableItem"><a href="{{ url_for('tag_delete', deletetag=tag_input) }}">Delete</a>
+			<td class="TagsTableItem"><a href="{{ url_for('tag_update', updatetag=tag_input) }}">Update</a>
 		</tr>
 		{% endfor %}
 		</tbody>

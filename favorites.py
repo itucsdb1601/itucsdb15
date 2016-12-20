@@ -30,27 +30,27 @@ class favorites:
             cursor.execute(query)
             query = """CREATE TABLE IF NOT EXISTS FAVORITETWEETS(
             favoritetweet_id serial unique,
-            tweet_id integer not null,
+            tweet_category VARCHAR(200) not null,
             user_logname VARCHAR(200) not null,
             pop_keyword VARCHAR(100) not null,
             primary key(favoritetweet_id, user_logname),
             foreign key(user_logname) references user_login(user_loginname) on delete cascade on update cascade,
-            foreign key(tweet_id) references TWEETS(tweet_id) on delete cascade on update cascade
+            foreign key(tweet_category) references TWEETS(tweet_category) on delete cascade on update cascade
             )
             """
             cursor.execute(query)
 
-            query = """DROP TABLE IF EXISTS FAVORITESTAGS CASCADE;"""
+            query = """DROP TABLE IF EXISTS FAVORITETAGS CASCADE;"""
             cursor.execute(query)
 
             query = """CREATE TABLE IF NOT EXISTS FAVORITETAGS (
             favoritetag_id serial unique,
-            tag_id integer not null,
+            tag_input VARCHAR(200) not null,
             user_logname VARCHAR(60) not null,
             pop_tag VARCHAR(100) not null,
             date date DEFAULT current_date,
-            primary key(favoritetag_id, tag_id),
-            foreign key(tag_id) references tags(tag_id) on delete cascade on update cascade
+            primary key(favoritetag_id),
+            foreign key(tag_input) references tags(tag_input) on delete cascade on update cascade
             )
             """
             cursor.execute(query)

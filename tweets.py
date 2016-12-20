@@ -18,12 +18,11 @@ class tweets:
             query = """CREATE TABLE IF NOT EXISTS TWEETS (
             tweet_id serial unique,
             user_logname VARCHAR(60) not null,
-            tweet_input VARCHAR(200) not null,
+            tweet_input VARCHAR(200) unique not null,
             date date default current_date,
             tweet_category VARCHAR(100) not null,
             primary key(tweet_id, user_logname),
-            foreign key(user_logname) references user_login(user_loginname) on delete cascade on update cascade
-            )
+            foreign key(user_logname) references user_login(user_loginname) on delete cascade on update cascade            )
             """
             cursor.execute(query)
 
@@ -32,12 +31,12 @@ class tweets:
 
             query = """CREATE TABLE IF NOT EXISTS TAGS (
             tag_id serial unique,
-            tweet_id integer not null,
-            tag_input VARCHAR(200) not null,
+            tweet_input VARCHAR(200) not null,
+            tag_input VARCHAR(200) unique not null,
             tag_category VARCHAR(100) not null,
             date date default current_date ,
-            primary key(tag_id, tweet_id),
-            foreign key(tweet_id) references TWEETS(tweet_id) on delete cascade on update cascade
+            primary key(tag_id),
+            foreign key(tweet_input) references TWEETS(tweet_input) on delete cascade on update cascade
             )
             """
 
@@ -48,14 +47,14 @@ class tweets:
 
 
             query = """CREATE TABLE IF NOT EXISTS COMMENTS (
-            tweet_id integer not null,
+            tweet_input VARCHAR(200) not null,
             comment_id serial unique not null,
             comment VARCHAR(200) not null,
             user_logname VARCHAR(60) not null,
             date date default current_date,
             primary key(comment_id),
             foreign key(user_logname) references user_login(user_loginname) on delete cascade on update cascade,
-            foreign key(tweet_id) references TWEETS(tweet_id) on delete cascade on update cascade)
+            foreign key(tweet_input) references TWEETS(tweet_input) on delete cascade on update cascade)
             """
 
             cursor.execute(query)

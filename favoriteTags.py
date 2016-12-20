@@ -10,12 +10,12 @@ app = Flask(__name__)
 class favoriteTags:
 
     def savefavoriteTags(config):
-        tag_id = None
+        tag_input = None
         user_logname = None
         pop_tag = None
         if request.method == 'POST':
-            tag_id = request.form['tag_id_text']
-            print(tag_id)
+            tag_input = request.form['tag_input_text']
+            print(tag_input)
             user_logname = request.form['flogin_name_text']
             print(user_logname)
             pop_tag = request.form['pop_tag_text']
@@ -23,8 +23,8 @@ class favoriteTags:
             with dbapi2.connect(config) as connection:
                 cursor = connection.cursor()
                 try:
-                    query = """INSERT INTO favoritetags(tag_id, user_logname, pop_tag) VALUES (%d, %s, %s)"""
-                    cursor.execute(query, (tag_id, user_logname, pop_tag))
+                    query = """INSERT INTO favoritetags(tag_input, user_logname, pop_tag) VALUES (%s, %s, %s)"""
+                    cursor.execute(query, (tag_input, user_logname, pop_tag))
                     connection.commit();
                     return 'Your favorite tag has been successfully posted <a href="http://localhost:5000">Home</a>'
                 except:
@@ -35,7 +35,7 @@ class favoriteTags:
         with dbapi2.connect(config) as connection:
             if request.method == 'GET':
                 cursor = connection.cursor()
-                query = "SELECT DISTINCT favoritetags.user_logname, tag_input, pop_tag from favoritetags, tags where tags.tag_id=favoritetags.tag_id"
+                query = "SELECT DISTINCT user_logname, tag_input, pop_tag from favoritetags"
                 cursor.execute(query)
                 connection.commit();
                 return render_template('favoriteTags.html', favoriteTags_list=cursor)
@@ -55,7 +55,7 @@ class favoriteTags:
             query = """SELECT pop_tag from favoritetags where user_logname = '%s'""" % (updatefavoriteTag)
             cursor.execute(query)
             connection.commit();
-            return render_template('favoriteTags_update.html', favoriteTags_updates=cursor)
+            return render_template('favoriteTags_update.html', favoriteTag_updates=cursor)
 
 
     def favoriteTags_db_update_apply(config, updatefavoriteEvent):

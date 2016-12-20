@@ -33,16 +33,14 @@
         <th>User Login Name</th>
         <th>Tweet</th>
         <th>Comment</th>
-		<th>Date</th>
       </tr>
     </thead>
 	<tbody>
-		{% for user_logname, tweet_input, comment, date in comments_list %}
+		{% for user_logname, tweet_input, comment in comments_list %}
 		<tr>
 			<td class="CommentsTableItem">{{user_logname}}</td>
 			<td class="CommentsTableItem">{{tweet_input}}</td>
 			<td class="CommentsTableItem">{{comment}}</td>
-			<td class="CommentsTableItem">{{date}}</td>
 			<td class="CommentsTableItem"><a href="{{ url_for('comments_delete', deletecomment=user_logname) }}">Delete</a>
 			<td class="CommentsTableItem"><a href="{{ url_for('comments_update', updatecomment=user_logname) }}">Update</a>
 		</tr>

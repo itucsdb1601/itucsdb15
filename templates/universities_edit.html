@@ -28,8 +28,8 @@
       </tr>
     </thead>
   <tbody>
-    {% for uni_name in unis %}
-    <td><input type="text" name="name" required="required" value="{{uni_name[0]}}" style="width:95%"></td>
+    {% for uni_name in uni %}
+    <td><input type="text" name="uname" required="required" value="{{uni_name[0]}}" style="width:95%"></td>
     {% endfor %}
     <tr>
       <td colspan="3" align="center"><input value="Update University Name" name="add" type="submit"></td>

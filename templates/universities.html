@@ -27,9 +27,9 @@
           <ul class="nav nav-pills pull-right">
           <li role="presentation" class="active"><a href="{{ url_for('home_page') }}">Home</a></li>
           <li role="presentation"><a href="{{ url_for('login') }}">Switch User</a></li>
-          <li role="presentation" class="active"><a href="{{ url_for('universities_edit') }}">Edit University Info</a></li>
           <li role="presentation" class="active"><a href="{{ url_for('academics') }}">Academic Info</a></li>
           <li role="presentation" class="active"><a href="{{ url_for('unisports') }}">University Sports Info</a></li>
+          <li role="presentation" class="active"><a href="{{ url_for('adduniversity') }}">Add a New University</a></li>
           </ul>
         </nav>
 
@@ -51,7 +51,7 @@
       <td class="UniversitiesTableItem">{{uni_name}}</td>
       <td class="UniversitiesTableItem">{{startdate}}</td>
       <td class="UniversitiesTableItem"><a href="{{ url_for('universities_delete', deleteuniversities=uni_name)}}">Delete</a>
-	  <td class="UniversitiesTableItem"><a href="{{ url_for('universities_edit', updateuniversities=uni_name)}}">Update</a>
+	  <td class="UniversitiesTableItem"><a href="{{ url_for('universities_update', updateuniversities=uni_name)}}">Update</a>
     </tr>
     {% endfor %}
     </tbody>

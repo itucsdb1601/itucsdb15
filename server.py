@@ -14,13 +14,15 @@ from Communication import Communication as communication
 from tags import tags as tag
 from tweets import tweets as tweet
 from favorites import favorites as favorite
-from university import university as university
 from directmessages import directmessages as directmessage
 from comments import comments as comment
 from events import activities as event
 from favoriteevents import favoriteevents as favoriteevent
 from favoriteTags import favoriteTags as favoritetag
 from favoriteUni import favoriteUnis as favoriteuni
+from university import university as university
+from unisports import unisports as unisport
+from academics import academics as academic
 
 
 app = Flask(__name__)
@@ -41,6 +43,13 @@ def init():
 def init_university():
     return university.initialize_universities(app.config['dsn'])
 
+@app.route('/initunisports')
+def init_unisports():
+    return unisport.initialize_unisports(app.config['dsn'])
+
+@app.route('/initacademics')
+def init_academics():
+    return academic.initialize_academics(app.config['dsn'])
 
 @app.route('/followers/search', methods=['POST'])
 def searchM():
@@ -304,30 +313,6 @@ def events_apply(updateevent):
 def saveevent():
     return event.saveevent(app.config['dsn'])
 
-@app.route('/universities')
-def universities():
-    return university.universities_page(app.config['dsn'])
-
-@app.route('/universities/delete/<deleteuniversities>', methods=['GET', 'POST'])
-def universities_delete(deleteuniversities):
-    return university.universities_page_delete(app.config['dsn'])
-
-@app.route('/universities/update/<updateuniversities>', methods=['GET', 'POST'])
-def universities_update(updateuniversities):
-    return university.universities_page_update(app.config['dsn'], updateuniversities)
-
-@app.route('/universities/update/<updateuniversities>/apply', methods=['GET', 'POST'])
-def universities_update_apply(updateuniversities):
-    return university.universities_page_update_apply(app.config['dsn'], updateuniversities)
-
-@app.route('/adduniversity')
-def adduniversity():
-    return render_template('universities_add.html')
-
-@app.route('/universities_edit')
-def universities_edit():
-    return render_template('universities_edit.html')
-
 @app.route('/tweets')
 def tweets():
     return tweet.tweets_db(app.config['dsn'])
@@ -475,6 +460,80 @@ def favoriteEvent_apply(updatefavoriteEvent):
 @app.route('/favoriteEvents_edit')
 def favoriteEvents_edit():
     return render_template('favoriteEvents_edit.html')
+
+
+@app.route('/universities')
+def universities():
+    return university.universities_page(app.config['dsn'])
+
+@app.route('/universities/delete/<deleteuniversities>', methods=['GET', 'POST'])
+def universities_delete(deleteuniversities):
+    return university.universities_page_delete(app.config['dsn'], deleteuniversities)
+
+@app.route('/universities/update/<updateuniversities>', methods=['GET', 'POST'])
+def universities_update(updateuniversities):
+    return university.universities_page_update(app.config['dsn'], updateuniversities)
+
+@app.route('/universities/update/<updateuniversities>/apply', methods=['GET', 'POST'])
+def universities_update_apply(updateuniversities):
+    return university.universities_page_update_apply(app.config['dsn'], updateuniversities)
+
+@app.route('/adduniversity')
+def adduniversity():
+    return render_template('university_add.html')
+
+
+@app.route('/academics')
+def academics():
+    return academic.academics_page(app.config['dsn'])
+
+@app.route('/academics/delete/<deleteacademicinfo>', methods=['GET', 'POST'])
+def academics_delete(deleteacademicinfo):
+    return academic.academics_page_delete(app.config['dsn'], deleteacademicinfo)
+
+@app.route('/academics/update/<updateacademicinfo>', methods=['GET', 'POST'])
+def academics_update(updateacademicinfo):
+    return academic.academics_page_update(app.config['dsn'], updateacademicinfo)
+
+@app.route('/academics/update/<updateacademicinfo>/apply', methods=['GET', 'POST'])
+def academics_update_apply(updateacademicinfo):
+    return academic.academics_page_update_apply(app.config['dsn'], updateacademicinfo)
+
+@app.route('/addacademics')
+def addacademics():
+    return render_template('academics_add.html')
+
+@app.route('/academics_edit')
+def academics_edit():
+    return render_template('academics_edit.html')
+
+@app.route('/unisports')
+def unisports():
+    return unisport.unisports_page(app.config['dsn'])
+
+@app.route('/unisports/delete/<deleteuniteam>', methods=['GET', 'POST'])
+def unisports_delete(deleteuniteam):
+    return unisport.unisports_page_delete(app.config['dsn'], deleteuniteam)
+
+@app.route('/unisports/update/<updateuniteam>', methods=['GET', 'POST'])
+def unisports_update(updateuniteam):
+    return unisport.unisports_page_update(app.config['dsn'], updateuniteam)
+
+@app.route('/unisports/update/<updateuniteam>/apply', methods=['GET', 'POST'])
+def unisports_update_apply(updateuniteam):
+    return unisport.unisports_page_update_apply(app.config['dsn'], updateuniteam)
+
+@app.route('/addunisports')
+def addunisports():
+    return render_template('unisports_add.html')
+
+@app.route('/unisports_edit')
+def unisports_edit():
+    return render_template('unisports_edit.html')
+
+@app.route('/saveuniversity', methods=['POST'])
+def saveuniversity():
+    return university.saveuniversity(app.config['dsn'])
 
 
 def get_elephantsql_dsn(vcap_services):

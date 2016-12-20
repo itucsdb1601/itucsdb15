@@ -13,19 +13,19 @@
     <div class="container bg-2 text-center">
   <h3> Please Enter Comment Information</h3>
     <form class="col-lg-12" action="{{url_for('savecomment')}}" method="POST">
-	
+
 	<div class="form-group">
       <label for="category">User Name:</label>
       <input class="form-control" name="userlogname_text" id="userlogname_text" type="text">
     </div>
-	
+
     <div class="form-group">
-      <label for="name">Tweet No:</label>
-	  <h4>You can reach tweet number from tweet page.</h4>            <li role="presentation" class="active"><a href="{{ url_for('tweets') }}">Tweets</a></li>
-       <input class="form-control" id="tweetid_text" name="tweetid_text" type="text">
+      <label for="name">Tweet:</label>
+	  <h4>You can reach tweet from tweet page.</h4>            <li role="presentation" class="active"><a href="{{ url_for('tweets') }}">Tweets</a></li>
+       <input class="form-control" id="tweetinput_text" name="tweetinput_text" type="text">
     </div>
-	
-	
+
+
     <div class="form-group">
       <label for="tweet">Comment for Tweet:</label>
       <input class="form-control" name="comment_text" id="comment_text" type="text">

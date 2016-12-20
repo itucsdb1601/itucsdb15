@@ -14,13 +14,12 @@ class tags:
 
 
     def savetag(config):
-        tweet_id = 0
+        tweet_input = None
         new_category = None
         new_tag = None
         if request.method == 'POST':
-            tweet_id = int(request.form['tweetid_text'])
-            tweet_id = int(tweet_id)
-            print(tweet_id)
+            tweet_input = request.form['tweetinput_text']
+            print(tweet_input)
             new_category = request.form['category_text']
             print(new_category)
             new_tag = request.form['tag_text']
@@ -28,8 +27,8 @@ class tags:
             with dbapi2.connect(config) as connection:
                 cursor = connection.cursor()
                 try:
-                    query = """INSERT INTO TAGS(tweet_id, tag_input ,tag_category) VALUES (%d, %s, %s)"""
-                    cursor.execute(query, (tweet_id, new_tag, new_category))
+                    query = """INSERT INTO TAGS(tweet_input, tag_input ,tag_category) VALUES (%s, %s, %s)"""
+                    cursor.execute(query, (tweet_input, new_tag, new_category))
                     connection.commit();
                     return 'Your tag has been successfully posted <a href="http://localhost:5000">Home</a>'
                 except:
@@ -40,7 +39,7 @@ class tags:
         with dbapi2.connect(config) as connection:
             if request.method == 'GET':
                 cursor = connection.cursor()
-                query = "SELECT DISTINCT user_logname, tweet_input,tag_input ,tag_category, tags.date from TAGS, TWEETS where tags.tweet_id=tweets.tweet_id"
+                query = "SELECT DISTINCT user_logname, tags.tweet_input,tag_input ,tag_category, tags.date from TAGS , TWEETS where tags.tweet_input = tweets.tweet_input"
                 cursor.execute(query)
                 connection.commit();
                 return render_template('tags.html', tag_list=cursor)
@@ -57,7 +56,7 @@ class tags:
     def tags_db_update(config, updatetag):
         with dbapi2.connect(config) as connection:
             cursor = connection.cursor()
-            query = """SELECT tag_input from tags where tag_input = '%s'""" % (updatetag)
+            query = """SELECT tag_input from tags where tag_input='%s'""" % (updatetag)
             cursor.execute(query)
             connection.commit();
             return render_template('tags_update.html', tag_updates=cursor)
