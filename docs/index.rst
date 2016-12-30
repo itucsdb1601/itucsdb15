@@ -19,5 +19,6 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
-   user/index
-   developer/index
+   installation/index Installation Guide
+   user/index User Guide
+   developer/index Technical Guide
