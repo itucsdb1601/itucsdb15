@@ -57,7 +57,7 @@ Fig. 6 Profile List after the Delete operation
 In the profile page, there is an Edit Personal Information button. When is clicked this button, personal information page is opened. This page provides the observing the personal information of users for admins.
 If admins wants the inserting personal information for users which is registered with sign up and existing in website database this part is used.  Firstly, user name is entered. Then, nationality and country is selected from the dropdowns which are the static table in database. Living city and telephone number is written. Finally, date of birth is selected from the calender and clicked the insert-update button. Thus, personal information for user with his/her user name is added.
 
- .. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/us7.png
+.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/us7.png
    :height: 100px
    :width: 200 px
    :scale: 50 %
@@ -66,7 +66,7 @@ Fig. 7 Insert operation for Personal Info List
 
 	If non existing information about the one user name, then insert operation is made realized. However, ıf the existing information about the one user name, then update operation is done with the new entering personal information. 
 	
-   .. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/us8.png
+.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/us8.png
    :height: 100px
    :width: 200 px
    :scale: 50 %
@@ -151,7 +151,7 @@ If the non existing user name is entered or wrong hobby is selected, warnin mesa
    
 Fig. 17 Wrong Delete operation
 
-.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/us1.png
+.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/us18.png
    :height: 100px
    :width: 200 px
    :scale: 50 % 
