@@ -1,4 +1,6 @@
 Parts Implemented by Member Name
 ================================
-![figure](https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png/1.png)
+.. figure::itucsdb1601/docs/png/1.png
+   :scale: 50 %
+   :alt: map to buried treasure
 
