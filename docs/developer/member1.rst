@@ -25,16 +25,26 @@ All of the tables creation are done in this initilalize_profiles() function. And
    :height: 100px
    :width: 200 px
    :scale: 50 %
- 
-Fig. 3.1.1 Table creation and initialize database
-
-HTML 
-This is the HTML code for home of profile page.
+   
 .. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-2.png
    :height: 100px
    :width: 200 px
    :scale: 50 %
  
+Fig. 3.1.1 Table creation and initialize database
+
+HTML 
+This is the HTML code for home of profile page.
+.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-3.png
+   :height: 100px
+   :width: 200 px
+   :scale: 50 %
+.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-4.png
+   :height: 100px
+   :width: 200 px
+   :scale: 50 %
+ 
+
 Fig. 3.1.2 HTML code for Profile Page
 
 USER_LOGIN TABLE
@@ -51,7 +61,7 @@ user_loginname is reference for USER_COMMUNICTION and USER_HOBBIES tables. . Use
 Add Method for USER_LOGIN
 This method enaables the sign up to website for users. As a default, all columns values are None. Then with ‘POST’ method, values are taken from users and inserted the USER_LOGIN table by using insert into command. 
 
-.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-3.png
+.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-5.png
    :height: 100px
    :width: 200 px
    :scale: 50 %
@@ -61,7 +71,7 @@ Fig. 3.1.3 Add Method for user_login
 Delete Method for USER_LOGIN
 User name which desired to be deleted is taken from by using deleteuserlogin and matched user names are deleted from 3 tables which in the profile database because the user_loginname is reference and delete from the references values on other tables. 
 
-.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-4.png
+.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-6.png
    :height: 100px
    :width: 200 px
    :scale: 50 %
@@ -72,16 +82,21 @@ Update Method for USER_LOGIN
 User_loginname is updated with the using updateuserlogin. If the entered user names are equals then new name is entered by the admin and user name is changed with the new name. 
 Because the being foreign key of user_loginname, user names of all tables are changed with the this update operation. Besides, add and drop constraints are set for the USER_COMMUNICATION and USER_HOBBIES tables with the user_loginname foreign keys.
 
-.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-5.png
+.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-7.png
    :height: 100px
    :width: 200 px
    :scale: 50 %
+.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-8.png
+   :height: 100px
+   :width: 200 px
+   :scale: 50 %
+ 
  
 Fig 3.1.5 Update Method for user_login
 Select Method for USER_LOGIN
 By using the ‘GET’ method, required columns are selected from the USER_LOGIN table and showed on the profile page with the selection table.
  
-.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-6.png
+.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-9.png
    :height: 100px
    :width: 200 px
    :scale: 50 %
@@ -108,7 +123,7 @@ country_name: varchar(200),  not null
 Add and Update Method for USER_COMMUNICATION
 Required information are taken from the users and ıf the non existing personal information with this user name, these personal information are added to an USER_COMMUNICATION table. If the existing personal information with this user name, then personal information of this person are updated. This control is provided by the Select 1 command. This operation can be named as UPSERT operation.
  
-.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-7.png
+.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev10.png
    :height: 100px
    :width: 200 px
    :scale: 50 %
@@ -118,7 +133,7 @@ Fig. 3.1.7 Upsert Method for user_communication
 Delete Method for USER_COMMUNICATION
 User name which entered the text box in delete operation on page is taken and if the matching is provided between user names is deleted. If there is no matching with two user names function returns the warning message. 
 
-.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-8.png
+.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-11.png
    :height: 100px
    :width: 200 px
    :scale: 50 %
@@ -128,7 +143,7 @@ Fig. 3.1.8 Delete Method for user_communication
 Search Method for USER_COMMUNICATION
 Join operation is done between the USER_COMMUNICATION and COUNTRY tables. After that, desired colums are selected from the join table and showed the personal info list selection table. 
 
-.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-9.png
+.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev12.png
    :height: 100px
    :width: 200 px
    :scale: 50 %
@@ -148,7 +163,7 @@ hobby_type: varchar(60), not null
 Add and Update Method for USER_HOBBIES
 Desired user name which is also exist in USER_LOGIN table is taken as a request. Hobby_name is selected from dropdown bar. If the non existing hobby name with this user name, these hobbies are added to an USER_HOBBIES table. If the existing hobbies with this user name, then hobbies of this person are updated. This control is provided by the Select 1 command. One person have an one or more than hobbies for herself/itself thanks to the primary key pairs of the user_loginname and user_hobby.
  
- .. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-10.png
+ .. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev13.png
    :height: 100px
    :width: 200 px
    :scale: 50 %
@@ -157,16 +172,18 @@ Fig. 3.1.10 Upsert Method for user_hobbies
 Delete Method for USER_HOBBIES 
 User name which entered the text box in delete operation on page is taken and hobby is selected from the dropdown. If the matching is provided between user names and hobby, this person is deleted by the admin. If there is no matching with two user names function returns the warning message. 
 
-.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-11.png
+.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev14.png
    :height: 100px
    :width: 200 px
    :scale: 50 %
  
 Fig.3.1.11 Delete Method for user_hobbies
+
 Search Method for USER_HOBBIES 
+
 Join operation is done between the USER_HOBBIES and HOBBIES tables. After that, desired colums are selected from the join table and showed the hobby list selection table. Hobby type of hobbies is also shown in the hobby list because of the join operation.
 
-.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-12.png
+.. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev15.png
    :height: 100px
    :width: 200 px
    :scale: 50 %
