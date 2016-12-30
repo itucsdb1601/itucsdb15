@@ -61,6 +61,7 @@ If admins wants the inserting personal information for users which is registered
    :height: 100px
    :width: 200 px
    :scale: 50 %
+   
 Fig. 7 Insert operation for Personal Info List
 
 	If non existing information about the one user name, then insert operation is made realized. However, ıf the existing information about the one user name, then update operation is done with the new entering personal information. 
@@ -78,6 +79,7 @@ Added and updated personal information can be seen on the selection table in top
    :height: 100px
    :width: 200 px
    :scale: 50 %
+   
 Fig. 9 Personal Info List after the Update operation
 If the entered user name is not exist in database, when clicked the button, "There is no user with that user name " warning message is seen on the another page. 
 
@@ -85,6 +87,7 @@ If the entered user name is not exist in database, when clicked the button, "The
    :height: 100px
    :width: 200 px
    :scale: 50 % 
+   
 Fig. 10 Warning Message Page
 
 To delete the personal information from the personal info list and database, the user name to be deleted is written. When the clicked the delete button, person is deleted from the database and can not be seen on the personal info list.
@@ -93,6 +96,7 @@ To delete the personal information from the personal info list and database, the
    :height: 100px
    :width: 200 px
    :scale: 50 %
+   
 Fig. 11 Delete operation for Personal Info
 
 .. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/us12.png
@@ -108,6 +112,7 @@ Edit Hobbies button is also in the top of the profile page. If is clicked this b
    :height: 100px
    :width: 200 px
    :scale: 50 %
+   
  Fig. 13 Insert operation for Hobbies
 
 Inserted and updated hobbies for user names can be seen on the hobby list table. One person can have an one or more hobbies for herself/himself. Hobby types are also seen since the join operation between hobbies and user_hobbies.
@@ -116,6 +121,7 @@ Inserted and updated hobbies for user names can be seen on the hobby list table.
    :height: 100px
    :width: 200 px
    :scale: 50 %
+   
 Fig. 14 Hobby List after the insert and update operation
 
 To delete the hobby from the hobby list and database, user name and hobby name is written. Then, delete operation is done by using the delete hobbies button. 
@@ -124,6 +130,7 @@ To delete the hobby from the hobby list and database, user name and hobby name i
    :height: 100px
    :width: 200 px
    :scale: 50 %
+   
 Fig.15 Delete operation for Hobbies
 
 After the delete operation, hobbies and user names are seen on the hobby list. 
@@ -132,6 +139,7 @@ After the delete operation, hobbies and user names are seen on the hobby list.
    :height: 100px
    :width: 200 px
    :scale: 50 % 
+   
 Fig. 16 Hobby list after delete operation
 
 If the non existing user name is entered or wrong hobby is selected, warnin mesaage is came and user name and hobby can not be deleted from the hobby list and database.
@@ -140,12 +148,14 @@ If the non existing user name is entered or wrong hobby is selected, warnin mesa
    :height: 100px
    :width: 200 px
    :scale: 50 % 
+   
 Fig. 17 Wrong Delete operation
 
 .. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/us1.png
    :height: 100px
    :width: 200 px
    :scale: 50 % 
+   
  Fig. 18 Warning message for the Delete operation       
 
 
