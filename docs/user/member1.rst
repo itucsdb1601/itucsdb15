@@ -2,9 +2,7 @@ Parts Implemented by Ceyda ALADAĞ
 ================================
 First of all, Unicorn website is opened via the localhost:5000 or bluemix. To begin the database of Profiles itucsdb1601.mybluemix.net/initdb is written on the address bar.
 .. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/us1.png
-   :height: 100px
-   :width: 200 px
-   :scale: 50 %
+
  
 Fig. 1. Initializing the database
 
