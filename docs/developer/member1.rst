@@ -35,6 +35,7 @@ Fig. 3.1.1 Table creation and initialize database
 
 HTML 
 This is the HTML code for home of profile page.
+
 .. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/dev-3.png
    :height: 100px
    :width: 200 px
