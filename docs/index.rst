@@ -17,7 +17,7 @@ Welcome to itucsdb1601's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 5
 
    installation/index Installation Guide
    user/index User Guide
