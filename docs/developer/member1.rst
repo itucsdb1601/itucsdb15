@@ -25,8 +25,6 @@ All of the tables creation are done in this initilalize_profiles() function. And
 
    class Profile:
 
-    #Initialize database tables from beginning, insert some example values
-    #Coutnries and Hobbiesa are static tables that are related to user_hobbies and user_communication
     def initialize_profiles(config):
         with dbapi2.connect(config) as connection:
             cursor = connection.cursor()
