@@ -21,12 +21,10 @@ PROFILE IMPLEMENTATION
 PYTHON/SQL CODE 
 All of the tables creation are done in this initilalize_profiles() function. And this function is called in the initialize_database() function which in the database.py class. 
  
-.. code-block::python
+.. code-block:: python
 
    class Profile:
 
-    #Initialize database tables from beginning, insert some example values
-    #Coutnries and Hobbiesa are static tables that are related to user_hobbies and user_communication
     def initialize_profiles(config):
         with dbapi2.connect(config) as connection:
             cursor = connection.cursor()
