@@ -135,8 +135,6 @@ If the non existing user name is entered or wrong hobby is selected, warnin mesa
    
 Fig. 17 Wrong Delete operation
 
-After the warning message
-
 .. figure:: ../png_profile/us18.png
    :scale: 50 %  
    :alt: Warning message for the Delete operation 
