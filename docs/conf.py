@@ -177,7 +177,7 @@ html_use_index = False
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'itucsdbdoc'
+htmlhelp_basename = 'itucsdb1601doc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -227,8 +227,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'itucsdb', 'itucsdb Documentation',
-     ['Team Name'], 1)
+    ('index', 'itucsdb1601', 'itucsdb1601 Documentation',
+     ['UNICORN'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -241,8 +241,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'itucsdb', 'itucsdb Documentation',
-   'Team Name', 'itucsdb', 'One line description of project.',
+  ('index', 'itucsdb1601', 'itucsdb1601 Documentation',
+   'UNICORN', 'itucsdb1601', 'Social Media Application',
    'Miscellaneous'),
 ]
 
