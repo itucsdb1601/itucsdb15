@@ -7,6 +7,7 @@ First of all, Unicorn website is opened via the localhost:5000 or bluemix. To be
 Fig. 1. Initializing the database
 
 After that, person who wants to use this website logs in the Unicorn website by using this sign up page. Users enter the name, surname, user name, e-mail address, password and select their gender and sign in the website. 
+
 .. image:: https://github.com/itucsdb1601/itucsdb1601/blob/master/docs/png_profile/us2.png
    :height: 100px
    :width: 200 px
