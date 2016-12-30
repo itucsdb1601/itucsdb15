@@ -98,9 +98,10 @@ Fig. 12 Personal Info List after the Delete operation
 Edit Hobbies button is also in the top of the profile page. If is clicked this button, hobby page is opened. To insert the hobby for user, user name is entered in the text box and hobby is selected from the dropdown which is static table in database. When the insert and update button is pressed, person hobby is added to a hobby list and Unicorn database. 
 
 .. figure:: ../png_profile/us13.png
+   :scale: 50 %
    :alt: Insert operation for Hobbies
    
- Fig. 13 Insert operation for Hobbies
+Fig. 13 Insert operation for Hobbies
 
 Inserted and updated hobbies for user names can be seen on the hobby list table. One person can have an one or more hobbies for herself/himself. Hobby types are also seen since the join operation between hobbies and user_hobbies.
 
@@ -137,9 +138,10 @@ Fig. 17 Wrong Delete operation
 After the warning message
 
 .. figure:: ../png_profile/us18.png
+   :scale: 50 %  
    :alt: Warning message for the Delete operation 
    
    
- Fig. 18 Warning message for the Delete operation       
+Fig. 18 Warning message for the Delete operation       
 
 
