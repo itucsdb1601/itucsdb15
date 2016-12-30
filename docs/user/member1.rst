@@ -10,7 +10,7 @@ Fig. 1. Initializing the database
 
 After that, person who wants to use this website logs in the Unicorn website by using this sign up page. Users enter the name, surname, user name, e-mail address, password and select their gender and sign in the website. 
 
-.. figure:: png_profile/us2.png
+.. figure:: ../png_profile/us2.png
    :scale: 50 %
    :alt: Sign Up Page
  
