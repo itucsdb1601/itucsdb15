@@ -139,6 +139,7 @@ Fig. 17 Wrong Delete operation
    :scale: 50 %
    :alt: Warning message for the Delete operation 
    
+   
  Fig. 18 Warning message for the Delete operation       
 
 
