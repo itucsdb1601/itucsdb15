@@ -8,10 +8,13 @@ In this part, database of profile page is begun by using \initdb command and tab
 
 •	Add Methods 
 This method provide the inserting the new users information to UNICORN website and our database.
+
 •	Delete Methods
 This method is used for the deleting user information from the database and website page. 
+
 •	Update Methods
 Update methods are used for updateing the information of users with the new information. 
+
 •	Search Methods
 Search method selects the required or desired information from the database tables and shows them on the selection list tables. 
 
