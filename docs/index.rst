@@ -14,11 +14,13 @@ Welcome to itucsdb1601's documentation!
 **Project Description**
   This is our project namely Unicorn. While we are deciding this project, we are inspired from Twitter social media. However, it has some differences with twitter as much as it has commons. In total, there are five pages namely profile, tweets, favorites, universities, and interaction. On each page, insert, delete, search, and update operations perform. Since the project is an admin panel, all these operations are controlled by the admin. Admin also manages the users and their activities.
 
-Contents:
+Contents
+********
+
+
 
 .. toctree::
    :maxdepth: 5
 
-   installation/index Installation Guide
-   user/index User Guide
-   developer/index Technical Guide
+   user/index
+   developer/index
