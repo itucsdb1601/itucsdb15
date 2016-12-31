@@ -27,7 +27,7 @@ When the user enters an user name that does not exist in user_login table, sudde
 
 If the user enters an user name that is already inserted to followers table, another error page occurs which is “This entry already exists in followers table”.
 
-.. figure:: itucsdb1601/docs/user/member5/5existserror.png 
+.. figure:: member5/5existserror.png 
    :scale: 50 %
    :alt: user already exists error 
 
