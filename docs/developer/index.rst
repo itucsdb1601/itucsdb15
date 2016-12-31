@@ -4,23 +4,23 @@ Developer Guide
 Database Design
 ---------------
 
-**explain the database design of your project**
+ER diagram of Unicorn website is shown in the following figure. The relationships between the tables will be explained in detail in the members parts.
 
-**include the E/R diagram(s)**
+.. figure:: ../developer/ER/er1.png
+   :scale: 50 %
+   :alt: ER diagram 1
+.. figure:: ../developer/ER/er2.png
+   :scale: 50 %
+   :alt: ER diagram 2  
+.. figure:: ../developer/ER/er3.png
+   :scale: 50 %
+   :alt: ER diagram 3 
+  
+ Figure 3.1 ER DIAGRAM OF UNICORN DATABASE
 
 Code
 ----
 
-**explain the technical structure of your code**
-
-**to include a code listing, use the following example**::
-
-   .. code-block:: python
-
-      class Foo:
-
-         def __init__(self, x):
-            self.x = x
 
 .. toctree::
 
