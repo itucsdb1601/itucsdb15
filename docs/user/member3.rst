@@ -7,7 +7,7 @@ In order to manage tweets, tags, comments, direct messages and activities as an 
 	:scale: 50 %
 	:alt: create tweets tables
 
-After all tables were created, admin user that wants to manage activities such as sending a tweet for a specific user should enter the activities panel page by clicking the “Tweets” button on home page that is seen on Figure xx. ********buraya figure numarasını gir*********** or admin can reach activities panel seen on below image by entering itucsdb1601.mybluemix.net/activities_panel into address bar of the browser. 
+After all tables were created, admin user that wants to manage activities such as sending a tweet for a specific user should enter the activities panel page by clicking the “Tweets” button on home page that is seen on below figure or admin can reach activities panel seen on below image by entering itucsdb1601.mybluemix.net/activities_panel into address bar of the browser. 
 
 
 On activities panel page, admin user can access tweets, tags, events, comments and direct messages by clicking the buttons of each activity. 
