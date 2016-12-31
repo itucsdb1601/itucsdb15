@@ -12,9 +12,6 @@ ER diagram of Unicorn website is shown in the following figure. The relationship
 .. figure:: ../developer/ER/er2.png
    :scale: 50 %
    :alt: ER diagram 2  
-.. figure:: ../developer/ER/er3.png
-   :scale: 50 %
-   :alt: ER diagram 3 
   
  Figure 3.1 ER DIAGRAM OF UNICORN DATABASE
 
