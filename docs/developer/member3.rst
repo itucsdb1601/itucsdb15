@@ -238,7 +238,7 @@ The select part of HTML code to display all rows in tweets table as below. By us
 
 Here, there is a for loop in tweets list that is created by select query and for each row of tweets table, there are “Delete” and “Update” link in order to achieve these operations.
 
-• DELETE METHOD:	tweets_db_delete() -> This method is written in order to make delete operation on tweets table. It takes a config to connect database and username value that will be deleted as parameters. Written Python code can be seen as follow for this operation. Due to the fact that “cascade” is used on deletion operation, there is no need to make exception.
+•	DELETE METHOD:	tweets_db_delete() -> This method is written in order to make delete operation on tweets table. It takes a config to connect database and username value that will be deleted as parameters. Written Python code can be seen as follow for this operation. Due to the fact that “cascade” is used on deletion operation, there is no need to make exception.
 
 .. code-block:: python
       def tweets_db_delete(config, deleteTweet):
@@ -257,9 +257,9 @@ This method is called in tweet_delete() function on server.py with following app
     return tweet.tweets_db_delete(app.config['dsn'],deleteTweet)
   
 
-• UPDATE METHODS:	
+• 	UPDATE METHODS:	
 
-•tweets_db_update() -> This method is written for finding with username that is taken from user. All search operations are made with username. Actually, this method finds tweet_input that will be updated in the following method that will be explained in detail. This method returns tweet_update.html in order to complete update operation.
+•	tweets_db_update() -> This method is written for finding with username that is taken from user. All search operations are made with username. Actually, this method finds tweet_input that will be updated in the following method that will be explained in detail. This method returns tweet_update.html in order to complete update operation.
 
 •	tweets_db_update_apply() -> This method is written in order to make update operation. It takes config and username from user as parameters and executes “UPDATE TWEETS SET TWEET_INPUT = %s WHERE USER_LOGNAME = %s” ,new tweet input is taken from user by HTML code. Due to the fact that “cascade” is used on update operation, there is no need to make exception.
 
@@ -429,7 +429,7 @@ In this format, there are 3 text boxes in order to take values from user and boo
   
   
 
-• SELECT METHOD:	tags_db() -> This medhod was written in order to display all tags for all tweets on tag panel page by using “SELECT” query. This query can be seen as follow in SQL and this query is executed in the following Python code. It takes a config as a parameter due to connecting database and it returns tags.html page.
+• 	SELECT METHOD:	tags_db() -> This medhod was written in order to display all tags for all tweets on tag panel page by using “SELECT” query. This query can be seen as follow in SQL and this query is executed in the following Python code. It takes a config as a parameter due to connecting database and it returns tags.html page.
 
 .. code-block:: python
 
@@ -509,7 +509,7 @@ This function provides to display all rows in tags table on tags.html page. This
   <body>
   
   
-• DELETE METHOD: tags_db_delete -> This method is written in order to make delete operation on tags table. It takes a config to connect database and tag value that will be deleted as parameters. Written SQL query and Python function can be seen as follow for this operation. Due to the fact that “cascade” is used on deletion operation, there is no need to make exception.
+•	 DELETE METHOD: tags_db_delete -> This method is written in order to make delete operation on tags table. It takes a config to connect database and tag value that will be deleted as parameters. Written SQL query and Python function can be seen as follow for this operation. Due to the fact that “cascade” is used on deletion operation, there is no need to make exception.
 
 .. code-block:: python
 
@@ -530,9 +530,9 @@ tags_db_delete() function of tags class is called in tag_delete() function on se
   def tag_delete(deletetag):
     return tag.tags_db_delete(app.config['dsn'],deletetag)
     
-• UPDATE METHODS:
+• 	UPDATE METHODS:
     
-• tags_db_update() -> This method is written for finding with tags that is taken from user. All search operations are made with tag input. This method returns tags_update.html in order to complete update operation.
+• 	tags_db_update() -> This method is written for finding with tags that is taken from user. All search operations are made with tag input. This method returns tags_update.html in order to complete update operation.
 
 
 
@@ -619,10 +619,15 @@ HTML code for update operation can be seen in the following code block. There is
 This class was created on comments.py Python file and it also includes 5 main methods to make basic database operation for comments table. There are 3 main HTML files were and these are, comments.html, comments_edit.html and comments_update.html pages.
 
 Comments Table:
+
 •	COMMENT_ID SERIAL UNIQUE: This is the primary key of comments table, it is serial; thus, it incremented by one after each entry into table. This enables fast search operation into table.
-•	DATE DATE DEFAULT CURRENT_DATE: This column holds the date of the comment is added into tweet and it has a default value. This value is date of adding a new comment.
+
+•	DATE DATE DEFAULT CURRENT_DATE: This column holds the date of the comment is added into tweet and it has a default value. This 	value is date of adding a new comment.
+
 •	TWEET_INPUT VARCHAR(200)  NOT NULL: This column holds tweets whose type is character varying at most 200 character. It is cannot have a null value. 
-•	COMMENT VARCHAR(200) NOT NULL: This column holds comments whose type is character varying at most 200 character. It is cannot have a null value.
+
+•	COMMENT VARCHAR(200) NOT NULL: This column holds comments whose type is character varying at most 200 character. It is cannot 	have a null value.
+
 •	USER_LOGNAME VARCHAR(60) NOT NULL: This column stores username of a user and it cannot have a null value. Type of this column is varying character up to 60.
 
 Constraints of Table:
@@ -631,9 +636,11 @@ There are two foreign key on this table.
 
 
 •	FOREIGN KEY(TWEET_INPUT) REFERENCES IN TWEETS(TWEET_INPUT) ON DELETE CASCADE ON UPDATE CASCADE  tweet_input column has a foreign key by having a relationship with tweet_input column on tweets table. When there is a deletion or updating operation on tweets, if there is a row in comments table with same tweet_input, it will also be deleted or updated.
+
 •	FOREIGN KEY(USER_LOGNAME) REFERENCES IN USER_LOGIN(USER_LOGINNAME) ON DELETE CASCADE ON UPDATE CASCADE  user_logname column has a foreign key by having a relationship with user_loginname column in user_login table. When there is a deletion or updating operation on user_login table, if there is a row in comments table with same username ,it will also be deleted or updated.
 
 Methods of Comments Class:
+
 There are 5 main method to insert, select, update and delete operations on tags table. Python and HTML codes are explaind; also, in this part, SQL codes for comments and the aim of methods were shared.
 
 •	INSERT METHOD: savecomment() -> This method makes insert operation for comments table. Due to foreign key constraint of comments table, there is an exception for this method by using “try and catch” object oriented approach. SQL query and Python code for this method are showed as below.
@@ -880,23 +887,32 @@ To make update operation, new comment value should be got from user; therefore, 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   </body>
   
-  4.	Directmessages Class:
+4.	Directmessages Class:
+  
 This class was created on directmessages.py Python file and there are 5 methods in this class to make database operations. There are 3 main HTML files were and these are, directmessages.html, directmessages_edit.html and directmessages_update.html pages.
+
 Directmessages Table:
-•	DM_ID SERIAL UNIQUE     This is the primary key of directmessages table, it is serial; thus, it incremented by one after each entry into table. This enables fast search operation into table.
-•	DATE DATE DEFAULT CURRENT_DATE  This column holds the date of the sending direct message and it has a default value by current date.
-•	MESSAGE VARCHAR(200)  NOT NULL  This column holds directmessages whose type is character varying at most 200 character. It cannot have a null value. 
-•	SUBJECT VARCHAR(100) NOT NULL  This column holds subjects of messages whose type is character varying at most 100 character. It cannot have a null value.
-•	USER_LOGNAME1 VARCHAR(60) NOT NULL  This column stores username of a user and it cannot have a null value. Type of this column is varying character up to 60.
-•	USER_LOGNAME2 VARCHAR(60) NOT NULL  This column stores username of a user and it cannot have a null value. Type of this column is varying character up to 60.
+
+•	DM_ID SERIAL UNIQUE:  This is the primary key of directmessages table, it is serial; thus, it incremented by one after each entry into table. This enables fast search operation into table.
+
+•	DATE DATE DEFAULT CURRENT_DATE: This column holds the date of the sending direct message and it has a default value by current date.
+•	MESSAGE VARCHAR(200)  NOT NULL: This column holds directmessages whose type is character varying at most 200 character. It cannot have a null value. 
+•	SUBJECT VARCHAR(100) NOT NULL: This column holds subjects of messages whose type is character varying at most 100 character. It cannot have a null value.
+•	USER_LOGNAME1 VARCHAR(60) NOT NULL: This column stores username of a user and it cannot have a null value. Type of this column is varying character up to 60.
+•	USER_LOGNAME2 VARCHAR(60) NOT NULL: This column stores username of a user and it cannot have a null value. Type of this column is varying character up to 60.
 
 Constraints of Table:
+
 There are two foreign key on this table.
-•	FOREIGN KEY(USER_LOGNAME1) REFERENCES IN USER_LOGIN(USER_LOGINNAME) ON DELETE CASCADE ON UPDATE CASCADE  When there is a deletion or updating operation on user_login table, if there is a row in comments table with same username ,it will also be deleted or updated because user_logname1 column has a foreign key by having a relationship with user_loginname column in user_login table. 
+
+•	FOREIGN KEY(USER_LOGNAME1) REFERENCES IN USER_LOGIN(USER_LOGINNAME) ON DELETE CASCADE ON UPDATE CASCADE  When there is a deletion or updating operation on user_login table, if there is a row in comments table with same username ,it will also be deleted or updated because user_logname1 column has a foreign key by having a relationship with user_loginname column in user_login table.
+
 •	FOREIGN KEY(USER_LOGNAME2) REFERENCES IN USER_LOGIN(USER_LOGINNAME) ON DELETE CASCADE ON UPDATE CASCADE  user_logname2 column has a foreign key by having a relationship with user_loginname column in user_login table. When there is a deletion or updating operation on user_login table, if there is a row in comments table with same username ,it will also be deleted or updated.
 
 Methods of Directmessages Class:
+
 Python and HTML codes are again similar to tweets entity except SQL codes; therefore, SQL queries and Python codes were showed on below for 5 methods in this class.
+
 •	INSERT METHOD: savedirectmessage() -> This method makes insert operation for comments table with following query. Due to foreign key constraint of directmessages table, there is an exception for this method by using “try and catch” object oriented approach. user_logname1 and user_logname2 must be on user_login table.
 
 .. code-block:: python
@@ -978,7 +994,7 @@ This method is called on server.py as follow.
 
 • UPDATE METHODS:
 
-•	directmessages_db_update -> Searching with user_logname1 that is taken from user can be made with this method. This method returns directmessages_update.html in order to complete update operation.
+•	directmessages_db_update() -> Searching with user_logname1 that is taken from user can be made with this method. This method returns directmessages_update.html in order to complete update operation.
 
 •	directmessages_db_update_apply() -> This method is written in order to make update operation. Message can be updated by taking new message from admin. Due to the fact that “cascade” is used on update operation, there is no need to make exception.
 
@@ -1019,13 +1035,19 @@ In order to make these operation, these methods are called on server.py
 
 
 5.	Activities Class:
+
 This class was created on events.py Python file and there are 3 main HTML files
  events.html, events_edit.html and events_update.html pages.
+ 
 Activities Table:
 •	EVENT_ID SERIAL UNIQUE: This is the primary key of activities table, it is serial; thus, it incremented by one after each entry into table. 
+
 •	EVENT_NAME VARCHAR(200)  UNIQUE NOT NULL: This column holds name of events whose type is character varying at most 200 character. It is unique and cannot have a null value. 
+
 •	EVENT_LOCATION VARCHAR(200) NOT NULL: This column holds locations of events whose type is character varying up to 200 character. It cannot have a null value.
+
 •	EVENT_CATEGORY VARCHAR(200) NOT NULL: This column stores categories of events and it cannot have a null value. Type of this column is varying character up to 200.
+
 •	EVENT_DATE VARCHAR(200) NOT NULL: This column stores date of events and it cannot have a null value. Type of this column is varying character up to 200.
 
 Constraints of Table:
@@ -1095,7 +1117,7 @@ There are 5 main methods in this class in order to make insert, select, update a
 
 •	events_db_update() -> Searching with user_logname1 that is taken from user can be made with this method. This method returns directmessages_update.html in order to complete update operation.
 
-•	events_db_update_apply()  This method is written in order to make update operation. Message can be updated by taking new message from admin. Due to the fact that “cascade” is used on update operation, there is no need to make exception.
+•	events_db_update_apply() -> This method is written in order to make update operation. Message can be updated by taking new message from admin. Due to the fact that “cascade” is used on update operation, there is no need to make exception.
 
 .. code-block:: python
 
