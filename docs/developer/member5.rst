@@ -1193,6 +1193,7 @@ This is follow_blocked method on Interaction_c.py file. Entered user name is tak
 
 
 If user wants to unblocked a blocked person from BLOCKED table, unfollow_blocked method is operated.
+
 .. code-block:: python 
 
    def unfollow_blocked(config):
