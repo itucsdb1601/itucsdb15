@@ -9,11 +9,12 @@ ER diagram of Unicorn website is shown in the following figure. The relationship
 .. figure:: ../developer/ER/er1.png
    :scale: 50 %
    :alt: ER diagram 1
+   
 .. figure:: ../developer/ER/er2.png
    :scale: 50 %
    :alt: ER diagram 2  
   
- Figure 3.1 ER DIAGRAM OF UNICORN DATABASE
+Figure 3.1 ER DIAGRAM OF UNICORN DATABASE
 
 Code
 ----
