@@ -8,17 +8,24 @@ In the following, these operations were explained in detail by giving Python, SQ
   This class is created on tweets.py Python file and it contains 6 main methods to make operation on tweets table. The structure of tweets table and its columns can be understood from the following explanation.
   
 Tweets Table:
+
 •	TWEET_ID SERIAL UNIQUE:  This is the primary key of tweets table, it is serial; thus, it incremented by one after each entry into table. This enables fast search operation into table.
-•	USER_LOGNAME VARCHAR(60) NOT NULL  This column stores username of a user and it cannot have a null value. Type of this column is varying character up to 60.
+
+•	USER_LOGNAME VARCHAR(60) NOT NULL: This column stores username of a user and it cannot have a null value. Type of this column is varying character up to 60.
+
 •	DATE DATE DEFAULT CURRENT_DATE: This column holds the date of the tweet is posted and it has a default value. This value is date of adding a new tweet.
+
 •	TWEET_CATEGORY VARCHAR(100) NOT NULL: This column is for storing the category of tweet and it cannot be null. Type of this column is varying character up to 100.
+
 •	TWEET_INPUT VARCHAR(200) UNIQUE NOT NULL: This column holds tweets whose type is character varying at most 200 character. It is unique and cannot have a null value. 
 
 Constraints of Table:
+
 •	FOREIGN KEY(USER_LOGNAME) REFERENCES IN USER_LOGIN(USER_LOGINNAME) ON DELETE CASCADE ON UPDATE CASCADE  user_logname column has a foreign key by having a relationship with user_loginname column in user_login table. When there is a deletion or updating operation on user_loginname, if there is a row in tweets table with same username , it will also be deleted or updated.
 
 
 Methods of Tweets Class:
+
 •	INITIALIZE TABLES METHOD: initialize_tweets() -> in this method, all tables were mentioned above are dropped and created again. The following SQL and Python codes were written in order to achieve this operation. It takes a config as a parameter to connect to database and returns a string “Tables inserted”. 
 
 .. code-block:: python
